@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/router/route_config.dart';
 import 'core/service_locator/service_locator.dart';
+import 'feature/authentication/presentation/bloc/authentication_bloc.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -11,16 +12,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => AuthenticationBloc(
-            AuthenticationUseCase(
-              authenticationRepository: AuthenticationRepositoryImpl(
-                authenticationRemoteDataSource: AuthenticationRemoteDataSource(
-                  getIt(),
-                ),
-                authenticationLocalDataSource: AuthenticationLocalDataSource(),
-              ),
-            ),
-          ),
+          create: (_) => AuthenticationBloc(),
         ),
       ],
       child: MaterialApp(
