@@ -1,7 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../feature/authentication/presentation/log_in/presentation/sign_in_screen.dart';
+import '../../feature/authentication/presentation/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/splash/presentation/splash_screen.dart';
 
 Handler splashScreenHandler = Handler(

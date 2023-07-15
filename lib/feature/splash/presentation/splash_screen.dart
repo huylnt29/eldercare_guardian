@@ -25,10 +25,10 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     authenticationBloc = context.read<AuthenticationBloc>();
     super.initState();
-    // Future.delayed(
-    //   const Duration(seconds: 3),
-    //   () => authenticationBloc.add(AutoLogInEvent()),
-    // );
+    Future.delayed(
+      const Duration(seconds: 3),
+      () => authenticationBloc.add(AutoLogInEvent()),
+    );
   }
 
   @override
@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
           if (state.canLoginAutomatically) {
             Routes.router.navigateTo(context, RoutePath.bottomNavBar);
           } else {
-            Routes.router.navigateTo(context, RoutePath.logInScreen);
+            Routes.router.navigateTo(context, RoutePath.signInScreen);
           }
         }
       },

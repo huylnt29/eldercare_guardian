@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/enums/load_state.dart';
+import '../../../../core/type_defs/email_type.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';

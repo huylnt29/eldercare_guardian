@@ -1,3 +1,4 @@
+import 'package:eldercare_guardian/core/extensions/font_size_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterui_modifiers/flutterui_modifiers.dart';
 
@@ -18,23 +19,26 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+      margin: EdgeInsets.symmetric(
+        horizontal: 20.sf,
+        vertical: 24.sf,
+      ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 5,
           backgroundColor: backgroundColor ?? AppColors.accentColor,
           shadowColor: Colors.transparent.withOpacity(0.1),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(50.sf),
           ),
         ),
         onPressed: onPressed,
         child: Text(
           title,
-          style: AppTextStyles.heading2(AppColors.secondaryColor),
+          style: AppTextStyles.heading2(AppColors.primaryColor),
         ).padding(
-          horizontal: 10,
-          vertical: 12,
+          horizontal: 10.sf,
+          vertical: 12.sf,
         ),
       ),
     );

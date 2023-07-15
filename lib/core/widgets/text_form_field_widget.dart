@@ -1,3 +1,4 @@
+import 'package:eldercare_guardian/core/extensions/font_size_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterui_modifiers/flutterui_modifiers.dart';
 
@@ -47,7 +48,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
             borderSide: BorderSide(color: widget.colorTheme),
           ),
         ),
-      ).margin(top: 20, horizontal: 20),
+      ).margin(top: 12.sf, horizontal: 20.sf),
     );
   }
 }
