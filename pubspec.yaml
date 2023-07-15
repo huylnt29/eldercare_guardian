@@ -1,0 +1,71 @@
+name: eldercare_guardian
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  bloc: ^8.1.2
+  skeletons: ^0.0.3
+  flutter_screenutil: ^5.6.0
+  dio: ^5.2.1+1
+  retrofit: ^4.0.1
+  shared_preferences: ^2.1.2
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  path_provider: ^2.0.15
+  get_it: ^7.2.0
+  injectable: ^2.1.0
+  flutter_dotenv: ^5.0.2
+  intl: ^0.18.1
+  freezed_annotation: ^2.2.0
+  internet_connection_checker: ^1.0.0+1
+  json_annotation: ^4.8.1
+  cached_network_image: ^3.2.3
+  fluro: ^2.0.4
+  freezed: ^2.3.1
+  flutter_bloc: ^8.1.1
+  flutter_svg: ^2.0.2
+  flutterui_modifiers: ^0.3.1
+  firebase_auth: ^4.6.3
+  firebase_core: ^2.14.0
+  fluttertoast: ^8.1.1
+  animated_notch_bottom_bar: ^1.0.0
+  provider: ^6.0.5
+  pretty_dio_logger: ^1.3.1
+  pinput: ^2.2.31
+  firebase_app_check: ^0.1.5
+  json_serializable: ^6.7.1
+  shimmer: ^3.0.0
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.4.5
+  flutter_gen_runner: ^5.2.0
+  retrofit_generator: ^7.0.1
+  isar_generator: ^3.1.0+1
+  injectable_generator: ^2.1.3
+
+flutter_gen:
+  output: lib/core/automatic_generator
+  line_length: 80
+  integrations:
+    flutter_svg: true  
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/icons/
+    - assets/images/
+    # - assets/audios
+    - .env
