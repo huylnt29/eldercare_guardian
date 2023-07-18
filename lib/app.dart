@@ -1,3 +1,5 @@
+import 'package:eldercare_guardian/feature/schedule/data/repository/schedule_repository_impl.dart';
+import 'package:eldercare_guardian/feature/schedule/presentation/bloc/schedule_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +15,15 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => AuthenticationBloc(),
+        ),
+        BlocProvider(
+          create: (_) => ScheduleBloc(
+            ScheduleRepositoryImpl(
+              ScheduleRemoteDataSource(
+                getIt(),
+              ),
+            ),
+          ),
         ),
       ],
       child: MaterialApp(

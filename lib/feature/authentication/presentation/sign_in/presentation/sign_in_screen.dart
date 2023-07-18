@@ -73,67 +73,77 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Widget signInForm() {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: 12.sf,
-        horizontal: 5.sf,
-      ),
-      margin: EdgeInsets.symmetric(
-        horizontal: 50.sf,
-      ),
-      decoration: BoxDecoration(
-          color: AppColors.primaryColor,
-          borderRadius: BorderRadius.circular(18.sf),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black,
-              offset: Offset(3, 5),
-              spreadRadius: 3,
-              blurRadius: 1,
-            )
-          ]),
-      child: Column(
-        children: [
-          TextFormFieldWidget(
-            controller: emailController,
-            labelText: 'Email',
-            textInputType: TextInputType.phone,
-            colorTheme: AppColors.textColor,
-          ),
-          TextFormFieldWidget(
-            controller: passwordController,
-            labelText: 'Password',
-            textInputType: TextInputType.text,
-            colorTheme: AppColors.textColor,
-          ),
-          ButtonWidget(
-            title: 'Continue',
-            onPressed: () {},
-          ),
-          Text(
-            'Or sign in with',
-            style: AppTextStyles.text(
-              AppColors.textColor,
+    return BlocListener<AuthenticationBloc, AuthenticationState>(
+      listener: (context, state) {
+        if (state.loadState == LoadState.loaded && state.credentialCorrect) {
+          Routes.router.navigateTo(context, RoutePath.bottomNavBar);
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 12.sf,
+          horizontal: 5.sf,
+        ),
+        margin: EdgeInsets.symmetric(
+          horizontal: 50.sf,
+        ),
+        decoration: BoxDecoration(
+            color: AppColors.primaryColor,
+            borderRadius: BorderRadius.circular(18.sf),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black,
+                offset: Offset(3, 5),
+                spreadRadius: 3,
+                blurRadius: 1,
+              )
+            ]),
+        child: Column(
+          children: [
+            TextFormFieldWidget(
+              controller: emailController,
+              labelText: 'Email',
+              textInputType: TextInputType.phone,
+              colorTheme: AppColors.textColor,
             ),
-          ),
-          18.vSpace,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              authProviderIconButton(Assets.images.google.image(scale: 0.75)),
-              18.hSpace,
-              authProviderIconButton(
-                  Assets.images.microsoft.image(scale: 0.75)),
-              18.hSpace,
-              authProviderIconButton(Assets.images.apple.image(scale: 0.75)),
-            ],
-          )
-        ],
+            TextFormFieldWidget(
+              controller: passwordController,
+              labelText: 'Password',
+              textInputType: TextInputType.text,
+              colorTheme: AppColors.textColor,
+            ),
+            ButtonWidget(
+              title: 'Continue',
+              onPressed: () => authenticationBloc.add(EmailPasswordLogInEvent(
+                email: emailController.text,
+                password: passwordController.text,
+              )),
+            ),
+            Text(
+              'Or sign in with',
+              style: AppTextStyles.text(
+                AppColors.textColor,
+              ),
+            ),
+            18.vSpace,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                authProviderIconButton(Assets.images.google.image(scale: 0.75)),
+                18.hSpace,
+                authProviderIconButton(
+                    Assets.images.microsoft.image(scale: 0.75)),
+                18.hSpace,
+                authProviderIconButton(Assets.images.apple.image(scale: 0.75)),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
 
-  Container authProviderIconButton(Image image) {
+  Widget authProviderIconButton(Image image) {
     return Container(
       padding: EdgeInsets.all(3.sf),
       decoration: BoxDecoration(

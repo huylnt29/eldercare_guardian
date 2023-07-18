@@ -44,6 +44,8 @@ dependencies:
   firebase_app_check: ^0.1.5
   json_serializable: ^6.7.1
   shimmer: ^3.0.0
+  dropdown_button2: ^2.1.4
+  camera: ^0.10.5+2
   
 dev_dependencies:
   flutter_test:

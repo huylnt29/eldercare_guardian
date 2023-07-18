@@ -23,6 +23,9 @@ class AuthenticationBloc
     on<AutoLogInEvent>((event, emit) async {
       await _logInAutomatically(event, emit);
     });
+    on<EmailPasswordLogInEvent>((event, emit) async {
+      await _logInWithEmailPassword(event, emit);
+    });
   }
 
   Future<void> _logInAutomatically(
@@ -34,6 +37,18 @@ class AuthenticationBloc
     emit(state.copyWith(
       loadState: LoadState.loaded,
       canLoginAutomatically: false,
+    ));
+  }
+
+  Future<void> _logInWithEmailPassword(
+    EmailPasswordLogInEvent event,
+    Emitter<AuthenticationState> emit,
+  ) async {
+    emit(state.copyWith(loadState: LoadState.loading));
+
+    emit(state.copyWith(
+      loadState: LoadState.loaded,
+      credentialCorrect: true,
     ));
   }
 }

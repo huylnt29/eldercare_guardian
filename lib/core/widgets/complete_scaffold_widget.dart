@@ -10,6 +10,7 @@ class CompleteScaffoldWidget extends StatefulWidget {
     required this.appBarTitle,
     required this.body,
     this.bottomNavigationBar,
+    this.floatingActionButtonLocation,
     this.floatingActionButton,
     this.resizeToAvoidBottomInset,
     this.backgroundColor,
@@ -22,6 +23,7 @@ class CompleteScaffoldWidget extends StatefulWidget {
   final String appBarTitle;
   final Widget body;
   final Widget? bottomNavigationBar;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
   final Widget? floatingActionButton;
   final bool? resizeToAvoidBottomInset;
   final Color? backgroundColor;
@@ -61,6 +63,8 @@ class _CompleteScaffoldWidgetState extends State<CompleteScaffoldWidget> {
           shadowColor: Colors.black,
         ),
         body: widget.body,
+        floatingActionButtonLocation: widget.floatingActionButtonLocation ??
+            FloatingActionButtonLocation.centerDocked,
         floatingActionButton: widget.floatingActionButton,
         bottomNavigationBar: widget.bottomNavigationBar,
       ),

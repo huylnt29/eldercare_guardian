@@ -4,8 +4,7 @@ part of 'authentication_bloc.dart';
 class AuthenticationState with _$AuthenticationState {
   const factory AuthenticationState({
     @Default(false) bool canLoginAutomatically,
-    @Default(false) bool canNavigateToOtpScreen,
-    @Default(false) bool otpCorrect,
+    @Default(false) bool credentialCorrect,
     required LoadState loadState,
   }) = _AuthenticationState;
 }
