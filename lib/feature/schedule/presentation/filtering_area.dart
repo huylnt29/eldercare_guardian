@@ -19,17 +19,19 @@ class _FilteringAreaState extends State<FilteringArea> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
+        top: 10.sf,
         left: 18.sf,
         right: 18.sf,
         bottom: 24.sf,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12.sf),
-        boxShadow: const [
+        borderRadius: BorderRadius.circular(18.sf),
+        boxShadow: [
           BoxShadow(
-            color: AppColors.textColor,
-            offset: Offset(3, 5),
+            color: AppColors.textColor.withOpacity(0.5),
+            spreadRadius: 1.sf,
+            blurRadius: 5.sf,
           )
         ],
       ),

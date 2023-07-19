@@ -37,9 +37,17 @@ class _SplashScreenState extends State<SplashScreen> {
       listener: (context, state) {
         if (state.loadState == LoadState.loaded) {
           if (state.canLoginAutomatically) {
-            Routes.router.navigateTo(context, RoutePath.bottomNavBar);
+            Routes.router.navigateTo(
+              context,
+              RoutePath.bottomNavBar,
+              replace: true,
+            );
           } else {
-            Routes.router.navigateTo(context, RoutePath.signInScreen);
+            Routes.router.navigateTo(
+              context,
+              RoutePath.signInScreen,
+              replace: true,
+            );
           }
         }
       },

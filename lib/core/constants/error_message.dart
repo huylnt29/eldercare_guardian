@@ -1,3 +1,3 @@
 class ErrorMessage {
-  static const isNotDetermined = 'Chưa xác định';
+  static const isNotDetermined = 'Undefined';
 }

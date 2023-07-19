@@ -9,13 +9,17 @@ class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
     Key? key,
     required this.title,
+    this.titleColor,
     this.backgroundColor,
     required this.onPressed,
+    this.disabled = false,
   }) : super(key: key);
   final Color? backgroundColor;
   final String title;
+  final Color? titleColor;
   // ignore: prefer_typing_uninitialized_variables
   final onPressed;
+  final bool disabled;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,16 +30,18 @@ class ButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 5,
-          backgroundColor: backgroundColor ?? AppColors.accentColor,
+          backgroundColor: (disabled)
+              ? AppColors.disableBackgroundColor
+              : (backgroundColor ?? AppColors.accentColor),
           shadowColor: Colors.transparent.withOpacity(0.1),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50.sf),
           ),
         ),
-        onPressed: onPressed,
+        onPressed: (!disabled) ? onPressed : null,
         child: Text(
           title,
-          style: AppTextStyles.heading2(AppColors.primaryColor),
+          style: AppTextStyles.heading2(titleColor ?? AppColors.primaryColor),
         ).padding(
           horizontal: 10.sf,
           vertical: 12.sf,

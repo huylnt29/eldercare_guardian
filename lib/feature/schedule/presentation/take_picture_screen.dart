@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:eldercare_guardian/core/enums/load_state.dart';
 import 'package:eldercare_guardian/core/extensions/font_size_extensions.dart';
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:eldercare_guardian/core/theme/app_text_styles.dart';
+import 'package:eldercare_guardian/core/widgets/button_widget.dart';
 import 'package:eldercare_guardian/core/widgets/complete_scaffold_widget.dart';
 import 'package:eldercare_guardian/feature/schedule/presentation/bloc/schedule_bloc.dart';
 import 'package:flutter/material.dart';
@@ -57,57 +59,111 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
   Widget build(BuildContext context) {
     return CompleteScaffoldWidget(
       appBarTitle: 'Taking picture',
-      appBarOverlapped: true,
+      appBarOverlapped: false,
+      backgroundColor: AppColors.textColor,
       body: buildBody(),
-      floatingActionButton: (xFile == null)
-          ? FloatingActionButton(
-              onPressed: () {
-                cameraController.takePicture().then((XFile? file) {
-                  if (mounted && file != null) {
-                    setState(() {
-                      xFile = file;
-                    });
-                  }
-                });
-              },
-              backgroundColor: AppColors.accentColor,
-              child: const Icon(Icons.circle),
-            )
-          : FloatingActionButton(
-              onPressed: () {},
-              backgroundColor: AppColors.accentColor,
-              child: const Icon(Icons.check),
-            ),
     );
   }
 
   Widget buildBody() {
     if (xFile == null) {
       try {
-        return Container(
-          width: double.infinity,
-          margin: EdgeInsets.only(
-            bottom: 18.sf,
+        return SizedBox.expand(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              4.vSpace,
+              Expanded(child: CameraPreview(cameraController)),
+              buildButtons(),
+            ],
           ),
-          child: CameraPreview(cameraController),
         );
       } catch (e) {
         return Center(
-            child: Text(
-          'Connecting camera...',
-          style: AppTextStyles.heading3(
-            AppColors.textColor,
+          child: Text(
+            'Connecting camera...',
+            style: AppTextStyles.heading3(
+              AppColors.textColor,
+            ),
           ),
-        ));
+        );
       }
     } else {
-      return Container(
-        width: double.infinity,
-        margin: EdgeInsets.only(
-          bottom: 18.sf,
-        ),
-        child: Image.file(File(xFile!.path)),
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          4.vSpace,
+          Expanded(child: Image.file(File(xFile!.path))),
+          buildButtons(),
+        ],
       );
     }
+  }
+
+  Widget buildButtons() {
+    return (xFile == null)
+        ? ButtonWidget(
+            title: 'Take',
+            onPressed: () {
+              cameraController.takePicture().then((XFile? file) {
+                if (mounted && file != null) {
+                  setState(() {
+                    xFile = file;
+                  });
+                }
+              });
+            })
+        : BlocConsumer<ScheduleBloc, ScheduleState>(
+            listener: (context, state) {
+              if (state.postTaskEvidenceSuccessfully) {
+                Navigator.pop(context, true);
+              }
+            },
+            builder: (context, state) {
+              if (state.loadState == LoadState.loaded) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ButtonWidget(
+                      title: 'Re-take',
+                      titleColor: AppColors.accentColor,
+                      backgroundColor: AppColors.primaryColor,
+                      onPressed: () {
+                        setState(() {
+                          xFile = null;
+                        });
+                      },
+                    ),
+                    ButtonWidget(
+                      title: 'Confirm',
+                      onPressed: () {
+                        scheduleBloc.add(PostTaskEvidenceEvent(
+                          widget.taskId,
+                          xFile!,
+                        ));
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ButtonWidget(
+                      title: 'Re-take',
+                      titleColor: AppColors.accentColor,
+                      backgroundColor: AppColors.primaryColor,
+                      onPressed: () {},
+                      disabled: true,
+                    ),
+                    ButtonWidget(
+                      title: 'Posting evidence...',
+                      onPressed: () {},
+                    ),
+                  ],
+                );
+              }
+            },
+          );
   }
 }

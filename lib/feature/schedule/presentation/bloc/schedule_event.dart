@@ -16,6 +16,8 @@ class ChangeAipEvent extends ScheduleEvent {
   String? aipId;
 }
 
-class ConnectCameraEvent extends ScheduleEvent {
-  ConnectCameraEvent();
+class PostTaskEvidenceEvent extends ScheduleEvent {
+  PostTaskEvidenceEvent(this.taskId, this.xFile);
+  XFile xFile;
+  String taskId;
 }

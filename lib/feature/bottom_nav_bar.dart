@@ -19,23 +19,29 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  final _screenController = PageController(initialPage: 0);
-  final bottomNavBarIndex = ValueNotifier<int>(0);
+  final bottomNavBarIndex = ValueNotifier<int>(2);
+  late PageController _screenController;
 
   final List<String> screenTitles = [
-    'Note',
+    'AIPs',
     'Account',
     'Schedule',
   ];
 
   late List<Widget> bottomBarScreens = [
-    const Text('Note'),
+    const Text('AIPs'),
     const Text('Account'),
     BlocProvider.value(
       value: BlocProvider.of<ScheduleBloc>(context)..add(InitScreenEvent()),
       child: const ScheduleScreen(),
     ),
   ];
+
+  @override
+  void initState() {
+    _screenController = PageController(initialPage: bottomNavBarIndex.value);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,8 +99,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
           backgroundColor: AppColors.primaryColor,
           items: [
             BottomNavigationBarItem(
-              icon: Assets.icons.note.svg(),
-              label: 'Note',
+              icon: Assets.icons.aips.svg(),
+              label: 'AIPs',
             ),
             BottomNavigationBarItem(
               icon: Assets.icons.user.svg(),

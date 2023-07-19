@@ -8,6 +8,13 @@ class TaskListArea extends StatefulWidget {
 }
 
 class _TaskListAreaState extends State<TaskListArea> {
+  late ScheduleBloc scheduleBloc;
+  @override
+  void initState() {
+    scheduleBloc = context.read<ScheduleBloc>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ScheduleBloc, ScheduleState>(builder: (context, state) {
@@ -32,12 +39,13 @@ class _TaskListAreaState extends State<TaskListArea> {
           child: Container(
             padding: EdgeInsets.symmetric(
               vertical: 12.sf,
-              horizontal: 18.sf,
-            ),
+              horizontal: 8.sf,
+            ).copyWith(left: 10.sf),
             decoration: BoxDecoration(
               border: Border.all(
                 width: 2.sf,
-                color: AppColors.getColorBasedOnTaskStatus(task.status),
+                color: AppColors.getColorBasedOnTaskStatus(
+                    task.status ?? TaskStatus.notDone),
               ),
               borderRadius: BorderRadius.circular(18.sf),
             ),
@@ -58,11 +66,13 @@ class _TaskListAreaState extends State<TaskListArea> {
                         horizontal: 8.sf,
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.getColorBasedOnTaskStatus(task.status),
+                        color: AppColors.getColorBasedOnTaskStatus(
+                            task.status ?? TaskStatus.notDone),
                         borderRadius: BorderRadius.circular(18.sf),
                       ),
                       child: Text(
-                        task.status.name,
+                        task.status?.name ?? ErrorMessage.isNotDetermined,
+                        softWrap: true,
                         style: AppTextStyles.text(
                           Colors.white,
                           bold: true,
@@ -72,14 +82,14 @@ class _TaskListAreaState extends State<TaskListArea> {
                   ],
                 ),
                 8.vSpace,
-                Text(
-                  task.timeRange,
-                  textAlign: TextAlign.start,
-                  style: AppTextStyles.text(AppColors.textColor).copyWith(
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-                8.vSpace,
+                // Text(
+                //   task.timeRange,
+                //   textAlign: TextAlign.start,
+                //   style: AppTextStyles.text(AppColors.textColor).copyWith(
+                //     fontStyle: FontStyle.italic,
+                //   ),
+                // ),
+                // 8.vSpace,
                 Visibility(
                   visible: task.aipName != null,
                   child: Text(
@@ -104,14 +114,19 @@ class _TaskListAreaState extends State<TaskListArea> {
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: IconButton(
-                  onPressed: () {
-                    Routes.router.navigateTo(
+                  onPressed: () async {
+                    final postedTaskEvidenceSuccessfully =
+                        await Routes.router.navigateTo(
                       context,
                       RoutePath.takePictureScreen,
                       routeSettings: RouteSettings(
                         arguments: task.id,
                       ),
                     );
+                    if (postedTaskEvidenceSuccessfully == true) {
+                      ToastWidget.show('Posted task evidence successfully');
+                      scheduleBloc.add(InitScreenEvent());
+                    }
                   },
                   icon: Assets.icons.camera.svg(),
                   iconSize: 30.sf,

@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+
+import '../../../../feature/schedule/data/model/task_model.dart';
 
 part 'eldercare_client.g.dart';
 
@@ -10,14 +14,18 @@ abstract class ElderCareClient {
     String baseUrl,
   }) = _ElderCareClient;
 
-  @POST('/auth/register')
-  // After logging in successfully with Firebase, ask server for an ID in Firebase database
-  Future<dynamic> signUpWithCaboServer(
-    @Body() Map<String, dynamic> body,
-  );
+  @GET('/task/guardian/{guardianId}')
+  Future<List<Task>> getTasks(@Path('guardianId') String guardianId);
 
-  @POST('/check-phone-existence')
-  Future<dynamic> checkPhone(
-    @Body() Map<String, dynamic> body,
+  // @POST('/check-phone-existence')
+  // Future<dynamic> checkPhone(
+  //   @Body() Map<String, dynamic> body,
+  // );
+
+  @MultiPart()
+  @POST('/task/{taskId}/evidence')
+  Future<void> postTaskEvidence(
+    @Path('taskId') String taskId,
+    @Part(name: 'taskEvidence') File filePart,
   );
 }

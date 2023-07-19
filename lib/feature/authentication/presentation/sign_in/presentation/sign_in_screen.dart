@@ -41,9 +41,11 @@ class _SignInScreenState extends State<SignInScreen> {
       listener: (context, state) {
         if (state.loadState == LoadState.loaded) {
           if (state.canLoginAutomatically) {
-            Routes.router.navigateTo(context, RoutePath.bottomNavBar);
-          } else {
-            Routes.router.navigateTo(context, RoutePath.signInScreen);
+            Routes.router.navigateTo(
+              context,
+              RoutePath.bottomNavBar,
+              replace: true,
+            );
           }
         }
       },

@@ -51,6 +51,15 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
         tasks: tasks,
       ));
     });
+
+    on<PostTaskEvidenceEvent>((event, emit) async {
+      emit(state.copyWith(loadState: LoadState.loading));
+      // final response = await scheduleRepositoryImpl.postTaskEvidence(
+      //   event.taskId,
+      //   event.xFile,
+      // );
+      emit(state.copyWith(postTaskEvidenceSuccessfully: true));
+    });
   }
 
   late ScheduleRepositoryImpl scheduleRepositoryImpl;

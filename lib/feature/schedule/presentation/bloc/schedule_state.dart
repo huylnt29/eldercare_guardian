@@ -7,6 +7,7 @@ class ScheduleState with _$ScheduleState {
     @Default([]) List<Aip?> aips,
     required DateTime currentSelectedDate,
     @Default([]) List<Task?> tasks,
+    @Default(false) bool postTaskEvidenceSuccessfully,
     required LoadState loadState,
   }) = _ScheduleState;
 }

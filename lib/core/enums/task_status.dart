@@ -2,15 +2,18 @@ import 'package:json_annotation/json_annotation.dart';
 
 enum TaskStatus {
   @JsonValue(0)
-  notDone,
+  notDone(name: 'Not done'),
   @JsonValue(1)
-  cancelled,
+  cancelled(name: 'Cancelled'),
   @JsonValue(2)
-  pending,
+  pending(name: 'Pending'),
   @JsonValue(3)
-  late,
+  late(name: 'Late'),
   @JsonValue(4)
-  overdue,
+  overdue(name: 'Overdue'),
   @JsonValue(5)
-  done,
+  done(name: 'Done');
+
+  final String name;
+  const TaskStatus({required this.name});
 }
