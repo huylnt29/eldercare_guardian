@@ -12,9 +12,10 @@ class Task {
     required this.title,
     required this.fromDateTime,
     required this.toDateTime,
+    @Default(false) required this.isDone,
     @Default(0) this.status,
     this.aipName,
-    this.imageEvidencePath,
+    this.taskEvidence,
   });
 
   factory Task.fromJson(Map<String, Object?> json) => _$TaskFromJson(json);
@@ -25,11 +26,35 @@ class Task {
   DateTime fromDateTime;
   @JsonKey(name: 'endTime')
   DateTime toDateTime;
+  bool isDone;
   @enumerated
   TaskStatus? status;
   String? aipName;
-  String? imageEvidencePath;
+  @JsonKey(name: 'image')
+  TaskEvidence? taskEvidence;
   String get timeRange {
     return '${DateTimeConverter.getHourMinute(fromDateTime.millisecondsSinceEpoch)} - ${DateTimeConverter.getHourMinute(toDateTime.millisecondsSinceEpoch)}';
   }
+}
+
+@JsonSerializable()
+class TaskEvidence {
+  TaskEvidence({
+    required this.id,
+    required this.imageEvidencePath,
+    this.latitude,
+    this.longtitude,
+    this.address,
+  });
+
+  factory TaskEvidence.fromJson(Map<String, Object?> json) =>
+      _$TaskEvidenceFromJson(json);
+
+  @JsonKey(name: '_id')
+  String id;
+  @JsonKey(name: 'link')
+  String imageEvidencePath;
+  double? latitude;
+  double? longtitude;
+  String? address;
 }

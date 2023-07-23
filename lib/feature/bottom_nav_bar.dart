@@ -19,22 +19,43 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  final bottomNavBarIndex = ValueNotifier<int>(2);
+  final bottomNavBarIndex = ValueNotifier<int>(1);
   late PageController _screenController;
 
   final List<String> screenTitles = [
     'AIPs',
-    'Account',
     'Schedule',
+    'Report',
+    'Account',
   ];
 
   late List<Widget> bottomBarScreens = [
     const Text('AIPs'),
-    const Text('Account'),
     BlocProvider.value(
       value: BlocProvider.of<ScheduleBloc>(context)..add(InitScreenEvent()),
       child: const ScheduleScreen(),
     ),
+    const Text('Report'),
+    const Text('Account'),
+  ];
+
+  final List<BottomNavigationBarItem> bottomNavigationItems = [
+    BottomNavigationBarItem(
+      icon: Assets.icons.aips.svg(),
+      label: 'AIPs',
+    ),
+    BottomNavigationBarItem(
+      icon: Assets.icons.schedule.svg(),
+      label: 'Schedule',
+    ),
+    BottomNavigationBarItem(
+      icon: Assets.icons.note.svg(),
+      label: 'Report',
+    ),
+    BottomNavigationBarItem(
+      icon: Assets.icons.user.svg(),
+      label: 'Account',
+    )
   ];
 
   @override
@@ -78,43 +99,54 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primaryColor,
-        onPressed: () {
-          bottomNavBarIndex.value = screenTitles.length - 1;
-          _screenController.animateToPage(
-            screenTitles.length - 1,
-            duration: const Duration(seconds: 1),
-            curve: Curves.easeIn,
-          );
-        },
-        tooltip: 'Schedule',
-        child: Assets.icons.schedule.svg(),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        child: BottomNavigationBar(
-          selectedItemColor: AppColors.accentColor,
-          backgroundColor: AppColors.primaryColor,
-          items: [
-            BottomNavigationBarItem(
-              icon: Assets.icons.aips.svg(),
-              label: 'AIPs',
+      bottomNavigationBar: ValueListenableBuilder<int>(
+        valueListenable: bottomNavBarIndex,
+        builder: (context, value, child) => Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(24.sf),
+              topLeft: Radius.circular(24.sf),
             ),
-            BottomNavigationBarItem(
-              icon: Assets.icons.user.svg(),
-              label: 'Account',
-            )
-          ],
-          onTap: (index) {
-            bottomNavBarIndex.value = index;
-            _screenController.animateToPage(
-              index,
-              duration: const Duration(milliseconds: 100),
-              curve: Curves.easeIn,
-            );
-          },
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.textColor.withOpacity(0.3),
+                spreadRadius: 5.sf,
+                blurRadius: 7.sf,
+                offset: const Offset(0, -1),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(15.sf),
+              topLeft: Radius.circular(15.sf),
+            ),
+            child: BottomNavigationBar(
+              backgroundColor: Colors.transparent,
+              showUnselectedLabels: true,
+              showSelectedLabels: true,
+              selectedLabelStyle: AppTextStyles.text(
+                AppColors.textColor,
+                bold: true,
+              ),
+              unselectedLabelStyle: AppTextStyles.text(AppColors.textColor),
+              unselectedItemColor: AppColors.textColor,
+              selectedItemColor: AppColors.accentColor,
+              items: List.generate(
+                bottomNavigationItems.length,
+                (index) => bottomNavigationItems[index],
+              ),
+              currentIndex: bottomNavBarIndex.value,
+              onTap: (index) {
+                bottomNavBarIndex.value = index;
+                _screenController.animateToPage(
+                  index,
+                  duration: const Duration(milliseconds: 100),
+                  curve: Curves.easeIn,
+                );
+              },
+            ),
+          ),
         ),
       ),
     );

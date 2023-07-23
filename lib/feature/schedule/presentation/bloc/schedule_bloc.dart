@@ -52,13 +52,24 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
       ));
     });
 
+    on<ResetStateEvent>((event, emit) {
+      emit(state.copyWith(loadState: LoadState.initial));
+    });
+
+    on<StateLoadedEvent>((event, emit) {
+      emit(state.copyWith(loadState: LoadState.loaded));
+    });
+
     on<PostTaskEvidenceEvent>((event, emit) async {
       emit(state.copyWith(loadState: LoadState.loading));
-      // final response = await scheduleRepositoryImpl.postTaskEvidence(
-      //   event.taskId,
-      //   event.xFile,
-      // );
-      emit(state.copyWith(postTaskEvidenceSuccessfully: true));
+      final response = await scheduleRepositoryImpl.postTaskEvidence(
+        event.taskId,
+        event.xFile,
+      );
+      emit(state.copyWith(
+        loadState: LoadState.loaded,
+        postTaskEvidenceSuccessfully: response,
+      ));
     });
   }
 

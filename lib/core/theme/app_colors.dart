@@ -36,4 +36,12 @@ class AppColors {
         return secondaryColor;
     }
   }
+
+  static Color getColorBasedOnTaskDoneOrNot(bool isDone) {
+    if (isDone) {
+      return taskStatusDoneColor;
+    } else {
+      return taskStatusNotDoneColor;
+    }
+  }
 }

@@ -13,9 +13,9 @@ class ElderCareClientConfig {
     }
     dio.interceptors.add(ElderCareClientInterceptors(dio: dio));
     dio.options.connectTimeout = const Duration(seconds: 50);
-    dio.options.headers['Content-Type'] = 'application/json';
+    // dio.options.headers['Content-Type'] = 'application/json';
 
-    dio.options.headers['Accept'] = 'application/json';
+    dio.options.headers['Accept'] = '*/*';
 
     dio.interceptors.add(PrettyDioLogger(
       requestHeader: true,

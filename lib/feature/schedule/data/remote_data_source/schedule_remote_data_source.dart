@@ -82,7 +82,21 @@ class ScheduleRemoteDataSource {
   }
 
   Future<bool> postTaskEvidence(String taskId, File file) async {
-    final response = await _elderCareClient.postTaskEvidence(taskId, file);
-    return true;
+    String fileName = file.path.split('/').last;
+    FormData formData = FormData.fromMap({
+      "file": await MultipartFile.fromFile(
+        file.path,
+        filename: fileName,
+      ),
+    });
+    try {
+      final response = await Dio().post(
+        'https://eldercare.up.railway.app/task/upload/$taskId',
+        data: formData,
+      );
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

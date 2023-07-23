@@ -16,16 +16,4 @@ abstract class ElderCareClient {
 
   @GET('/task/guardian/{guardianId}')
   Future<List<Task>> getTasks(@Path('guardianId') String guardianId);
-
-  // @POST('/check-phone-existence')
-  // Future<dynamic> checkPhone(
-  //   @Body() Map<String, dynamic> body,
-  // );
-
-  @MultiPart()
-  @POST('/task/{taskId}/evidence')
-  Future<void> postTaskEvidence(
-    @Path('taskId') String taskId,
-    @Part(name: 'taskEvidence') File filePart,
-  );
 }

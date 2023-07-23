@@ -16,6 +16,14 @@ class ChangeAipEvent extends ScheduleEvent {
   String? aipId;
 }
 
+class ResetStateEvent extends ScheduleEvent {
+  ResetStateEvent();
+}
+
+class StateLoadedEvent extends ScheduleEvent {
+  StateLoadedEvent();
+}
+
 class PostTaskEvidenceEvent extends ScheduleEvent {
   PostTaskEvidenceEvent(this.taskId, this.xFile);
   XFile xFile;

@@ -12,6 +12,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/extensions/logger.dart';
+import '../../../core/service_locator/service_locator.dart';
 
 class TakePictureScreen extends StatefulWidget {
   const TakePictureScreen({required this.taskId, super.key});
@@ -115,12 +116,12 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
             })
         : BlocConsumer<ScheduleBloc, ScheduleState>(
             listener: (context, state) {
-              if (state.postTaskEvidenceSuccessfully) {
-                Navigator.pop(context, true);
+              if (state.loadState == LoadState.loaded) {
+                Navigator.pop(context, state.postTaskEvidenceSuccessfully);
               }
             },
             builder: (context, state) {
-              if (state.loadState == LoadState.loaded) {
+              if (state.loadState == LoadState.initial) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -145,7 +146,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
                     ),
                   ],
                 );
-              } else {
+              } else if (state.loadState == LoadState.loading) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -157,10 +158,14 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
                       disabled: true,
                     ),
                     ButtonWidget(
-                      title: 'Posting evidence...',
+                      title: 'Posting...',
                       onPressed: () {},
                     ),
                   ],
+                );
+              } else {
+                return const Center(
+                  child: Text('This screen should be closed'),
                 );
               }
             },

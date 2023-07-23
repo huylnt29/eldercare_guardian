@@ -44,8 +44,7 @@ class _TaskListAreaState extends State<TaskListArea> {
             decoration: BoxDecoration(
               border: Border.all(
                 width: 2.sf,
-                color: AppColors.getColorBasedOnTaskStatus(
-                    task.status ?? TaskStatus.notDone),
+                color: AppColors.getColorBasedOnTaskDoneOrNot(task.isDone),
               ),
               borderRadius: BorderRadius.circular(18.sf),
             ),
@@ -66,12 +65,12 @@ class _TaskListAreaState extends State<TaskListArea> {
                         horizontal: 8.sf,
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.getColorBasedOnTaskStatus(
-                            task.status ?? TaskStatus.notDone),
+                        color:
+                            AppColors.getColorBasedOnTaskDoneOrNot(task.isDone),
                         borderRadius: BorderRadius.circular(18.sf),
                       ),
                       child: Text(
-                        task.status?.name ?? ErrorMessage.isNotDetermined,
+                        (task.isDone) ? 'Done' : 'Not done',
                         softWrap: true,
                         style: AppTextStyles.text(
                           Colors.white,
@@ -102,19 +101,22 @@ class _TaskListAreaState extends State<TaskListArea> {
           ),
         ),
         18.hSpace,
-        (task.imageEvidencePath != null)
+        (task.taskEvidence != null)
             ? CircleAvatar(
-                backgroundImage: NetworkImage(task.imageEvidencePath!),
+                backgroundImage: NetworkImage(
+                  task.taskEvidence!.imageEvidencePath,
+                ),
                 radius: 30.sf,
               )
             : Container(
                 padding: EdgeInsets.all(7.sf),
                 decoration: BoxDecoration(
-                  border: Border.all(width: 1),
+                  border: Border.all(width: 1.sf),
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: IconButton(
                   onPressed: () async {
+                    scheduleBloc.add(ResetStateEvent());
                     final postedTaskEvidenceSuccessfully =
                         await Routes.router.navigateTo(
                       context,
@@ -126,6 +128,11 @@ class _TaskListAreaState extends State<TaskListArea> {
                     if (postedTaskEvidenceSuccessfully == true) {
                       ToastWidget.show('Posted task evidence successfully');
                       scheduleBloc.add(InitScreenEvent());
+                    } else if (postedTaskEvidenceSuccessfully == false) {
+                      ToastWidget.show('Try again later.');
+                      scheduleBloc.add(StateLoadedEvent());
+                    } else {
+                      scheduleBloc.add(StateLoadedEvent());
                     }
                   },
                   icon: Assets.icons.camera.svg(),

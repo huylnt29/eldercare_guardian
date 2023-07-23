@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-import 'package:eldercare_guardian/core/extensions/logger.dart';
+import 'package:dio/dio.dart';
 import 'package:eldercare_guardian/core/model/aip_model.dart';
 
 import '../../../../core/network/remote/eldercare_server/eldercare_client.dart';
