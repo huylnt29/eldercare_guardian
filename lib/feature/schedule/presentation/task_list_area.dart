@@ -81,14 +81,6 @@ class _TaskListAreaState extends State<TaskListArea> {
                   ],
                 ),
                 8.vSpace,
-                // Text(
-                //   task.timeRange,
-                //   textAlign: TextAlign.start,
-                //   style: AppTextStyles.text(AppColors.textColor).copyWith(
-                //     fontStyle: FontStyle.italic,
-                //   ),
-                // ),
-                // 8.vSpace,
                 Visibility(
                   visible: task.aipName != null,
                   child: Text(
@@ -102,11 +94,20 @@ class _TaskListAreaState extends State<TaskListArea> {
         ),
         18.hSpace,
         (task.taskEvidence != null)
-            ? CircleAvatar(
-                backgroundImage: NetworkImage(
-                  task.taskEvidence!.imageEvidencePath,
+            ? InkWell(
+                // TODO: Remove when done testing
+                onTap: () => onNavigatingTakePictureScreen(task.id),
+                child: ClipOval(
+                  child: Image.network(
+                    task.taskEvidence!.imageEvidencePath,
+                    width: 50.sf,
+                    height: 50.sf,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, exception, stackTrace) {
+                      return Assets.images.emptyImage.image();
+                    },
+                  ),
                 ),
-                radius: 30.sf,
               )
             : Container(
                 padding: EdgeInsets.all(7.sf),
@@ -115,31 +116,31 @@ class _TaskListAreaState extends State<TaskListArea> {
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: IconButton(
-                  onPressed: () async {
-                    scheduleBloc.add(ResetStateEvent());
-                    final postedTaskEvidenceSuccessfully =
-                        await Routes.router.navigateTo(
-                      context,
-                      RoutePath.takePictureScreen,
-                      routeSettings: RouteSettings(
-                        arguments: task.id,
-                      ),
-                    );
-                    if (postedTaskEvidenceSuccessfully == true) {
-                      ToastWidget.show('Posted task evidence successfully');
-                      scheduleBloc.add(InitScreenEvent());
-                    } else if (postedTaskEvidenceSuccessfully == false) {
-                      ToastWidget.show('Try again later.');
-                      scheduleBloc.add(StateLoadedEvent());
-                    } else {
-                      scheduleBloc.add(StateLoadedEvent());
-                    }
-                  },
+                  onPressed: () => onNavigatingTakePictureScreen(task.id),
                   icon: Assets.icons.camera.svg(),
                   iconSize: 30.sf,
                 ),
               ),
       ],
     );
+  }
+
+  Future<void> onNavigatingTakePictureScreen(String taskId) async {
+    final postedTaskEvidenceSuccessfully = await Routes.router.navigateTo(
+      context,
+      RoutePath.takePictureScreen,
+      routeSettings: RouteSettings(
+        arguments: taskId,
+      ),
+    );
+    if (postedTaskEvidenceSuccessfully == true) {
+      ToastWidget.show('Posted task evidence successfully');
+      scheduleBloc.add(InitScreenEvent());
+    } else if (postedTaskEvidenceSuccessfully == false) {
+      ToastWidget.show('Try again later.');
+      scheduleBloc.add(StateLoadedEvent());
+    } else {
+      scheduleBloc.add(StateLoadedEvent());
+    }
   }
 }

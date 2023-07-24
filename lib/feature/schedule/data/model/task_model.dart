@@ -1,4 +1,3 @@
-import 'package:eldercare_guardian/core/converter/datetime_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
 
@@ -10,8 +9,6 @@ class Task {
   Task({
     required this.id,
     required this.title,
-    required this.fromDateTime,
-    required this.toDateTime,
     @Default(false) required this.isDone,
     @Default(0) this.status,
     this.aipName,
@@ -22,19 +19,12 @@ class Task {
   @JsonKey(name: '_id')
   String id;
   String title;
-  @JsonKey(name: 'startTime')
-  DateTime fromDateTime;
-  @JsonKey(name: 'endTime')
-  DateTime toDateTime;
   bool isDone;
   @enumerated
   TaskStatus? status;
   String? aipName;
   @JsonKey(name: 'image')
   TaskEvidence? taskEvidence;
-  String get timeRange {
-    return '${DateTimeConverter.getHourMinute(fromDateTime.millisecondsSinceEpoch)} - ${DateTimeConverter.getHourMinute(toDateTime.millisecondsSinceEpoch)}';
-  }
 }
 
 @JsonSerializable()

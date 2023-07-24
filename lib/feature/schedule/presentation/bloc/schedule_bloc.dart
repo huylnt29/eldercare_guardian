@@ -4,7 +4,6 @@ import 'package:eldercare_guardian/feature/schedule/data/repository/schedule_rep
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/enums/load_state.dart';
-import '../../../../core/extensions/logger.dart';
 import '../../../../core/model/aip_model.dart';
 import '../../data/model/task_model.dart';
 

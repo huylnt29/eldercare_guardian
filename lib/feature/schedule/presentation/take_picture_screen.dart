@@ -12,7 +12,6 @@ import 'package:camera/camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/extensions/logger.dart';
-import '../../../core/service_locator/service_locator.dart';
 
 class TakePictureScreen extends StatefulWidget {
   const TakePictureScreen({required this.taskId, super.key});
@@ -29,7 +28,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
   @override
   void initState() {
     super.initState();
-    scheduleBloc = context.read<ScheduleBloc>();
+    scheduleBloc = context.read<ScheduleBloc>()..add(ResetStateEvent());
     startCamera();
   }
 

@@ -1,9 +1,6 @@
 import 'package:eldercare_guardian/core/extensions/font_size_extensions.dart';
-import 'package:eldercare_guardian/core/service_locator/service_locator.dart';
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:eldercare_guardian/core/theme/app_text_styles.dart';
-import 'package:eldercare_guardian/feature/authentication/presentation/sign_in/presentation/sign_in_screen.dart';
-import 'package:eldercare_guardian/feature/schedule/data/repository/schedule_repository_impl.dart';
 import 'package:eldercare_guardian/feature/schedule/presentation/bloc/schedule_bloc.dart';
 import 'package:eldercare_guardian/feature/schedule/presentation/schedule_screen.dart';
 import 'package:flutter/material.dart';

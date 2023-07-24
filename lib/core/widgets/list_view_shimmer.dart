@@ -9,6 +9,7 @@ class ListViewShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 12.sf),
+      padding: EdgeInsets.zero,
       child: Shimmer.fromColors(
         period: const Duration(milliseconds: 500),
         baseColor: Colors.grey[300]!,
