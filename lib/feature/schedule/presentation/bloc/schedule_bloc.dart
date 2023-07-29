@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
 import 'package:eldercare_guardian/feature/schedule/data/repository/schedule_repository_impl.dart';
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/enums/load_state.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
 
 import '../../../../core/model/aip_model.dart';
 import '../../data/model/task_model.dart';

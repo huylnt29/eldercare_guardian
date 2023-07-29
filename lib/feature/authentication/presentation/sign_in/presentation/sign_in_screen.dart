@@ -1,12 +1,12 @@
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/enums/load_state.dart';
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/extensions/font_size.dart';
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/theme/app_text_styles.dart';
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/widgets/button_widget.dart';
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/widgets/complete_scaffold_widget.dart';
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/widgets/text_form_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterui_modifiers/flutterui_modifiers.dart';
+import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
+import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
+import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/button_widget.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/complete_scaffold_widget.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/text_form_field_widget.dart';
 
 import '../../../../../core/automatic_generator/assets.gen.dart';
 

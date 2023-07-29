@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  huylnt_flutter_component:
+    path: huylnt_flutter_component
   cupertino_icons: ^1.0.2
   bloc: ^8.1.2
   skeletons: ^0.0.3

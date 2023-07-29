@@ -2,15 +2,16 @@ import 'dart:io';
 
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:eldercare_guardian/feature/schedule/presentation/bloc/schedule_bloc.dart';
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/enums/load_state.dart';
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/extensions/font_size.dart';
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/extensions/logger.dart';
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/theme/app_text_styles.dart';
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/widgets/button_widget.dart';
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/widgets/complete_scaffold_widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
+import 'package:huylnt_flutter_component/reusable_core/extensions/box_size.dart';
+import 'package:huylnt_flutter_component/reusable_core/extensions/logger.dart';
+import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/button_widget.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/complete_scaffold_widget.dart';
 
 class TakePictureScreen extends StatefulWidget {
   const TakePictureScreen({required this.taskId, super.key});

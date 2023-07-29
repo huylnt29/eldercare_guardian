@@ -5,6 +5,8 @@ import 'package:eldercare_guardian/feature/schedule/presentation/schedule_screen
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
+import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
 
 import '../core/automatic_generator/assets.gen.dart';
 
