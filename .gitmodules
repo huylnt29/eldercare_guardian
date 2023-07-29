@@ -1,0 +1,3 @@
+[submodule "huylnt_flutter_component"]
+	path = huylnt_flutter_component
+	url = https://github.com/huylnt/huylnt_flutter_component.git

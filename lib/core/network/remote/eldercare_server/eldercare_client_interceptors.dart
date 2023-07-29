@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/extensions/logger.dart';
+
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../local/isar/isar_database.dart';
