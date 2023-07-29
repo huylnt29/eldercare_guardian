@@ -1,8 +1,9 @@
-import 'package:eldercare_guardian/core/extensions/font_size_extensions.dart';
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
-import 'package:eldercare_guardian/core/theme/app_text_styles.dart';
+
 import 'package:eldercare_guardian/feature/schedule/presentation/bloc/schedule_bloc.dart';
 import 'package:eldercare_guardian/feature/schedule/presentation/schedule_screen.dart';
+import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/extensions/font_size.dart';
+import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

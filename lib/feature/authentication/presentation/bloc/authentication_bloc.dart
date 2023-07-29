@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/enums/load_state.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../core/enums/load_state.dart';
-import '../../../../core/type_defs/email_type.dart';
+import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/type_defs/email_type.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';

@@ -1,15 +1,17 @@
-import 'package:eldercare_guardian/core/extensions/font_size_extensions.dart';
+import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/enums/load_state.dart';
+import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/extensions/font_size.dart';
+import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/theme/app_text_styles.dart';
+import 'package:eldercare_guardian/huylnt_flutter_component/lib/reusable_core/widgets/complete_scaffold_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterui_modifiers/flutterui_modifiers.dart';
 
 import '../../../core/automatic_generator/assets.gen.dart';
-import '../../../core/enums/load_state.dart';
+
 import '../../../core/router/route_config.dart';
 import '../../../core/router/route_paths.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_text_styles.dart';
-import '../../../core/widgets/complete_scaffold_widget.dart';
+
 import '../../authentication/presentation/bloc/authentication_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
