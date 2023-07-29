@@ -66,6 +66,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
         title: ValueListenableBuilder(
           valueListenable: bottomNavBarIndex,
@@ -73,7 +74,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
         leading: Container(),
         centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: Colors.white,
         foregroundColor: AppColors.textColor,
         actions: [
           Container(

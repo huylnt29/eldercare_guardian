@@ -118,6 +118,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             ButtonWidget(
               title: 'Continue',
+              backgroundColor: AppColors.accentColor,
               onPressed: () => authenticationBloc.add(EmailPasswordLogInEvent(
                 email: emailController.text,
                 password: passwordController.text,
