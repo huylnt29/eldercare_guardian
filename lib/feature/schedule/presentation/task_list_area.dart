@@ -19,12 +19,16 @@ class _TaskListAreaState extends State<TaskListArea> {
   Widget build(BuildContext context) {
     return BlocBuilder<ScheduleBloc, ScheduleState>(builder: (context, state) {
       if (state.loadState == LoadState.loaded) {
-        return ListView.separated(
-          shrinkWrap: true,
-          itemBuilder: (context, index) => taskListItem(state.tasks[index]!),
-          separatorBuilder: (context, index) => 15.vSpace,
-          itemCount: state.tasks.length,
-        );
+        if (state.tasks.isNotEmpty) {
+          return ListView.separated(
+            shrinkWrap: true,
+            itemBuilder: (context, index) => taskListItem(state.tasks[index]!),
+            separatorBuilder: (context, index) => 15.vSpace,
+            itemCount: state.tasks.length,
+          );
+        } else {
+          return const NoDataWidget();
+        }
       } else {
         return const ListViewShimmer();
       }
