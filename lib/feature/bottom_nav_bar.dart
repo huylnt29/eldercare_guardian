@@ -1,4 +1,6 @@
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
+import 'package:eldercare_guardian/feature/profile/presentation/bloc/profile_bloc.dart';
+import 'package:eldercare_guardian/feature/profile/presentation/view_profile_screen.dart';
 
 import 'package:eldercare_guardian/feature/schedule/presentation/bloc/schedule_bloc.dart';
 import 'package:eldercare_guardian/feature/schedule/presentation/schedule_screen.dart';
@@ -35,7 +37,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
       child: const ScheduleScreen(),
     ),
     const Text('Report'),
-    const Text('Account'),
+    BlocProvider.value(
+      value: BlocProvider.of<ProfileBloc>(context)
+        ..add(FetchDataForScreenEvent()),
+      child: const ViewProfileScreen(),
+    ),
   ];
 
   final List<BottomNavigationBarItem> bottomNavigationItems = [
@@ -83,7 +89,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           )
         ],
       ),
-      extendBody: true,
+      extendBody: false,
       body: PageView(
         controller: _screenController,
         physics: const NeverScrollableScrollPhysics(),

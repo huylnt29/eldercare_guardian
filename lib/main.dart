@@ -21,7 +21,7 @@ void main() async {
       ),
     );
 
-    // await IsarDatabase.init();
+    await IsarDatabase.init();
 
     Routes.configureRoutes();
 

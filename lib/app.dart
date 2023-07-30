@@ -1,3 +1,7 @@
+import 'package:eldercare_guardian/feature/profile/data/local_data_source/profile_local_data_source.dart';
+import 'package:eldercare_guardian/feature/profile/data/remote_data_source/profile_remote_data_source.dart';
+import 'package:eldercare_guardian/feature/profile/data/repository/profile_repository_impl.dart';
+import 'package:eldercare_guardian/feature/profile/presentation/bloc/profile_bloc.dart';
 import 'package:eldercare_guardian/feature/schedule/data/repository/schedule_repository_impl.dart';
 import 'package:eldercare_guardian/feature/schedule/presentation/bloc/schedule_bloc.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +24,16 @@ class App extends StatelessWidget {
           create: (_) => ScheduleBloc(
             ScheduleRepositoryImpl(
               ScheduleRemoteDataSource(
+                getIt(),
+              ),
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (_) => ProfileBloc(
+            ProfileRepositoryImpl(
+              ProfileLocalDataSource(),
+              ProfileRemoteDataSource(
                 getIt(),
               ),
             ),

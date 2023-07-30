@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:eldercare_guardian/core/model/profile_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:isar/isar.dart';
 
@@ -22,7 +23,7 @@ mixin IsarDatabase {
 
     final isar = await Isar.open([
       // AccountSchema,
-      // CustomerSchema,
+      ProfileSchema,
     ], directory: isarDir.path, inspector: true);
 
     return isar;
