@@ -24,6 +24,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         emit(state.copyWith(loadState: LoadState.error));
       }
     });
+    on<PrepareTemporaryDataEvent>(
+      (event, emit) => emit(
+        state.copyWith(
+          tempProfile: Profile.clone(state.profile!),
+        ),
+      ),
+    );
   }
   ProfileRepositoryImpl profileRepositoryImpl;
 }

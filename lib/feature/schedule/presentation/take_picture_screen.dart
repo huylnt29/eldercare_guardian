@@ -58,7 +58,10 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
   @override
   Widget build(BuildContext context) {
     return CompleteScaffoldWidget(
-      appBarTitle: 'Taking picture',
+      appBarTextWidget: const Text(
+        'Taking picture',
+        style: TextStyle(color: Colors.white),
+      ),
       appBarOverlapped: false,
       backgroundColor: AppColors.textColor,
       body: buildBody(),

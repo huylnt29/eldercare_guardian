@@ -54,7 +54,10 @@ class _SignInScreenState extends State<SignInScreen> {
       child: CompleteScaffoldWidget(
         appBarOverlapped: true,
         backButtonEnabled: false,
-        appBarTitle: 'Log in',
+        appBarTextWidget: const Text(
+          'Log in',
+          style: TextStyle(color: Colors.white),
+        ),
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(

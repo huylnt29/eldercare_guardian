@@ -16,6 +16,8 @@ class Profile {
     this.dateOfBirth,
     this.identity,
     this.email,
+    this.phoneNumber,
+    this.address,
     this.level = Level.none,
     this.avatar,
     @Default([]) required this.educationArtifacts,
@@ -48,6 +50,20 @@ class Profile {
       _$ProfileFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProfileToJson(this);
+
+  Profile.clone(Profile original)
+      : this(
+          id: original.id,
+          firstName: original.firstName,
+          lastName: original.lastName,
+          dateOfBirth: original.dateOfBirth,
+          identity: original.identity,
+          email: original.email,
+          phoneNumber: original.phoneNumber,
+          address: original.address,
+          educationArtifacts: original.educationArtifacts,
+          experiences: original.experiences,
+        );
 }
 
 enum Level {

@@ -1,10 +1,9 @@
+import 'package:eldercare_guardian/core/router/route_config.dart';
+import 'package:eldercare_guardian/core/router/route_paths.dart';
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:eldercare_guardian/core/widgets/error_widget.dart';
 import 'package:eldercare_guardian/core/widgets/no_data_widget.dart';
-import 'package:eldercare_guardian/feature/profile/data/model/experience_model.dart';
-import 'package:eldercare_guardian/feature/profile/presentation/education_artifact_item.dart';
-import 'package:eldercare_guardian/feature/profile/presentation/experience_item.dart';
-import 'package:eldercare_guardian/feature/profile/presentation/profile_basic_info_item.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
@@ -13,7 +12,10 @@ import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dar
 import 'package:huylnt_flutter_component/reusable_core/widgets/button_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/home_shimmer.dart';
 
-import 'bloc/profile_bloc.dart';
+import '../bloc/profile_bloc.dart';
+import 'widgets/education_artifact_item.dart';
+import 'widgets/experience_item.dart';
+import 'widgets/profile_basic_info_item.dart';
 
 class ViewProfileScreen extends StatelessWidget {
   const ViewProfileScreen({super.key});
@@ -70,7 +72,10 @@ class ViewProfileScreen extends StatelessWidget {
                 ),
                 ButtonWidget(
                   title: 'Edit profile',
-                  onPressed: () {},
+                  onPressed: () => Routes.router.navigateTo(
+                    context,
+                    RoutePath.editProfileScreen,
+                  ),
                   backgroundColor: AppColors.accentColor,
                 ),
               ],

@@ -15,6 +15,7 @@ class Routes {
     setRouter(RoutePath.signInScreen, handler: signInScreenHandler);
     setRouter(RoutePath.bottomNavBar, handler: bottomNavBarHandler);
     setRouter(RoutePath.takePictureScreen, handler: takePictureScreenHandler);
+    setRouter(RoutePath.editProfileScreen, handler: editProfileScreenHandler);
   }
 
   static void setRouter(String path,

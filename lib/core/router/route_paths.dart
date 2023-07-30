@@ -4,4 +4,5 @@ class RoutePath {
   static const String signInScreen = '/sign-in';
   static const String bottomNavBar = '/bottom-nav-bar';
   static const String takePictureScreen = '/take-picture';
+  static const String editProfileScreen = 'edit-profile';
 }

@@ -5,3 +5,7 @@ abstract class ProfileEvent {}
 class FetchDataForScreenEvent extends ProfileEvent {
   FetchDataForScreenEvent();
 }
+
+class PrepareTemporaryDataEvent extends ProfileEvent {
+  PrepareTemporaryDataEvent();
+}
