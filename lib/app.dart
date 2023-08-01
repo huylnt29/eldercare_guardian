@@ -41,10 +41,22 @@ class App extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        builder: (context, child) {
+          return Overlay(
+            initialEntries: [
+              OverlayEntry(
+                builder: (context) => child!,
+              ),
+            ],
+          );
+        },
         onGenerateRoute: Routes.router.generator,
         initialRoute: '/',
         debugShowCheckedModeBanner: false,
+        navigatorKey: navigatorKey,
       ),
     );
   }
 }
+
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

@@ -26,6 +26,7 @@ class NoDataWidget extends StatelessWidget {
               fontSize: 14,
             ),
           ),
+          12.vSpace,
         ],
       ),
     );

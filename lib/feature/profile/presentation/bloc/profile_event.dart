@@ -9,3 +9,7 @@ class FetchDataForScreenEvent extends ProfileEvent {
 class PrepareTemporaryDataEvent extends ProfileEvent {
   PrepareTemporaryDataEvent();
 }
+
+class UpdateProfileEvent extends ProfileEvent {
+  UpdateProfileEvent();
+}

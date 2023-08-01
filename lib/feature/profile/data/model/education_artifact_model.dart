@@ -20,4 +20,6 @@ class EducationArtifact {
 
   factory EducationArtifact.fromJson(Map<String, Object?> json) =>
       _$EducationArtifactFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EducationArtifactToJson(this);
 }

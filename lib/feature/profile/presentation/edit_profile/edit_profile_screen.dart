@@ -1,12 +1,17 @@
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:eldercare_guardian/core/widgets/error_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:huylnt_flutter_component/reusable_core/constants/error_message.dart';
+import 'package:huylnt_flutter_component/reusable_core/converter/datetime_converter.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
+import 'package:huylnt_flutter_component/reusable_core/extensions/logger.dart';
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/complete_scaffold_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/tab_bar_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/text_form_field_widget.dart';
+import '../../../../core/widgets/loading_dialog.dart';
 import '../bloc/profile_bloc.dart';
 
 part 'tabs/basic_infor_tab.dart';
@@ -46,22 +51,34 @@ class _EditProfileScreenState extends State<EditProfileScreen>
         ),
       ),
       actions: [
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 4.sf, vertical: 5.sf),
-          padding: EdgeInsets.symmetric(horizontal: 16.sf),
-          decoration: BoxDecoration(
-            color: AppColors.accentColor,
-            borderRadius: BorderRadius.circular(16.sf),
-          ),
-          child: Center(
-            child: Text(
-              'Confirm',
-              style: AppTextStyles.text(Colors.white, bold: true),
+        InkWell(
+          onTap: () {
+            context.read<ProfileBloc>().add(UpdateProfileEvent());
+            LoadingDialog.instance.show();
+          },
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 4.sf, vertical: 5.sf),
+            padding: EdgeInsets.symmetric(horizontal: 16.sf),
+            decoration: BoxDecoration(
+              color: AppColors.accentColor,
+              borderRadius: BorderRadius.circular(16.sf),
+            ),
+            child: Center(
+              child: Text(
+                'Confirm',
+                style: AppTextStyles.text(Colors.white, bold: true),
+              ),
             ),
           ),
         ),
       ],
-      body: BlocBuilder<ProfileBloc, ProfileState>(
+      body: BlocConsumer<ProfileBloc, ProfileState>(
+        listener: (context, state) {
+          if (state.profileUpdatedSuccessfully == true) {
+            Navigator.of(context).pop();
+            LoadingDialog.instance.hide();
+          }
+        },
         builder: (context, state) {
           if (state.tempProfile != null) {
             return Column(
@@ -87,10 +104,7 @@ class _EditProfileScreenState extends State<EditProfileScreen>
                       selectedGradientBackgroundColor: const LinearGradient(
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
-                        colors: [
-                          AppColors.accentColor,
-                          AppColors.secondaryColor
-                        ],
+                        colors: [AppColors.accentColor, AppColors.textColor],
                       ),
                     ),
                   ),

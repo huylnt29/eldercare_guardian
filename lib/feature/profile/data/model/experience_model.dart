@@ -22,4 +22,6 @@ class Experience {
 
   factory Experience.fromJson(Map<String, Object?> json) =>
       _$ExperienceFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ExperienceToJson(this);
 }

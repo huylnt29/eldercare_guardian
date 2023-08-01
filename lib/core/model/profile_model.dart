@@ -39,7 +39,7 @@ class Profile {
   Email? email;
   PhoneNumber? phoneNumber;
   String? address;
-  @JsonKey(name: 'certifications')
+  @JsonKey(name: 'certificates')
   List<EducationArtifact?> educationArtifacts;
   List<Experience?> experiences;
   @enumerated

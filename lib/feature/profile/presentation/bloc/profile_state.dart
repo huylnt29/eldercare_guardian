@@ -6,6 +6,7 @@ class ProfileState with _$ProfileState {
     Profile? profile,
     Profile? tempProfile,
     @Default(false) canProfileUpdated,
+    @Default(false) profileUpdatedSuccessfully,
     required LoadState loadState,
   }) = _ProfileState;
 }

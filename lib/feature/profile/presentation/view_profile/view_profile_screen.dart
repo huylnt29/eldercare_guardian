@@ -22,7 +22,12 @@ class ViewProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileBloc, ProfileState>(
+    return BlocConsumer<ProfileBloc, ProfileState>(
+      listener: (context, state) {
+        if (state.profileUpdatedSuccessfully == true) {
+          context.read<ProfileBloc>().add(FetchDataForScreenEvent());
+        }
+      },
       builder: (context, state) {
         if (state.loadState == LoadState.loaded) {
           return SingleChildScrollView(
@@ -66,7 +71,7 @@ class ViewProfileScreen extends StatelessWidget {
                       'Address',
                       state.profile!.address,
                     ),
-                    buildEducationArtifactArea(state),
+                    // buildEducationArtifactArea(state),
                     buildExperienceArea(state),
                   ],
                 ),
@@ -138,6 +143,7 @@ class ViewProfileScreen extends StatelessWidget {
           ),
           (state.profile!.educationArtifacts.isNotEmpty)
               ? ListView(
+                  shrinkWrap: true,
                   children: [
                     for (var educationArtifact
                         in state.profile!.educationArtifacts)

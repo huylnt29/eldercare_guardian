@@ -12,11 +12,11 @@ class ProfileLocalDataSource with IsarDatabase {
     return profile;
   }
 
-  Future<int> putProfile(String guardianId, Profile profile) async {
+  Future<int> putProfile(Profile profile) async {
     final profileCollection = isarInstance!.collection<Profile>();
     try {
       await isarInstance!.writeTxn(() async {
-        final key = await profileCollection.put(profile);
+        final key = await profileCollection.putById(profile);
         return key;
       });
     } on Exception catch (error) {

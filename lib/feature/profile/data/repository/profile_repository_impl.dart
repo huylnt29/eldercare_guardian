@@ -25,9 +25,16 @@ class ProfileRepositoryImpl {
     return remoteProfile;
   }
 
+  Future<dynamic> putProfileById(Profile profile) async {
+    final response = await profileRemoteDataSource.putProfileById(
+      FakedData.guardianId,
+      profile,
+    );
+    return response;
+  }
+
   Future<int> putProfileRemoteToLocal(Profile remoteProfile) async {
     final response = await profileLocalDataSource.putProfile(
-      FakedData.guardianId,
       remoteProfile,
     );
     return response;
