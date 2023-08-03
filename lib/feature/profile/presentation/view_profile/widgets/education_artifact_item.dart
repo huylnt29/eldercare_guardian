@@ -16,34 +16,37 @@ class EducationArtifactItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: double.infinity,
-          margin: EdgeInsets.symmetric(
-            horizontal: 1.sf,
-            vertical: 10.sf,
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: 18.sf,
-            vertical: 10.sf,
-          ),
-          decoration: BoxDecoration(
-            color: AppColors.textColor.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(18.sf),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: AppTextStyles.heading3(AppColors.textColor),
-              ),
-              3.vSpace,
-              (description != null)
-                  ? Text(description.toString())
-                  : const Text(ErrorMessage.hasNoDescription),
-            ],
+        Expanded(
+          child: Container(
+            width: double.infinity,
+            margin: EdgeInsets.symmetric(
+              horizontal: 1.sf,
+              vertical: 10.sf,
+            ),
+            padding: EdgeInsets.symmetric(
+              horizontal: 18.sf,
+              vertical: 10.sf,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.textColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(18.sf),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: AppTextStyles.heading3(AppColors.textColor),
+                ),
+                3.vSpace,
+                (description != null)
+                    ? Text(description.toString())
+                    : const Text(ErrorMessage.hasNoDescription),
+              ],
+            ),
           ),
         ),
+        12.hSpace,
         CircleAvatar(
           backgroundImage: NetworkImage(imageEvidence ?? ''),
         )

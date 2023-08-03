@@ -1,7 +1,7 @@
 import 'package:eldercare_guardian/feature/profile/presentation/bloc/profile_bloc.dart';
 import 'package:eldercare_guardian/feature/profile/presentation/edit_profile/edit_profile_screen.dart';
 import 'package:eldercare_guardian/feature/schedule/presentation/bloc/schedule_bloc.dart';
-import 'package:eldercare_guardian/feature/schedule/presentation/take_picture_screen.dart';
+import 'package:eldercare_guardian/feature/photo_capture/presentation/take_picture_screen.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,12 +38,10 @@ Handler takePictureScreenHandler = Handler(handlerFunc: (
   BuildContext? context,
   Map<String, List<String>> params,
 ) {
-  final arg = context?.settings?.arguments as String;
-  return BlocProvider.value(
-    value: BlocProvider.of<ScheduleBloc>(context!),
-    child: TakePictureScreen(
-      taskId: arg,
-    ),
+  final arg = context?.settings?.arguments as Map<String, dynamic>;
+  return TakePictureScreen(
+    artifactId: arg['artifactId'],
+    takePictureScreenPurpose: arg['takePictureScreenPurpose'],
   );
 });
 

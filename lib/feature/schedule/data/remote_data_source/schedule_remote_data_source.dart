@@ -90,7 +90,7 @@ class ScheduleRemoteDataSource {
     });
     try {
       await Dio().post(
-        'https://eldercare.up.railway.app/task/upload/$taskId',
+        '${dotenv.env['ELDERCARE_SERVER_URL']}/task/upload/$taskId',
         data: formData,
       );
       return true;

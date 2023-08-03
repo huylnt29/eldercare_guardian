@@ -1,25 +1,58 @@
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:huylnt_flutter_component/reusable_core/constants/error_message.dart';
+import 'package:huylnt_flutter_component/reusable_core/converter/datetime_converter.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
 
 class ExperienceItem extends StatelessWidget {
   const ExperienceItem(
-      this.position, this.description, this.startTime, this.endTime,
+      this.position, this.description, this.startDate, this.endDate,
       {Key? key})
       : super(key: key);
   final String position;
   final String? description;
-  final String? startTime;
-  final String? endTime;
+  final DateTime? startDate;
+  final DateTime? endDate;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        Expanded(
+          child: Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: 1.sf,
+              vertical: 10.sf,
+            ),
+            padding: EdgeInsets.symmetric(
+              horizontal: 18.sf,
+              vertical: 10.sf,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.textColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(18.sf),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  position,
+                  style: AppTextStyles.heading3(AppColors.textColor),
+                ),
+                3.vSpace,
+                (description != null)
+                    ? Text(description.toString())
+                    : const Text(ErrorMessage.hasNoDescription),
+              ],
+            ),
+          ),
+        ),
+        18.hSpace,
         Container(
-          width: double.infinity,
           margin: EdgeInsets.symmetric(
             horizontal: 1.sf,
             vertical: 10.sf,
@@ -29,31 +62,28 @@ class ExperienceItem extends StatelessWidget {
             vertical: 10.sf,
           ),
           decoration: BoxDecoration(
-            color: AppColors.textColor.withOpacity(0.1),
+            color: AppColors.secondaryColor.withOpacity(0.5),
             borderRadius: BorderRadius.circular(18.sf),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                position,
-                style: AppTextStyles.heading3(AppColors.textColor),
+              (startDate != null)
+                  ? Text(DateTimeConverter.getDate(
+                      startDate!.millisecondsSinceEpoch))
+                  : const Text(ErrorMessage.isNotDetermined),
+              SizedBox(
+                width: 75.sf,
+                child: Divider(
+                  thickness: 2.sf,
+                  color: AppColors.secondaryColor,
+                ),
               ),
-              3.vSpace,
-              (description != null)
-                  ? Text(description.toString())
-                  : const Text(ErrorMessage.hasNoDescription),
-            ],
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.sf),
-          ),
-          child: Column(
-            children: [
-              Text(startTime ?? ErrorMessage.isNotDetermined),
-              Text(endTime ?? ErrorMessage.isNotDetermined),
+              (endDate != null)
+                  ? Text(DateTimeConverter.getDate(
+                      endDate!.millisecondsSinceEpoch))
+                  : const Text(ErrorMessage.isNotDetermined),
             ],
           ),
         )

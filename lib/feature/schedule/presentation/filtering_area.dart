@@ -17,24 +17,7 @@ class _FilteringAreaState extends State<FilteringArea> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(
-        top: 10.sf,
-        left: 18.sf,
-        right: 18.sf,
-        bottom: 24.sf,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18.sf),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.textColor.withOpacity(0.5),
-            spreadRadius: 1.sf,
-            blurRadius: 5.sf,
-          )
-        ],
-      ),
+    return RoundedContainerWidget(
       child: BlocBuilder<ScheduleBloc, ScheduleState>(
         builder: (context, state) {
           return Column(

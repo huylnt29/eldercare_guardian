@@ -3,6 +3,8 @@ import 'package:eldercare_guardian/feature/profile/data/local_data_source/profil
 import 'package:eldercare_guardian/feature/profile/data/remote_data_source/profile_remote_data_source.dart';
 
 import '../../../../core/model/profile_model.dart';
+import '../model/education_artifact_model.dart';
+import '../model/experience_model.dart';
 
 class ProfileRepositoryImpl {
   ProfileLocalDataSource profileLocalDataSource;
@@ -25,7 +27,7 @@ class ProfileRepositoryImpl {
     return remoteProfile;
   }
 
-  Future<dynamic> putProfileById(Profile profile) async {
+  Future<Profile> putProfileById(Profile profile) async {
     final response = await profileRemoteDataSource.putProfileById(
       FakedData.guardianId,
       profile,
@@ -36,6 +38,77 @@ class ProfileRepositoryImpl {
   Future<int> putProfileRemoteToLocal(Profile remoteProfile) async {
     final response = await profileLocalDataSource.putProfile(
       remoteProfile,
+    );
+    return response;
+  }
+
+  Future<EducationArtifact> postEducationArtifact(
+      EducationArtifact educationArtifact) async {
+    final response = await profileRemoteDataSource.postEducationArtifact(
+      FakedData.guardianId,
+      educationArtifact,
+    );
+    return response;
+  }
+
+  Future<bool> postEducationArtifactEvidence(
+    EducationArtifact educationArtifact,
+    String filePath,
+  ) async {
+    final response =
+        await profileRemoteDataSource.postEducationArtifactEvidence(
+      educationArtifact.id!,
+      filePath,
+    );
+    return response;
+  }
+
+  Future<EducationArtifact> putEducationArtifactById(
+      EducationArtifact educationArtifact) async {
+    final response = await profileRemoteDataSource.putEducationArtifactById(
+      educationArtifact,
+    );
+    return response;
+  }
+
+  Future<dynamic> deleteEducationArtifact(
+    EducationArtifact educationArtifact,
+  ) async {
+    final response = await profileRemoteDataSource.deleteEducationArtifact(
+      FakedData.guardianId,
+      educationArtifact,
+    );
+    return response;
+  }
+
+  Future<dynamic> postExperience(Experience experience) async {
+    final response = await profileRemoteDataSource.postExperience(
+      FakedData.guardianId,
+      experience,
+    );
+    return response;
+  }
+
+  Future<Experience> putExperiencById(Experience experience) async {
+    final response = await profileRemoteDataSource.putExperienceById(
+      experience,
+    );
+    return response;
+  }
+
+  Future<dynamic> deleteExperience(
+    Experience experience,
+  ) async {
+    final response = await profileRemoteDataSource.deleteExperience(
+      FakedData.guardianId,
+      experience,
+    );
+    return response;
+  }
+
+  Future<bool> deleteProfile() async {
+    final response = await profileLocalDataSource.deleteProfile(
+      FakedData.guardianId,
     );
     return response;
   }

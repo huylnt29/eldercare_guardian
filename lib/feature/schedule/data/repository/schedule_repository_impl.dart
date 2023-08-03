@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:eldercare_guardian/core/faked/faked_data.dart';
 import 'package:eldercare_guardian/core/model/aip_model.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../../../../core/network/remote/eldercare_server/eldercare_client.dart';
 import '../model/task_model.dart';

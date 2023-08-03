@@ -71,7 +71,7 @@ class ViewProfileScreen extends StatelessWidget {
                       'Address',
                       state.profile!.address,
                     ),
-                    // buildEducationArtifactArea(state),
+                    buildEducationArtifactArea(state),
                     buildExperienceArea(state),
                   ],
                 ),
@@ -98,10 +98,10 @@ class ViewProfileScreen extends StatelessWidget {
   Container buildExperienceArea(ProfileState state) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 12.sf),
-      padding: EdgeInsets.only(top: 12.sf),
+      padding: EdgeInsets.symmetric(vertical: 12.sf, horizontal: 12.sf),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.7),
-        borderRadius: BorderRadius.circular(12.sf),
+        borderRadius: BorderRadius.circular(18.sf),
       ),
       child: Column(
         children: [
@@ -111,13 +111,14 @@ class ViewProfileScreen extends StatelessWidget {
           ),
           (state.profile!.experiences.isNotEmpty)
               ? ListView(
+                  shrinkWrap: true,
                   children: [
                     for (var experience in state.profile!.experiences)
                       ExperienceItem(
                         experience!.position!,
                         experience.description,
-                        experience.startTime.toString(),
-                        experience.endTime.toString(),
+                        experience.startDate,
+                        experience.endDate,
                       ),
                   ],
                 )
@@ -130,10 +131,10 @@ class ViewProfileScreen extends StatelessWidget {
   Container buildEducationArtifactArea(ProfileState state) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 12.sf),
-      padding: EdgeInsets.only(top: 12.sf),
+      padding: EdgeInsets.symmetric(vertical: 12.sf, horizontal: 12.sf),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.7),
-        borderRadius: BorderRadius.circular(12.sf),
+        borderRadius: BorderRadius.circular(18.sf),
       ),
       child: Column(
         children: [

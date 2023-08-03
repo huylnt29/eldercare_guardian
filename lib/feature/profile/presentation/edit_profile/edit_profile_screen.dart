@@ -1,20 +1,31 @@
+import 'dart:io';
+
+import 'package:eldercare_guardian/core/automatic_generator/assets.gen.dart';
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:eldercare_guardian/core/widgets/error_widget.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:eldercare_guardian/feature/profile/data/model/education_artifact_model.dart';
+import 'package:eldercare_guardian/feature/profile/data/model/experience_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huylnt_flutter_component/reusable_core/constants/error_message.dart';
 import 'package:huylnt_flutter_component/reusable_core/converter/datetime_converter.dart';
+import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
-import 'package:huylnt_flutter_component/reusable_core/extensions/logger.dart';
+
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/action_dialog_widget.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/button_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/complete_scaffold_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/tab_bar_widget.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/rounded_container_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/text_form_field_widget.dart';
+import '../../../../core/router/route_config.dart';
+import '../../../../core/router/route_paths.dart';
 import '../../../../core/widgets/loading_dialog.dart';
+import '../../../photo_capture/presentation/take_picture_screen.dart';
 import '../bloc/profile_bloc.dart';
 
-part 'tabs/basic_infor_tab.dart';
+part 'tabs/profile_basic_infor_tab.dart';
 part 'tabs/education_artifact_tab.dart';
 part 'tabs/experience_tab.dart';
 
@@ -34,7 +45,7 @@ class _EditProfileScreenState extends State<EditProfileScreen>
   @override
   void initState() {
     tabPages.addAll(const [
-      BasicInforTab(),
+      ProfileBasicInfoTab(),
       EducationArtifactTab(),
       ExperienceTab(),
     ]);
@@ -50,6 +61,28 @@ class _EditProfileScreenState extends State<EditProfileScreen>
           color: AppColors.textColor,
         ),
       ),
+      onLeadingPressed: () {
+        showDialog<void>(
+          context: context,
+          builder: (ctx) => ActionDialogWidget(
+            isPositiveGradient: true,
+            dialogContext: context,
+            iconTitle: const Icon(Icons.warning_amber_rounded),
+            title: 'Confirm navigation',
+            titleColor: AppColors.textColor,
+            displayCloseButton: true,
+            positiveActionTitle: 'OK',
+            negativeActionTitle: 'Stay',
+            negativeBtnBorderColor: AppColors.disableBackgroundColor,
+            negativeBtnTextColor: AppColors.textColor,
+            onPositiveActionCallback: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            },
+            message: 'If you navigate back, some changes will be lost.',
+          ),
+        );
+      },
       actions: [
         InkWell(
           onTap: () {
@@ -80,7 +113,10 @@ class _EditProfileScreenState extends State<EditProfileScreen>
           }
         },
         builder: (context, state) {
-          if (state.tempProfile != null) {
+          if (state.loadState == LoadState.error) {
+            LoadingDialog.instance.hide();
+            return const AppErrorWidget();
+          } else if (state.tempProfile != null) {
             return Column(
               children: [
                 CircleAvatar(
@@ -92,26 +128,30 @@ class _EditProfileScreenState extends State<EditProfileScreen>
                 ),
                 12.vSpace,
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8.sf),
+                  margin: EdgeInsets.symmetric(horizontal: 18.sf),
                   decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
+                    color: AppColors.secondaryColor.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(18.sf),
                   ),
-                  child: Center(
-                    child: TabBarWidget(
-                      tabController: tabController,
-                      tabs: tabTitles,
-                      selectedGradientBackgroundColor: const LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [AppColors.accentColor, AppColors.textColor],
-                      ),
+                  child: TabBarWidget(
+                    tabController: tabController,
+                    tabs: tabTitles,
+                    selectedGradientBackgroundColor: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        AppColors.textColor,
+                        AppColors.secondaryColor.withOpacity(0.5),
+                      ],
                     ),
                   ),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(top: 18.sf),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 18.sf,
+                      horizontal: 18.sf,
+                    ),
                     child: TabBarView(
                       physics: const NeverScrollableScrollPhysics(),
                       controller: tabController,
@@ -122,7 +162,7 @@ class _EditProfileScreenState extends State<EditProfileScreen>
               ],
             );
           } else {
-            return const AppErrorWidget();
+            return Container();
           }
         },
       ),

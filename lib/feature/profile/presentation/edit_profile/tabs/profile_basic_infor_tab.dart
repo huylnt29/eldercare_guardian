@@ -1,13 +1,13 @@
 part of '../edit_profile_screen.dart';
 
-class BasicInforTab extends StatefulWidget {
-  const BasicInforTab({super.key});
+class ProfileBasicInfoTab extends StatefulWidget {
+  const ProfileBasicInfoTab({super.key});
 
   @override
-  State<BasicInforTab> createState() => _BasicInforTabState();
+  State<ProfileBasicInfoTab> createState() => _ProfileBasicInfoTabState();
 }
 
-class _BasicInforTabState extends State<BasicInforTab> {
+class _ProfileBasicInfoTabState extends State<ProfileBasicInfoTab> {
   final firstNameController = TextEditingController(text: '');
   final lastNameController = TextEditingController(text: '');
   final dateOfBirthController = TextEditingController(text: '');
@@ -73,7 +73,7 @@ class _BasicInforTabState extends State<BasicInforTab> {
               ),
               12.hSpace,
               InkWell(
-                onTap: () async => selectDate(),
+                onTap: () async => selectDate(dateOfBirthController),
                 child: Container(
                   height: 50.sf,
                   width: 50.sf,
@@ -124,7 +124,9 @@ class _BasicInforTabState extends State<BasicInforTab> {
     );
   }
 
-  Future<DateTime?> selectDate() async {
+  Future<DateTime?> selectDate(
+    TextEditingController textEditingController,
+  ) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -132,7 +134,7 @@ class _BasicInforTabState extends State<BasicInforTab> {
       lastDate: DateTime.now(),
     );
     if (picked != null) {
-      dateOfBirthController.text = DateTimeConverter.getDate(
+      textEditingController.text = DateTimeConverter.getDate(
         picked.millisecondsSinceEpoch,
       );
       profileBloc.state.tempProfile!.dateOfBirth = picked.toIso8601String();

@@ -6,7 +6,7 @@ import 'package:huylnt_flutter_component/reusable_core/type_defs/phone_number_ty
 import 'package:isar/isar.dart';
 part 'profile_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 @collection
 class Profile {
   Profile({
@@ -39,8 +39,9 @@ class Profile {
   Email? email;
   PhoneNumber? phoneNumber;
   String? address;
-  @JsonKey(name: 'certificates')
+  @JsonKey(name: 'certificates', includeToJson: false)
   List<EducationArtifact?> educationArtifacts;
+  @JsonKey(includeToJson: false)
   List<Experience?> experiences;
   @enumerated
   Level level;
@@ -51,19 +52,35 @@ class Profile {
 
   Map<String, dynamic> toJson() => _$ProfileToJson(this);
 
-  Profile.clone(Profile original)
-      : this(
-          id: original.id,
-          firstName: original.firstName,
-          lastName: original.lastName,
-          dateOfBirth: original.dateOfBirth,
-          identity: original.identity,
-          email: original.email,
-          phoneNumber: original.phoneNumber,
-          address: original.address,
-          educationArtifacts: original.educationArtifacts,
-          experiences: original.experiences,
-        );
+  Profile copyWith({
+    String? id,
+    String? firstName,
+    String? lastName,
+    String? dateOfBirth,
+    String? identity,
+    Email? email,
+    PhoneNumber? phoneNumber,
+    String? address,
+    List<EducationArtifact?>? educationArtifacts,
+    List<Experience?>? experiences,
+    Level? level,
+    String? avatar,
+  }) {
+    return Profile(
+      id: id ?? this.id,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      identity: identity ?? this.identity,
+      email: email ?? this.email,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      address: address ?? this.address,
+      educationArtifacts: educationArtifacts ?? this.educationArtifacts,
+      experiences: experiences ?? this.experiences,
+      level: level ?? this.level,
+      avatar: avatar ?? this.avatar,
+    );
+  }
 }
 
 enum Level {

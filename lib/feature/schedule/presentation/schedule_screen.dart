@@ -1,3 +1,5 @@
+import 'package:eldercare_guardian/core/widgets/error_widget.dart';
+import 'package:eldercare_guardian/core/widgets/loading_dialog.dart';
 import 'package:eldercare_guardian/core/widgets/no_data_widget.dart';
 import 'package:eldercare_guardian/feature/schedule/presentation/bloc/schedule_bloc.dart';
 
@@ -11,12 +13,14 @@ import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/list_view_shimmer.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/rounded_container_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/toast_widget.dart';
 import '../../../core/automatic_generator/assets.gen.dart';
 import '../../../core/router/route_config.dart';
 import '../../../core/router/route_paths.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../photo_capture/presentation/take_picture_screen.dart';
 import '../data/model/task_model.dart';
 
 part 'filtering_area.dart';

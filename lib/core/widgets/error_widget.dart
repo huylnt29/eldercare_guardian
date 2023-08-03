@@ -10,23 +10,25 @@ class AppErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: 10.sf, horizontal: 0.sf),
-      child: Column(
-        children: [
-          Assets.images.errorResult.image(
-            fit: BoxFit.cover,
-            width: MediaQuery.of(context).size.width.sf / 2,
-          ),
-          12.vSpace,
-          Text(
-            ErrorMessage.error,
-            style: AppTextStyles.custom(
-              fontSize: 14,
+    return Center(
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(vertical: 10.sf, horizontal: 0.sf),
+        child: Column(
+          children: [
+            Assets.images.errorResult.image(
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width.sf / 2,
             ),
-          ),
-        ],
+            18.vSpace,
+            Text(
+              ErrorMessage.error,
+              style: AppTextStyles.custom(
+                fontSize: 14,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -17,7 +17,14 @@ class _TaskListAreaState extends State<TaskListArea> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ScheduleBloc, ScheduleState>(builder: (context, state) {
+    return BlocConsumer<ScheduleBloc, ScheduleState>(
+        listener: (context, state) {
+      if (state.loadState == LoadState.loading) {
+        LoadingDialog.instance.show();
+      } else if (state.loadState == LoadState.loaded) {
+        LoadingDialog.instance.hide();
+      }
+    }, builder: (context, state) {
       if (state.loadState == LoadState.loaded) {
         if (state.tasks.isNotEmpty) {
           return ListView.separated(
@@ -29,8 +36,10 @@ class _TaskListAreaState extends State<TaskListArea> {
         } else {
           return const NoDataWidget();
         }
-      } else {
+      } else if (state.loadState == LoadState.loading) {
         return const ListViewShimmer();
+      } else {
+        return const AppErrorWidget();
       }
     });
   }
@@ -107,9 +116,6 @@ class _TaskListAreaState extends State<TaskListArea> {
                     width: 50.sf,
                     height: 50.sf,
                     fit: BoxFit.cover,
-                    errorBuilder: (context, exception, stackTrace) {
-                      return Assets.images.emptyImage.image();
-                    },
                   ),
                 ),
               )
@@ -130,21 +136,18 @@ class _TaskListAreaState extends State<TaskListArea> {
   }
 
   Future<void> onNavigatingTakePictureScreen(String taskId) async {
-    final postedTaskEvidenceSuccessfully = await Routes.router.navigateTo(
+    final xFile = await Routes.router.navigateTo(
       context,
       RoutePath.takePictureScreen,
       routeSettings: RouteSettings(
-        arguments: taskId,
+        arguments: {
+          'artifactId': taskId,
+          'takePictureScreenPurpose': TakePictureScreenPurpose.postTaskEvidence,
+        },
       ),
     );
-    if (postedTaskEvidenceSuccessfully == true) {
-      ToastWidget.show('Posted task evidence successfully');
-      scheduleBloc.add(InitScreenEvent());
-    } else if (postedTaskEvidenceSuccessfully == false) {
-      ToastWidget.show('Try again later.');
-      scheduleBloc.add(StateLoadedEvent());
-    } else {
-      scheduleBloc.add(StateLoadedEvent());
+    if (xFile != null) {
+      scheduleBloc.add(PostTaskEvidenceEvent(taskId, xFile));
     }
   }
 }
