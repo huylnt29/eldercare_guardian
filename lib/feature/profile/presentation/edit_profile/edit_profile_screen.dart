@@ -16,7 +16,8 @@ import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dar
 import 'package:huylnt_flutter_component/reusable_core/widgets/action_dialog_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/button_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/complete_scaffold_widget.dart';
-import 'package:huylnt_flutter_component/reusable_core/widgets/tab_bar_widget.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/tab_bar_text.dart';
+
 import 'package:huylnt_flutter_component/reusable_core/widgets/rounded_container_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/text_form_field_widget.dart';
 import '../../../../core/router/route_config.dart';
@@ -133,7 +134,7 @@ class _EditProfileScreenState extends State<EditProfileScreen>
                     color: AppColors.secondaryColor.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(18.sf),
                   ),
-                  child: TabBarWidget(
+                  child: TabBarText(
                     tabController: tabController,
                     tabs: tabTitles,
                     selectedGradientBackgroundColor: LinearGradient(

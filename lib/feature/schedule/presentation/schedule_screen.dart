@@ -1,7 +1,6 @@
 import 'package:eldercare_guardian/core/widgets/error_widget.dart';
 import 'package:eldercare_guardian/core/widgets/loading_dialog.dart';
 import 'package:eldercare_guardian/core/widgets/no_data_widget.dart';
-import 'package:eldercare_guardian/feature/profile/presentation/bloc/profile_bloc.dart';
 import 'package:eldercare_guardian/feature/schedule/data/repository/schedule_repository_impl.dart';
 
 import 'package:flutter/material.dart';
@@ -30,6 +29,9 @@ part 'tabs/planned_work/filtering_area.dart';
 part 'tabs/planned_work/task_list_area.dart';
 part 'tabs/planned_work/planned_work_tab.dart';
 part 'tabs/user_available_time/user_available_time_tab.dart';
+part 'tabs/user_available_time/date_tab_bar_item.dart';
+part 'tabs/user_available_time/date_tab_bar.dart';
+part 'tabs/user_available_time/date_tab_bar_view.dart';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({super.key});
@@ -75,7 +77,7 @@ class _ScheduleScreenState extends State<ScheduleScreen>
               const UserAvailableTimeTab(),
             ],
           ),
-        )
+        ),
       ],
     );
   }
