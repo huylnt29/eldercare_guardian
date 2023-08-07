@@ -5,22 +5,24 @@ import 'package:eldercare_guardian/feature/schedule/data/repository/schedule_rep
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
 
-import '../../../../core/model/aip_model.dart';
-import '../../data/model/task_model.dart';
+import '../../../../../../core/model/aip_model.dart';
+import '../../../../data/model/task_model.dart';
 
-part 'schedule_event.dart';
-part 'schedule_state.dart';
-part 'schedule_bloc.freezed.dart';
+part 'planned_work_event.dart';
+part 'planned_work_state.dart';
+part 'planned_work_bloc.freezed.dart';
 
-class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
-  ScheduleBloc(this.scheduleRepositoryImpl)
-      : super(ScheduleState(
-          currentSelectedDate: DateTime.now(),
-          loadState: LoadState.initial,
-        )) {
+class PlannedWorkBloc extends Bloc<PlannedWorkEvent, PlannedWorkState> {
+  PlannedWorkBloc(this.scheduleRepositoryImpl)
+      : super(
+          PlannedWorkState(
+            currentSelectedDate: DateTime.now(),
+            loadState: LoadState.initial,
+          ),
+        ) {
     on<InitScreenEvent>((event, emit) async {
       emit(state.copyWith(loadState: LoadState.loading));
-      final tasks = await scheduleRepositoryImpl.getTasks(
+      final tasks = await scheduleRepositoryImpl.getAllTasksByDate(
         dateTime: state.currentSelectedDate,
       );
       final aips = await scheduleRepositoryImpl.getAips();
@@ -31,7 +33,22 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
       ));
     });
 
-    on<ChangeDateTimeEvent>((event, emit) {});
+    on<ChangeDateTimeEvent>((event, emit) async {
+      emit(state.copyWith(loadState: LoadState.loading));
+
+      emit(state.copyWith(
+        currentSelectedDate: event.nextDate,
+      ));
+
+      final tasks = await scheduleRepositoryImpl.getAllTasksByDate(
+        dateTime: state.currentSelectedDate,
+      );
+
+      emit(state.copyWith(
+        tasks: tasks,
+        loadState: LoadState.loaded,
+      ));
+    });
 
     on<ChangeAipEvent>((event, emit) async {
       emit(state.copyWith(loadState: LoadState.loading));
@@ -40,7 +57,7 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
         aipId: event.aipId,
       ));
 
-      final tasks = await scheduleRepositoryImpl.getTasks(
+      final tasks = await scheduleRepositoryImpl.getAllTasksByDate(
         dateTime: state.currentSelectedDate,
         aipId: event.aipId,
       );

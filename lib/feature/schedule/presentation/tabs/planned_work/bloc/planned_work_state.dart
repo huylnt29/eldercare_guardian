@@ -1,12 +1,12 @@
-part of 'schedule_bloc.dart';
+part of 'planned_work_bloc.dart';
 
 @freezed
-class ScheduleState with _$ScheduleState {
-  const factory ScheduleState({
+class PlannedWorkState with _$PlannedWorkState {
+  const factory PlannedWorkState({
     String? aipId,
     @Default([]) List<Aip?> aips,
     required DateTime currentSelectedDate,
     @Default([]) List<Task?> tasks,
     required LoadState loadState,
-  }) = _ScheduleState;
+  }) = _PlannedWorkState;
 }

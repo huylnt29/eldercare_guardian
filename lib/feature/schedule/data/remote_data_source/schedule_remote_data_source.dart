@@ -4,44 +4,13 @@ class ScheduleRemoteDataSource {
   ScheduleRemoteDataSource(this._elderCareClient);
   final ElderCareClient _elderCareClient;
 
-  Future<List<Task>> getAllTasks(DateTime dateTime) async {
-    // return [
-    //   Task.fromJson({
-    //     'id': 't124',
-    //     'title': 'Clean the floor',
-    //     'fromDateTime': DateTime.now().toIso8601String(),
-    //     'toDateTime': DateTime.now().toIso8601String(),
-    //     'status': 0,
-    //     'aipName': 'Nguyen Thien Phu',
-    //   }),
-    //   Task.fromJson({
-    //     'id': 't125',
-    //     'title': 'Wash the dishes',
-    //     'fromDateTime': DateTime.now().toIso8601String(),
-    //     'toDateTime': DateTime.now().toIso8601String(),
-    //     'status': 5,
-    //     'aipName': 'Tran Thien Kim',
-    //     'imageEvidencePath':
-    //         'https://images.pexels.com/photos/709767/pexels-photo-709767.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    //   }),
-    //   Task.fromJson({
-    //     'id': 't120',
-    //     'title': 'Wash the dishes',
-    //     'fromDateTime': DateTime.now().toIso8601String(),
-    //     'toDateTime': DateTime.now().toIso8601String(),
-    //     'status': 3,
-    //     'aipName': 'Tran Thien Kim',
-    //   }),
-    // ];
-    // try {
-    //   final response =
-    //       await _elderCareClient.getTasks('64b76229250c2f0f19bb1c8a');
-    //   return response;
-    // } catch (e) {
-    //   Logger.e(e);
-    // }
-    // return [];
-    final response = await _elderCareClient.getTasks(FakedData.guardianId);
+  Future<List<Task>> getAllTasksByDate(DateTime dateTime) async {
+    final response = await _elderCareClient.getTasks(
+      FakedData.guardianId,
+      DateTimeConverter.getYearMonthDay(
+        dateTime.millisecondsSinceEpoch,
+      ),
+    );
     return response;
   }
 

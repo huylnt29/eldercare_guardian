@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:eldercare_guardian/core/faked/faked_data.dart';
 import 'package:eldercare_guardian/core/model/aip_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:huylnt_flutter_component/reusable_core/converter/datetime_converter.dart';
 
 import '../../../../core/network/remote/eldercare_server/eldercare_client.dart';
 import '../model/task_model.dart';
@@ -15,12 +16,12 @@ class ScheduleRepositoryImpl {
   ScheduleRepositoryImpl(this.scheduleRemoteDataSource);
   ScheduleRemoteDataSource scheduleRemoteDataSource;
 
-  Future<List<Task>> getTasks({
+  Future<List<Task>> getAllTasksByDate({
     String? aipId,
     required DateTime dateTime,
   }) async {
     if (aipId == null) {
-      return await scheduleRemoteDataSource.getAllTasks(dateTime);
+      return await scheduleRemoteDataSource.getAllTasksByDate(dateTime);
     } else {
       return await scheduleRemoteDataSource.getTasksByAipId(aipId, dateTime);
     }

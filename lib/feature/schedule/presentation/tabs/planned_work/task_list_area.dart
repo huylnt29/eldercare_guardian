@@ -1,4 +1,4 @@
-part of 'schedule_screen.dart';
+part of '../../schedule_screen.dart';
 
 class TaskListArea extends StatefulWidget {
   const TaskListArea({super.key});
@@ -8,16 +8,16 @@ class TaskListArea extends StatefulWidget {
 }
 
 class _TaskListAreaState extends State<TaskListArea> {
-  late ScheduleBloc scheduleBloc;
+  late PlannedWorkBloc plannedWorkBloc;
   @override
   void initState() {
-    scheduleBloc = context.read<ScheduleBloc>();
+    plannedWorkBloc = context.read<PlannedWorkBloc>();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ScheduleBloc, ScheduleState>(
+    return BlocConsumer<PlannedWorkBloc, PlannedWorkState>(
         listener: (context, state) {
       if (state.loadState == LoadState.loading) {
         LoadingDialog.instance.show();
@@ -147,7 +147,7 @@ class _TaskListAreaState extends State<TaskListArea> {
       ),
     );
     if (xFile != null) {
-      scheduleBloc.add(PostTaskEvidenceEvent(taskId, xFile));
+      plannedWorkBloc.add(PostTaskEvidenceEvent(taskId, xFile));
     }
   }
 }

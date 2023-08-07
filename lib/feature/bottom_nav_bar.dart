@@ -1,7 +1,6 @@
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:eldercare_guardian/feature/profile/presentation/bloc/profile_bloc.dart';
 
-import 'package:eldercare_guardian/feature/schedule/presentation/bloc/schedule_bloc.dart';
 import 'package:eldercare_guardian/feature/schedule/presentation/schedule_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -32,10 +31,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   late List<Widget> bottomBarScreens = [
     const Text('AIPs'),
-    BlocProvider.value(
-      value: BlocProvider.of<ScheduleBloc>(context)..add(InitScreenEvent()),
-      child: const ScheduleScreen(),
-    ),
+    const ScheduleScreen(),
     const Text('Report'),
     BlocProvider.value(
       value: BlocProvider.of<ProfileBloc>(context)

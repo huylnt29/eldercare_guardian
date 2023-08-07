@@ -1,6 +1,6 @@
 import 'package:eldercare_guardian/feature/profile/presentation/bloc/profile_bloc.dart';
 import 'package:eldercare_guardian/feature/profile/presentation/edit_profile/edit_profile_screen.dart';
-import 'package:eldercare_guardian/feature/schedule/presentation/bloc/schedule_bloc.dart';
+
 import 'package:eldercare_guardian/feature/photo_capture/presentation/take_picture_screen.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/widgets.dart';

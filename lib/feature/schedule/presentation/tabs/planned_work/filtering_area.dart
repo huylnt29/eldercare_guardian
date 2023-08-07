@@ -1,4 +1,4 @@
-part of './schedule_screen.dart';
+part of '../../schedule_screen.dart';
 
 class FilteringArea extends StatefulWidget {
   const FilteringArea({super.key});
@@ -8,17 +8,17 @@ class FilteringArea extends StatefulWidget {
 }
 
 class _FilteringAreaState extends State<FilteringArea> {
-  late ScheduleBloc scheduleBloc;
+  late PlannedWorkBloc plannedWorkBloc;
   @override
   void initState() {
-    scheduleBloc = context.read<ScheduleBloc>();
+    plannedWorkBloc = context.read<PlannedWorkBloc>();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return RoundedContainerWidget(
-      child: BlocBuilder<ScheduleBloc, ScheduleState>(
+      child: BlocBuilder<PlannedWorkBloc, PlannedWorkState>(
         builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +44,7 @@ class _FilteringAreaState extends State<FilteringArea> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: () => scheduleBloc.add(
+                      onTap: () => plannedWorkBloc.add(
                         ChangeDateTimeEvent(
                           state.currentSelectedDate.subtract(
                             const Duration(days: 1),
@@ -63,7 +63,7 @@ class _FilteringAreaState extends State<FilteringArea> {
                       ),
                     ),
                     InkWell(
-                      onTap: () => scheduleBloc.add(
+                      onTap: () => plannedWorkBloc.add(
                         ChangeDateTimeEvent(
                           state.currentSelectedDate.add(
                             const Duration(days: 1),
@@ -114,7 +114,7 @@ class _FilteringAreaState extends State<FilteringArea> {
                                           element.id == state.aipId)!
                                       .id
                                   : null,
-                              onChanged: (value) => scheduleBloc.add(
+                              onChanged: (value) => plannedWorkBloc.add(
                                 ChangeAipEvent(value as String?),
                               ),
                               buttonStyleData: ButtonStyleData(

@@ -16,7 +16,10 @@ abstract class ElderCareClient {
   }) = _ElderCareClient;
 
   @GET('/task/guardian/{guardianId}')
-  Future<List<Task>> getTasks(@Path('guardianId') String guardianId);
+  Future<List<Task>> getTasks(
+    @Path('guardianId') String guardianId,
+    @Query('date') String date, // format : YYYY-MM-DD
+  );
 
   @GET('/guardian/{guardianId}')
   Future<Profile> getProfileById(@Path('guardianId') String guardianId);

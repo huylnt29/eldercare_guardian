@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../network_key.dart';
 import 'shared_preferences_request_model.dart';
 
 // ignore: avoid_classes_with_only_static_members
@@ -16,47 +15,6 @@ class SharedPreferencesHelper {
 
   Future<void> init() async {
     _pref = await SharedPreferences.getInstance();
-  }
-
-  String getAccessTokenKey() {
-    try {
-      return _pref.getString(NetworkKey.accessToken) ?? '';
-    } catch (e) {
-      return '';
-    }
-  }
-
-  String? getAccount() {
-    try {
-      return _pref.getString(NetworkKey.account);
-    } catch (e) {
-      return null;
-    }
-  }
-
-  String? getUserProfileId() {
-    try {
-      return _pref.getString(NetworkKey.userProfileId);
-    } catch (e) {
-      return null;
-    }
-  }
-
-  //Set authKey
-  Future<void> setAccessToken(String apiTokenKey) async {
-    await _pref.setString(NetworkKey.accessToken, apiTokenKey);
-  }
-
-  Future<bool> setUserProfileId(String value) async {
-    try {
-      return _pref.setString(NetworkKey.userProfileId, value);
-    } catch (e) {
-      return false;
-    }
-  }
-
-  Future<void> removeAccessToken() async {
-    await _pref.remove(NetworkKey.accessToken);
   }
 
   String? getString(String key) {
