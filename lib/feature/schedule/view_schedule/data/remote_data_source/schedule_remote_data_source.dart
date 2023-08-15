@@ -8,7 +8,6 @@ class ScheduleRemoteDataSource {
     String guardianId,
     DateTime dateTime,
   ) async {
-    // TODO: RE-OPEN LATER
     final response = await apiClient.getTasks(
       guardianId,
       dateTime.yearMonthDay,
@@ -29,27 +28,12 @@ class ScheduleRemoteDataSource {
     ];
   }
 
-  Future<List<Aip>> getAips() async {
-    return [
-      Aip.fromJson({
-        'id': '1',
-        'firstName': 'Le',
-        'lastName': 'Huy',
-        'CCCD': '092202',
-        'phoneNumber': '090914243',
-        'dateOfBirth': '29/01/2002',
-        'address': '32 Ha Ba Tuong street',
-      }),
-      Aip.fromJson({
-        'id': '2',
-        'firstName': 'Le',
-        'lastName': 'Phu',
-        'CCCD': '092202',
-        'phoneNumber': '090914243',
-        'dateOfBirth': '29/01/2002',
-        'address': '32 Ha Ba Tuong street',
-      })
-    ];
+  Future<List<Aip>> getAipsByDate(String guardianId, DateTime dateTime) async {
+    final response = await apiClient.getAipByDate(
+      guardianId,
+      dateTime.yearMonthDay,
+    );
+    return response;
   }
 
   Future<bool> postTaskEvidence(String taskId, File file) async {

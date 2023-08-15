@@ -21,16 +21,7 @@ class PlannedWorkBloc extends Bloc<PlannedWorkEvent, PlannedWorkState> {
           ),
         ) {
     on<InitScreenEvent>((event, emit) async {
-      emit(state.copyWith(loadState: LoadState.loading));
-      final tasks = await scheduleRepository.getAllTasksByDate(
-        dateTime: state.currentSelectedDate,
-      );
-      final aips = await scheduleRepository.getAips();
-      emit(state.copyWith(
-        tasks: tasks,
-        aips: aips,
-        loadState: LoadState.loaded,
-      ));
+      add(ChangeDateTimeEvent(state.currentSelectedDate));
     });
 
     on<ChangeDateTimeEvent>((event, emit) async {
@@ -46,8 +37,9 @@ class PlannedWorkBloc extends Bloc<PlannedWorkEvent, PlannedWorkState> {
 
       emit(state.copyWith(
         tasks: tasks,
-        loadState: LoadState.loaded,
       ));
+
+      add(ChangeAipEvent(null));
     });
 
     on<ChangeAipEvent>((event, emit) async {

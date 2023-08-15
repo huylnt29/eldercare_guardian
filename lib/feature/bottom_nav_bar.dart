@@ -22,16 +22,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
   late PageController _screenController;
 
   final List<String> screenTitles = [
-    'AIPs',
-    'Schedule',
     'Report',
+    'Schedule',
     'Account',
   ];
 
   late List<Widget> bottomBarScreens = [
-    const Text('AIPs'),
-    const ScheduleScreen(),
     const Text('Report'),
+    const ScheduleScreen(),
     BlocProvider.value(
       value: BlocProvider.of<ProfileBloc>(context)
         ..add(FetchDataForScreenEvent()),
@@ -41,16 +39,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   final List<BottomNavigationBarItem> bottomNavigationItems = [
     BottomNavigationBarItem(
-      icon: Assets.icons.aips.svg(),
-      label: 'AIPs',
+      icon: Assets.icons.note.svg(),
+      label: 'Report',
     ),
     BottomNavigationBarItem(
       icon: Assets.icons.schedule.svg(),
       label: 'Schedule',
-    ),
-    BottomNavigationBarItem(
-      icon: Assets.icons.note.svg(),
-      label: 'Report',
     ),
     BottomNavigationBarItem(
       icon: Assets.icons.user.svg(),
@@ -81,7 +75,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           Container(
             margin: EdgeInsets.only(right: 18.sf),
             child: Assets.icons.notification.svg(),
-          )
+          ),
         ],
       ),
       extendBody: false,
@@ -105,15 +99,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
         builder: (context, value, child) => Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-              topRight: Radius.circular(24.sf),
-              topLeft: Radius.circular(24.sf),
+              topRight: Radius.circular(12.sf),
+              topLeft: Radius.circular(12.sf),
             ),
             boxShadow: [
               BoxShadow(
-                color: AppColors.textColor.withOpacity(0.3),
+                color: AppColors.textColor.withOpacity(0.25.sf),
                 spreadRadius: 5.sf,
                 blurRadius: 7.sf,
-                offset: const Offset(0, -1),
+                offset: Offset(0, -1.sf),
               ),
             ],
           ),
@@ -123,7 +117,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               topLeft: Radius.circular(15.sf),
             ),
             child: BottomNavigationBar(
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.white,
               showUnselectedLabels: true,
               showSelectedLabels: true,
               selectedLabelStyle: AppTextStyles.text(

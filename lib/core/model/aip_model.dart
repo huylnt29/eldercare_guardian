@@ -14,7 +14,7 @@ class Aip {
   });
 
   factory Aip.fromJson(Map<String, Object?> json) => _$AipFromJson(json);
-
+  @JsonKey(name: '_id')
   String id;
   String firstName;
   String lastName;

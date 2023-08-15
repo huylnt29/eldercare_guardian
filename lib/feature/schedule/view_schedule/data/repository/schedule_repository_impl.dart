@@ -36,8 +36,11 @@ class ScheduleRepositoryImpl {
     }
   }
 
-  Future<List<Aip>> getAips() async {
-    return await scheduleRemoteDataSource.getAips();
+  Future<List<Aip>> getAips(DateTime dateTime) async {
+    return await scheduleRemoteDataSource.getAipsByDate(
+      FakedData.guardianId,
+      dateTime,
+    );
   }
 
   Future<bool> postTaskEvidence(String taskId, XFile xFile) async {

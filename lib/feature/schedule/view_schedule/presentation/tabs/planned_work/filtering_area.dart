@@ -95,15 +95,16 @@ class _FilteringAreaState extends State<FilteringArea> {
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton2(
                               hint: const Text('Select an AIP'),
-                              items: List.from(state.aips
-                                  .map(
-                                    (e) => DropdownMenuItem(
-                                      value: e!.id,
-                                      child: Text(e.lastName),
-                                    ),
-                                  )
-                                  .toList())
-                                ..add(
+                              items: List.from(
+                                state.aips
+                                    .map(
+                                      (e) => DropdownMenuItem(
+                                        value: e!.id,
+                                        child: Text(e.lastName),
+                                      ),
+                                    )
+                                    .toList(),
+                              )..add(
                                   const DropdownMenuItem(
                                     value: null,
                                     child: Text('All'),
@@ -159,6 +160,7 @@ class _FilteringAreaState extends State<FilteringArea> {
                       ],
                     )
                   : const Text('Loading'),
+              10.vSpace,
             ],
           );
         },

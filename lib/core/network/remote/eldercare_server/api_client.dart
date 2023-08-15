@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:eldercare_guardian/core/model/aip_model.dart';
 import 'package:eldercare_guardian/core/model/profile_model.dart';
 import 'package:eldercare_guardian/feature/profile/data/model/education_artifact_model.dart';
 import 'package:eldercare_guardian/feature/profile/data/model/experience_model.dart';
@@ -21,6 +22,14 @@ abstract class ApiClient {
   @GET('/task/guardian/{guardianId}')
   Future<List<Task>> getTasks(
     @Path('guardianId') String guardianId,
+    @Query('date') String date, // format : YYYY-MM-DD
+  );
+  // __________________________________________________
+
+  /// AIP
+  @GET('/aip/guardian/{id}')
+  Future<List<Aip>> getAipByDate(
+    @Path('id') String guardianId,
     @Query('date') String date, // format : YYYY-MM-DD
   );
   // __________________________________________________
