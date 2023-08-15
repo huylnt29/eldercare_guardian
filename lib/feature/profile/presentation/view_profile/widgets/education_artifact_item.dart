@@ -1,13 +1,18 @@
+import 'package:eldercare_guardian/core/faked/faked_data.dart';
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:huylnt_flutter_component/reusable_core/constants/error_message.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/cached_network_image_widget.dart';
 
 class EducationArtifactItem extends StatelessWidget {
-  const EducationArtifactItem(this.title, this.description, this.imageEvidence,
-      {Key? key})
-      : super(key: key);
+  const EducationArtifactItem(
+    this.title,
+    this.description,
+    this.imageEvidence, {
+    Key? key,
+  }) : super(key: key);
   final String title;
   final String? description;
   final String? imageEvidence;
@@ -47,9 +52,14 @@ class EducationArtifactItem extends StatelessWidget {
           ),
         ),
         12.hSpace,
-        CircleAvatar(
-          backgroundImage: NetworkImage(imageEvidence ?? ''),
-        )
+        ClipRRect(
+          borderRadius: BorderRadius.circular(100.sf),
+          child: CachedNetWorkImageWidget(
+            width: 81.sf,
+            height: 81.sf,
+            imageUrl: imageEvidence ?? FakedData.emptyImagePath,
+          ),
+        ),
       ],
     );
   }

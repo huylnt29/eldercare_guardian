@@ -14,7 +14,9 @@ class WorkShift {
   factory WorkShift.fromJson(Map<String, Object?> json) =>
       _$WorkShiftFromJson(json);
 
-  @JsonKey(name: '_id')
+  Map<String, dynamic> toJson() => _$WorkShiftToJson(this);
+
+  @JsonKey(name: '_id', includeToJson: false)
   String id;
   DateTime startTime;
   DateTime endTime;
@@ -40,26 +42,28 @@ class DayWorkShift {
   List<WorkShift> eveningShifts;
 }
 
-@JsonSerializable()
-class WeekWorkShift {
-  WeekWorkShift({
-    required this.monday,
-    required this.tuesday,
-    required this.wednesday,
-    required this.thursday,
-    required this.friday,
-    required this.saturday,
-    this.sunday,
-  });
 
-  factory WeekWorkShift.fromJson(Map<String, Object?> json) =>
-      _$WeekWorkShiftFromJson(json);
 
-  Map<String, List<WorkShift>> monday;
-  Map<String, List<WorkShift>> tuesday;
-  Map<String, List<WorkShift>> wednesday;
-  Map<String, List<WorkShift>> thursday;
-  Map<String, List<WorkShift>> friday;
-  Map<String, List<WorkShift>> saturday;
-  Map<String, List<WorkShift>>? sunday;
-}
+// @JsonSerializable()
+// class WeekWorkShift {
+//   WeekWorkShift({
+//     required this.monday,
+//     required this.tuesday,
+//     required this.wednesday,
+//     required this.thursday,
+//     required this.friday,
+//     required this.saturday,
+//     this.sunday,
+//   });
+
+//   factory WeekWorkShift.fromJson(Map<String, Object?> json) =>
+//       _$WeekWorkShiftFromJson(json);
+
+//   Map<String, List<WorkShift>> monday;
+//   Map<String, List<WorkShift>> tuesday;
+//   Map<String, List<WorkShift>> wednesday;
+//   Map<String, List<WorkShift>> thursday;
+//   Map<String, List<WorkShift>> friday;
+//   Map<String, List<WorkShift>> saturday;
+//   Map<String, List<WorkShift>>? sunday;
+// }

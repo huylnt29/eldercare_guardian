@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
-import '../network/remote/eldercare_server/eldercare_client.dart';
+import '../network/remote/eldercare_server/api_client.dart';
 import 'service_locator.config.dart';
 
 final getIt = GetIt.instance;
@@ -15,7 +15,7 @@ final getIt = GetIt.instance;
 )
 // ignore: always_declare_return_types
 configureDependencies({required Dio dio}) {
-  getIt.registerLazySingleton<ElderCareClient>(() => ElderCareClient(dio));
+  getIt.registerLazySingleton<ApiClient>(() => ApiClient(dio));
 
   $initGetIt(getIt);
 }

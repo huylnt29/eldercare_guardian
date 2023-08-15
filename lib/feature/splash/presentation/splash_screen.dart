@@ -57,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
         appBarOverlapped: true,
         backButtonEnabled: false,
         appBarTextWidget: const Text(
-          'Eldercare for the Guardian',
+          'Eldercare',
           style: TextStyle(color: Colors.white),
         ),
         body: Container(

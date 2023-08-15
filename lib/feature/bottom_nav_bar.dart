@@ -1,8 +1,6 @@
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:eldercare_guardian/feature/profile/presentation/bloc/profile_bloc.dart';
 
-import 'package:eldercare_guardian/feature/schedule/presentation/schedule_screen.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
@@ -10,6 +8,7 @@ import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dar
 
 import '../core/automatic_generator/assets.gen.dart';
 import 'profile/presentation/view_profile/view_profile_screen.dart';
+import 'schedule/view_schedule/presentation/schedule_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -80,7 +79,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         foregroundColor: AppColors.textColor,
         actions: [
           Container(
-            margin: EdgeInsets.only(right: 10.sf),
+            margin: EdgeInsets.only(right: 18.sf),
             child: Assets.icons.notification.svg(),
           )
         ],

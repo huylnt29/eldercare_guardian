@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:eldercare_guardian/core/automatic_generator/assets.gen.dart';
+import 'package:eldercare_guardian/core/faked/faked_data.dart';
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:eldercare_guardian/core/widgets/error_widget.dart';
 import 'package:eldercare_guardian/feature/profile/data/model/education_artifact_model.dart';
@@ -8,13 +9,15 @@ import 'package:eldercare_guardian/feature/profile/data/model/experience_model.d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huylnt_flutter_component/reusable_core/constants/error_message.dart';
-import 'package:huylnt_flutter_component/reusable_core/converter/datetime_converter.dart';
+
 import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
+import 'package:huylnt_flutter_component/reusable_core/extensions/date_time.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
 
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/action_dialog_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/button_widget.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/cached_network_image_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/complete_scaffold_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/tab_bar_text.dart';
 
@@ -91,8 +94,9 @@ class _EditProfileScreenState extends State<EditProfileScreen>
             LoadingDialog.instance.show();
           },
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 4.sf, vertical: 5.sf),
-            padding: EdgeInsets.symmetric(horizontal: 16.sf),
+            margin: EdgeInsets.symmetric(horizontal: 4.sf, vertical: 5.sf)
+                .copyWith(right: 12.sf),
+            padding: EdgeInsets.symmetric(horizontal: 12.sf),
             decoration: BoxDecoration(
               color: AppColors.accentColor,
               borderRadius: BorderRadius.circular(16.sf),
@@ -120,14 +124,15 @@ class _EditProfileScreenState extends State<EditProfileScreen>
           } else if (state.tempProfile != null) {
             return Column(
               children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    state.profile!.avatar ??
-                        'https://ui-avatars.com/api/?name=${state.tempProfile!.firstName}',
+                8.vSpace,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: CachedNetWorkImageWidget(
+                    imageUrl: state.profile!.avatar ??
+                        '${FakedData.uiAvatarPath}${state.profile!.lastName}',
                   ),
-                  radius: 45.sf,
                 ),
-                12.vSpace,
+                18.vSpace,
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 18.sf),
                   decoration: BoxDecoration(

@@ -2,6 +2,7 @@ import 'package:eldercare_guardian/feature/profile/presentation/bloc/profile_blo
 import 'package:eldercare_guardian/feature/profile/presentation/edit_profile/edit_profile_screen.dart';
 
 import 'package:eldercare_guardian/feature/photo_capture/presentation/take_picture_screen.dart';
+import 'package:eldercare_guardian/feature/schedule/edit_work_shift/presentation/edit_work_shift_screen.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,13 +46,29 @@ Handler takePictureScreenHandler = Handler(handlerFunc: (
   );
 });
 
-Handler editProfileScreenHandler = Handler(handlerFunc: (
-  BuildContext? context,
-  Map<String, List<String>> params,
-) {
-  return BlocProvider.value(
-    value: BlocProvider.of<ProfileBloc>(context!)
-      ..add(PrepareTemporaryDataEvent()),
-    child: const EditProfileScreen(),
-  );
-});
+Handler editProfileScreenHandler = Handler(
+  handlerFunc: (
+    BuildContext? context,
+    Map<String, List<String>> params,
+  ) {
+    return BlocProvider.value(
+      value: BlocProvider.of<ProfileBloc>(context!)
+        ..add(PrepareTemporaryDataEvent()),
+      child: const EditProfileScreen(),
+    );
+  },
+);
+
+Handler editWorkShiftScreenHandler = Handler(
+  handlerFunc: (
+    BuildContext? context,
+    Map<String, List<String>> params,
+  ) {
+    final arg = context?.settings?.arguments as Map<String, dynamic>;
+    return EditWorkShiftScreen(
+      userAvailableTimeBloc: arg['userAvailableTimeBloc'],
+      dateTime: arg['dateTime'],
+      workShiftSession: arg['workShiftSession'],
+    );
+  },
+);

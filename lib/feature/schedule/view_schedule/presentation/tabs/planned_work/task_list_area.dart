@@ -37,7 +37,7 @@ class _TaskListAreaState extends State<TaskListArea> {
           return const NoDataWidget();
         }
       } else if (state.loadState == LoadState.loading) {
-        return const ListViewShimmer();
+        return Container();
       } else {
         return const AppErrorWidget();
       }

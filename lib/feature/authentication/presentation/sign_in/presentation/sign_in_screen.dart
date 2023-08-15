@@ -46,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
             Routes.router.navigateTo(
               context,
               RoutePath.bottomNavBar,
-              replace: true,
+              clearStack: true,
             );
           }
         }

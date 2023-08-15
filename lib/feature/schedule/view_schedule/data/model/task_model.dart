@@ -1,7 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
 
-import '../../../../core/enums/task_status.dart';
+import '../../../../../core/enums/task_status.dart';
+
 part 'task_model.g.dart';
 
 @JsonSerializable()

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:eldercare_guardian/core/network/remote/eldercare_server/eldercare_client.dart';
+import 'package:eldercare_guardian/core/network/remote/eldercare_server/api_client.dart';
 import 'package:eldercare_guardian/feature/profile/data/model/education_artifact_model.dart';
 import 'package:eldercare_guardian/feature/profile/data/model/experience_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -10,7 +10,7 @@ import '../../../../core/model/profile_model.dart';
 
 class ProfileRemoteDataSource {
   ProfileRemoteDataSource(this.elderCareClient);
-  final ElderCareClient elderCareClient;
+  final ApiClient elderCareClient;
 
   Future<Profile> getProfileById(String guardianId) async {
     final response = await elderCareClient.getProfileById(guardianId);

@@ -1,6 +1,7 @@
 import 'package:eldercare_guardian/feature/profile/data/model/education_artifact_model.dart';
 import 'package:eldercare_guardian/feature/profile/data/model/experience_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:huylnt_flutter_component/reusable_core/constants/error_message.dart';
 import 'package:huylnt_flutter_component/reusable_core/type_defs/email_type.dart';
 import 'package:huylnt_flutter_component/reusable_core/type_defs/phone_number_type.dart';
 import 'package:isar/isar.dart';
@@ -22,6 +23,7 @@ class Profile {
     this.avatar,
     @Default([]) required this.educationArtifacts,
     @Default([]) required this.experiences,
+    this.localLastModifiedAt,
   });
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -46,7 +48,7 @@ class Profile {
   @enumerated
   Level level;
   String? avatar;
-
+  DateTime? localLastModifiedAt;
   factory Profile.fromJson(Map<String, Object?> json) =>
       _$ProfileFromJson(json);
 
@@ -65,6 +67,7 @@ class Profile {
     List<Experience?>? experiences,
     Level? level,
     String? avatar,
+    DateTime? localLastModifiedAt,
   }) {
     return Profile(
       id: id ?? this.id,
@@ -79,12 +82,39 @@ class Profile {
       experiences: experiences ?? this.experiences,
       level: level ?? this.level,
       avatar: avatar ?? this.avatar,
+      localLastModifiedAt: localLastModifiedAt ?? this.localLastModifiedAt,
     );
   }
 }
 
 enum Level {
-  @JsonValue('0')
+  @JsonValue('Amateur')
   amateur,
+  @JsonValue('Professional')
+  professional,
   none;
+}
+
+extension LevelX on Level {
+  String get text {
+    switch (this) {
+      case Level.amateur:
+        return 'Amateur';
+      case Level.professional:
+        return 'Professional';
+      case Level.none:
+        return ErrorMessage.isNotDetermined;
+    }
+  }
+}
+
+extension ProfileX on Profile? {
+  bool get isFresh {
+    if (this == null) return false;
+    if (this!.localLastModifiedAt == null) return false;
+    if (this!.localLastModifiedAt!.difference(DateTime.now()).inHours > 1) {
+      return false;
+    }
+    return true;
+  }
 }

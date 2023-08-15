@@ -134,9 +134,7 @@ class _ProfileBasicInfoTabState extends State<ProfileBasicInfoTab> {
       lastDate: DateTime.now(),
     );
     if (picked != null) {
-      textEditingController.text = DateTimeConverter.getDate(
-        picked.millisecondsSinceEpoch,
-      );
+      textEditingController.text = picked.beautifulDate;
       profileBloc.state.tempProfile!.dateOfBirth = picked.toIso8601String();
     }
     return DateTime.now();

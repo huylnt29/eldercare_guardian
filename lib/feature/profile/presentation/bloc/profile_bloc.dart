@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_function_literals_in_foreach_calls
+
 import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
 import 'package:eldercare_guardian/core/model/profile_model.dart';
@@ -42,12 +44,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<UpdateProfileEvent>((event, emit) async {
       Logger.v('Right before profile being updated: ');
       Logger.d(state.tempProfile!.toJson());
+      state.tempProfile!.educationArtifacts.forEach(
+        (element) => Logger.d(element!.toJson()),
+      );
+      state.tempProfile!.experiences.forEach(
+        (element) => Logger.d(element!.toJson()),
+      );
+
       emit(state.copyWith(loadState: LoadState.loading));
       try {
         // Education artifact
         for (var element in state.tempProfile!.educationArtifacts) {
           if (element!.editionType ==
               EducationArtifactEditionType.originalModified) {
+            Logger.v('Hello1');
             final educationArtifact =
                 await profileRepositoryImpl.putEducationArtifactById(element);
             await profileRepositoryImpl.postEducationArtifactEvidence(
@@ -57,6 +67,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           } else if (element.editionType ==
                   EducationArtifactEditionType.draft &&
               element.canBePosted) {
+            Logger.v('Hello2');
             final educationArtifact =
                 await profileRepositoryImpl.postEducationArtifact(element);
             await profileRepositoryImpl.postEducationArtifactEvidence(

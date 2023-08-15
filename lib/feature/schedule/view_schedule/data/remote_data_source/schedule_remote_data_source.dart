@@ -1,17 +1,20 @@
 part of '../repository/schedule_repository_impl.dart';
 
 class ScheduleRemoteDataSource {
-  ScheduleRemoteDataSource(this._elderCareClient);
-  final ElderCareClient _elderCareClient;
+  ScheduleRemoteDataSource(this.apiClient);
+  final ApiClient apiClient;
 
-  Future<List<Task>> getAllTasksByDate(DateTime dateTime) async {
-    final response = await _elderCareClient.getTasks(
-      FakedData.guardianId,
-      DateTimeConverter.getYearMonthDay(
-        dateTime.millisecondsSinceEpoch,
-      ),
+  Future<List<Task>> getAllTasksByDate(
+    String guardianId,
+    DateTime dateTime,
+  ) async {
+    // TODO: RE-OPEN LATER
+    final response = await apiClient.getTasks(
+      guardianId,
+      dateTime.yearMonthDay,
     );
     return response;
+    // return [];
   }
 
   Future<List<Task>> getTasksByAipId(String aipId, DateTime dateTime) async {
@@ -52,7 +55,7 @@ class ScheduleRemoteDataSource {
   Future<bool> postTaskEvidence(String taskId, File file) async {
     String fileName = file.path.split('/').last;
     FormData formData = FormData.fromMap({
-      "file": await MultipartFile.fromFile(
+      'file': await MultipartFile.fromFile(
         file.path,
         filename: fileName,
       ),
@@ -66,5 +69,30 @@ class ScheduleRemoteDataSource {
     } catch (e) {
       return false;
     }
+  }
+
+  Future<DayWorkShift> getScheduleByDate(
+    String guardianId,
+    DateTime dateTime,
+  ) async {
+    final response = await apiClient.getScheduleByDate(
+      guardianId,
+      dateTime.yearMonthDay,
+    );
+    return response;
+  }
+
+  Future<WorkShift> postShift(String guardianId, WorkShift workShift) async {
+    final response = await apiClient.postShift(
+      workShift.toJson()..addEntries([MapEntry('guardian', guardianId)]),
+    );
+    return response;
+  }
+
+  Future<dynamic> deleteShift(String workShiftId) async {
+    final response = await apiClient.deleteWorkShift(
+      workShiftId,
+    );
+    return response;
   }
 }

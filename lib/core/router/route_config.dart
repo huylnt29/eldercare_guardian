@@ -14,13 +14,30 @@ class Routes {
     setRouter(RoutePath.splashScreen, handler: splashScreenHandler);
     setRouter(RoutePath.signInScreen, handler: signInScreenHandler);
     setRouter(RoutePath.bottomNavBar, handler: bottomNavBarHandler);
-    setRouter(RoutePath.takePictureScreen, handler: takePictureScreenHandler);
-    setRouter(RoutePath.editProfileScreen, handler: editProfileScreenHandler);
+    setRouter(
+      RoutePath.takePictureScreen,
+      handler: takePictureScreenHandler,
+    );
+    setRouter(
+      RoutePath.editProfileScreen,
+      handler: editProfileScreenHandler,
+    );
+    setRouter(
+      RoutePath.editWorkShiftScreen,
+      handler: editWorkShiftScreenHandler,
+    );
   }
 
-  static void setRouter(String path,
-      {required Handler handler, TransitionType? transitionType}) {
+  static void setRouter(
+    String path, {
+    required Handler handler,
+    TransitionType? transitionType,
+  }) {
     transitionType ??= TransitionType.cupertino;
-    router.define(path, handler: handler, transitionType: transitionType);
+    router.define(
+      path,
+      handler: handler,
+      transitionType: transitionType,
+    );
   }
 }

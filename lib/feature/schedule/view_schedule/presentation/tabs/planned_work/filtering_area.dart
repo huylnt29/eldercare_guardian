@@ -25,7 +25,7 @@ class _FilteringAreaState extends State<FilteringArea> {
             children: [
               Text(
                 'Schedule of: ',
-                style: AppTextStyles.heading1(AppColors.textColor),
+                style: AppTextStyles.heading2(AppColors.textColor),
               ),
               12.vSpace,
               Container(
@@ -53,15 +53,18 @@ class _FilteringAreaState extends State<FilteringArea> {
                       ),
                       child: Assets.icons.arrowLeft.svg(),
                     ),
-                    Text(
-                      DateTimeConverter.getDateInSchedule(
-                        state.currentSelectedDate.millisecondsSinceEpoch,
-                      ),
-                      style: AppTextStyles.text(
-                        AppColors.accentColor,
-                        bold: true,
+                    12.hSpace,
+                    Expanded(
+                      child: Text(
+                        state.currentSelectedDate.dateInSchedule,
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.text(
+                          AppColors.accentColor,
+                          bold: true,
+                        ),
                       ),
                     ),
+                    12.hSpace,
                     InkWell(
                       onTap: () => plannedWorkBloc.add(
                         ChangeDateTimeEvent(
@@ -81,7 +84,7 @@ class _FilteringAreaState extends State<FilteringArea> {
               10.vSpace,
               Text(
                 'For AIP(s): ',
-                style: AppTextStyles.heading1(AppColors.textColor),
+                style: AppTextStyles.heading2(AppColors.textColor),
               ),
               10.vSpace,
               (state.loadState == LoadState.loaded)

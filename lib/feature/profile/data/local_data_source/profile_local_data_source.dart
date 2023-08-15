@@ -14,13 +14,17 @@ class ProfileLocalDataSource with IsarDatabase {
     final profile = await profileCollection.getById(
       guardianId,
     );
-    return profile;
+    if (profile.isFresh) return profile;
+    return null;
   }
 
   Future<int> putProfile(Profile profile) async {
     try {
       await isarInstance!.writeTxn(() async {
-        final key = await profileCollection.putById(profile);
+        final trackedProfile = profile.copyWith(
+          localLastModifiedAt: DateTime.now(),
+        );
+        final key = await profileCollection.putById(trackedProfile);
         return key;
       });
     } on Exception catch (error) {

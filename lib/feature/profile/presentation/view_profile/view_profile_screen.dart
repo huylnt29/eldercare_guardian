@@ -1,3 +1,5 @@
+import 'package:eldercare_guardian/core/faked/faked_data.dart';
+import 'package:eldercare_guardian/core/model/profile_model.dart';
 import 'package:eldercare_guardian/core/router/route_config.dart';
 import 'package:eldercare_guardian/core/router/route_paths.dart';
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
@@ -10,6 +12,7 @@ import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/button_widget.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/cached_network_image_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/home_shimmer.dart';
 
 import '../bloc/profile_bloc.dart';
@@ -33,12 +36,35 @@ class ViewProfileScreen extends StatelessWidget {
           return SingleChildScrollView(
             child: Column(
               children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    state.profile!.avatar ??
-                        'https://ui-avatars.com/api/?name=${state.profile!.firstName}',
-                  ),
-                  radius: 45.sf,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: CachedNetWorkImageWidget(
+                        imageUrl: state.profile!.avatar ??
+                            '${FakedData.uiAvatarPath}${state.profile!.lastName}',
+                      ),
+                    ),
+                    12.hSpace,
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12.sf,
+                        vertical: 8.sf,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.textColor.withOpacity(0.75),
+                        borderRadius: BorderRadius.circular(24.sf),
+                      ),
+                      child: Text(
+                        state.profile!.level.text,
+                        style: AppTextStyles.text(
+                          AppColors.secondaryColor,
+                          bold: true,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
                 12.vSpace,
                 Column(

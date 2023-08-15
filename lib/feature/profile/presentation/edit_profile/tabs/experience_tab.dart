@@ -59,16 +59,10 @@ class _ExperienceTabState extends State<ExperienceTab> {
     final descriptionController = TextEditingController(
         text: experience.description ?? ErrorMessage.isNotDetermined);
     final startDateController = ValueNotifier(
-      DateTimeConverter.getDate(
-        experience.startDate?.millisecondsSinceEpoch ??
-            DateTime.now().millisecondsSinceEpoch,
-      ),
+      experience.startDate.beautifulDate,
     );
     final endDateController = ValueNotifier(
-      DateTimeConverter.getDate(
-        experience.endDate?.millisecondsSinceEpoch ??
-            DateTime.now().millisecondsSinceEpoch,
-      ),
+      experience.endDate.beautifulDate,
     );
     return InkWell(
       onLongPress: () {
@@ -148,9 +142,13 @@ class _ExperienceTabState extends State<ExperienceTab> {
                 ),
               ],
             ),
-            18.hSpace,
+            12.hSpace,
             Expanded(
               child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8.sf,
+                  vertical: 5.sf,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.primaryColor,
                   borderRadius: BorderRadius.circular(18.sf),
@@ -169,14 +167,21 @@ class _ExperienceTabState extends State<ExperienceTab> {
                           keyboardInvisible.value = true;
                           FocusScope.of(context).unfocus();
                         },
-                        onChanged: (_) =>
-                            experience.position = positionController.text,
+                        onChanged: (_) {
+                          experience.position = positionController.text;
+                          if (experience.editionType ==
+                              ExperienceEditionType.original) {
+                            experience.editionType =
+                                ExperienceEditionType.originalModified;
+                          }
+                        },
                         controller: positionController,
                         textInputType: TextInputType.name,
                         colorTheme: AppColors.textColor,
                         labelText: 'Position',
                       ),
                     ),
+                    12.vSpace,
                     Flexible(
                       child: TextFormFieldWidget(
                         onEditingComplete: () {
@@ -188,8 +193,14 @@ class _ExperienceTabState extends State<ExperienceTab> {
                           keyboardInvisible.value = true;
                           FocusScope.of(context).unfocus();
                         },
-                        onChanged: (_) =>
-                            experience.description = descriptionController.text,
+                        onChanged: (_) {
+                          experience.description = descriptionController.text;
+                          if (experience.editionType ==
+                              ExperienceEditionType.original) {
+                            experience.editionType =
+                                ExperienceEditionType.originalModified;
+                          }
+                        },
                         controller: descriptionController,
                         textInputType: TextInputType.name,
                         colorTheme: AppColors.textColor,
@@ -218,14 +229,15 @@ class _ExperienceTabState extends State<ExperienceTab> {
       lastDate: DateTime.now(),
     );
     if (picked != null) {
-      valueNotifier.value = DateTimeConverter.getDate(
-        picked.millisecondsSinceEpoch,
-      );
+      valueNotifier.value = picked.beautifulDate;
       if (experienceDatePickerPurpose ==
           ExperienceDatePickerPurpose.startDate) {
         experience.startDate = picked;
       } else {
         experience.endDate = picked;
+      }
+      if (experience.editionType == ExperienceEditionType.original) {
+        experience.editionType = ExperienceEditionType.originalModified;
       }
     }
     return DateTime.now();

@@ -88,7 +88,7 @@ class _EducationArtifactTabState extends State<EducationArtifactTab> {
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: 4.sf,
-          vertical: 6.sf,
+          vertical: 18.sf,
         ),
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
@@ -109,8 +109,14 @@ class _EducationArtifactTabState extends State<EducationArtifactTab> {
                       keyboardInvisible.value = true;
                       FocusScope.of(context).unfocus();
                     },
-                    onChanged: (_) =>
-                        educationArtifact.title = titleController.text,
+                    onChanged: (_) {
+                      educationArtifact.title = titleController.text;
+                      if (educationArtifact.editionType ==
+                          EducationArtifactEditionType.original) {
+                        educationArtifact.editionType =
+                            EducationArtifactEditionType.originalModified;
+                      }
+                    },
                     controller: titleController,
                     textInputType: TextInputType.text,
                     colorTheme: AppColors.textColor,
@@ -126,8 +132,15 @@ class _EducationArtifactTabState extends State<EducationArtifactTab> {
                       keyboardInvisible.value = true;
                       FocusScope.of(context).unfocus();
                     },
-                    onChanged: (_) => educationArtifact.description =
-                        descriptionController.text,
+                    onChanged: (_) {
+                      educationArtifact.description =
+                          descriptionController.text;
+                      if (educationArtifact.editionType ==
+                          EducationArtifactEditionType.original) {
+                        educationArtifact.editionType =
+                            EducationArtifactEditionType.originalModified;
+                      }
+                    },
                     controller: descriptionController,
                     textInputType: TextInputType.text,
                     colorTheme: AppColors.textColor,
@@ -141,12 +154,14 @@ class _EducationArtifactTabState extends State<EducationArtifactTab> {
               onTap: () => onNavigatingTakePictureScreen(educationArtifact.id!),
               child: (educationArtifact.editionType ==
                       EducationArtifactEditionType.original)
-                  ? CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        educationArtifact.imageEvidence ??
-                            'https://tse3.mm.bing.net/th?id=OIP.gpB7_qn-l-hIYeLufFtPWwAAAA&pid=Api&P=0&h=180',
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(100.sf),
+                      child: CachedNetWorkImageWidget(
+                        width: 112.sf,
+                        height: 112.sf,
+                        imageUrl: educationArtifact.imageEvidence ??
+                            FakedData.emptyImagePath,
                       ),
-                      radius: 45.sf,
                     )
                   : (educationArtifact.imageEvidence != null
                       ? Image.file(

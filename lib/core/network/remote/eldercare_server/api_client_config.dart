@@ -1,17 +1,17 @@
 import 'package:dio/dio.dart';
 
-import 'eldercare_client.dart';
+import 'api_client.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import 'eldercare_client_interceptors.dart';
+import 'api_client_interceptors.dart';
 
-class ElderCareClientConfig {
+class ApiClientConfig {
   static Dio initApiService({String? baseUrl}) {
     final dio = Dio();
     if (baseUrl != null) {
       dio.options.baseUrl = baseUrl;
     }
-    dio.interceptors.add(ElderCareClientInterceptors(dio: dio));
+    dio.interceptors.add(ApiClientInterceptors(dio: dio));
     dio.options.connectTimeout = const Duration(seconds: 50);
     // dio.options.headers['Content-Type'] = 'application/json';
 
@@ -25,8 +25,8 @@ class ElderCareClientConfig {
     return dio;
   }
 
-  static ElderCareClient getApiClient() {
-    final apiClient = ElderCareClient(initApiService());
+  static ApiClient getApiClient() {
+    final apiClient = ApiClient(initApiService());
     return apiClient;
   }
 }
