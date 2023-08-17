@@ -16,7 +16,7 @@ part 'profile_state.dart';
 part 'profile_bloc.freezed.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  ProfileBloc(this.profileRepositoryImpl)
+  ProfileBloc(this.profileRepository)
       : super(const ProfileState(loadState: LoadState.initial)) {
     on<FetchDataForScreenEvent>((event, emit) async {
       emit(state.copyWith(
@@ -24,12 +24,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         profileUpdatedSuccessfully: false,
       ));
       try {
-        final response = await profileRepositoryImpl.getProfileById();
+        final response = await profileRepository.getProfileById();
         emit(state.copyWith(
           profile: response,
           loadState: LoadState.loaded,
         ));
-        await profileRepositoryImpl.putProfileRemoteToLocal(response);
+        await profileRepository.putProfileRemoteToLocal(response);
       } on Exception {
         emit(state.copyWith(loadState: LoadState.error));
       }
@@ -59,8 +59,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
               EducationArtifactEditionType.originalModified) {
             Logger.v('Hello1');
             final educationArtifact =
-                await profileRepositoryImpl.putEducationArtifactById(element);
-            await profileRepositoryImpl.postEducationArtifactEvidence(
+                await profileRepository.putEducationArtifactById(element);
+            await profileRepository.postEducationArtifactEvidence(
               educationArtifact,
               element.imageEvidence!,
             );
@@ -69,8 +69,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
               element.canBePosted) {
             Logger.v('Hello2');
             final educationArtifact =
-                await profileRepositoryImpl.postEducationArtifact(element);
-            await profileRepositoryImpl.postEducationArtifactEvidence(
+                await profileRepository.postEducationArtifact(element);
+            await profileRepository.postEducationArtifactEvidence(
               educationArtifact,
               element.imageEvidence!,
             );
@@ -80,18 +80,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         // Experience
         for (var element in state.tempProfile!.experiences) {
           if (element!.editionType == ExperienceEditionType.originalModified) {
-            await profileRepositoryImpl.putExperiencById(element);
+            await profileRepository.putExperiencById(element);
           } else if (element.editionType == ExperienceEditionType.draft) {
-            await profileRepositoryImpl.postExperience(element);
+            await profileRepository.postExperience(element);
           }
         }
         // Update basic info...
-        await profileRepositoryImpl.putProfileById(
+        await profileRepository.putProfileById(
           state.tempProfile!,
         );
 
         // Reset data in local
-        await profileRepositoryImpl.deleteProfile();
+        await profileRepository.deleteProfile();
 
         emit(state.copyWith(
           loadState: LoadState.loaded,
@@ -152,14 +152,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       if (event.educationArtifact.editionType !=
           EducationArtifactEditionType.draft) {
         try {
-          await profileRepositoryImpl.deleteEducationArtifact(
+          await profileRepository.deleteEducationArtifact(
             event.educationArtifact,
           );
         } on Exception {
           emit(state.copyWith(loadState: LoadState.error));
         }
 
-        await profileRepositoryImpl.deleteProfile();
+        await profileRepository.deleteProfile();
       }
     });
 
@@ -178,14 +178,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
       if (event.experience.editionType != ExperienceEditionType.draft) {
         try {
-          await profileRepositoryImpl.deleteExperience(
+          await profileRepository.deleteExperience(
             event.experience,
           );
         } on Exception {
           emit(state.copyWith(loadState: LoadState.error));
         }
 
-        await profileRepositoryImpl.deleteProfile();
+        await profileRepository.deleteProfile();
       }
     });
 
@@ -206,5 +206,5 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(state.copyWith(loadState: LoadState.loaded));
     });
   }
-  ProfileRepositoryImpl profileRepositoryImpl;
+  ProfileRepository profileRepository;
 }

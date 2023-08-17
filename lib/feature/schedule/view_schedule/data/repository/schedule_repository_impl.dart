@@ -7,6 +7,7 @@ import 'package:eldercare_guardian/core/model/aip_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:huylnt_flutter_component/reusable_core/extensions/date_time.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../../core/network/remote/eldercare_server/api_client.dart';
 
@@ -15,10 +16,24 @@ import '../model/work_shift_model.dart';
 
 part '../remote_data_source/schedule_remote_data_source.dart';
 
-class ScheduleRepositoryImpl {
-  ScheduleRepositoryImpl(this.scheduleRemoteDataSource);
+abstract class ScheduleRepository {
+  ScheduleRepository(this.scheduleRemoteDataSource);
   ScheduleRemoteDataSource scheduleRemoteDataSource;
+  Future<List<Task>> getAllTasksByDate({
+    String? aipId,
+    required DateTime dateTime,
+  });
+  Future<List<Aip>> getAips(DateTime dateTime);
+  Future<bool> postTaskEvidence(String taskId, XFile xFile);
+  Future<DayWorkShift> getScheduleByDate(DateTime dateTime);
+  Future<WorkShift> postShift(WorkShift workShift);
+  Future<dynamic> deleteShift(WorkShift workShift);
+}
 
+@Injectable(as: ScheduleRepository)
+class ScheduleRepositoryImpl extends ScheduleRepository {
+  ScheduleRepositoryImpl(super.scheduleRemoteDataSource);
+  @override
   Future<List<Task>> getAllTasksByDate({
     String? aipId,
     required DateTime dateTime,
@@ -36,6 +51,7 @@ class ScheduleRepositoryImpl {
     }
   }
 
+  @override
   Future<List<Aip>> getAips(DateTime dateTime) async {
     return await scheduleRemoteDataSource.getAipsByDate(
       FakedData.guardianId,
@@ -43,6 +59,7 @@ class ScheduleRepositoryImpl {
     );
   }
 
+  @override
   Future<bool> postTaskEvidence(String taskId, XFile xFile) async {
     return await scheduleRemoteDataSource.postTaskEvidence(
       taskId,
@@ -50,6 +67,7 @@ class ScheduleRepositoryImpl {
     );
   }
 
+  @override
   Future<DayWorkShift> getScheduleByDate(DateTime dateTime) async {
     return await scheduleRemoteDataSource.getScheduleByDate(
       FakedData.guardianId,
@@ -57,6 +75,7 @@ class ScheduleRepositoryImpl {
     );
   }
 
+  @override
   Future<WorkShift> postShift(WorkShift workShift) async {
     final response = await scheduleRemoteDataSource.postShift(
       FakedData.guardianId,
@@ -65,6 +84,7 @@ class ScheduleRepositoryImpl {
     return response;
   }
 
+  @override
   Future<dynamic> deleteShift(WorkShift workShift) async {
     final response = await scheduleRemoteDataSource.deleteShift(workShift.id);
     return response;

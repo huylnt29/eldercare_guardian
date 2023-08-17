@@ -6,6 +6,7 @@ import 'package:eldercare_guardian/feature/profile/data/model/experience_model.d
 
 import 'package:retrofit/retrofit.dart';
 
+import '../../../../feature/report_management/data/model/report_model.dart';
 import '../../../../feature/schedule/view_schedule/data/model/task_model.dart';
 import '../../../../feature/schedule/view_schedule/data/model/work_shift_model.dart';
 
@@ -103,4 +104,22 @@ abstract class ApiClient {
   Future<dynamic> deleteWorkShift(
     @Path('id') String workShiftId,
   );
+  // __________________________________________________
+
+  /// REPORT
+
+  // TODO: Get finished reports by date
+
+  @GET('/report/{id}')
+  Future<Report> getReport(
+    @Path('id') String reportId,
+  );
+
+  @POST('/report')
+  Future<dynamic> postReport(
+    @Query('guardianId') String guardianId,
+    @Query('aipId') String aipId,
+    @Body() Map<String, dynamic> body,
+  );
+  // __________________________________________________
 }

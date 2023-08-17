@@ -5,6 +5,7 @@ import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/date_time.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/logger.dart';
 
+import '../../../../../../../core/service_locator/service_locator.dart';
 import '../../../../data/model/work_shift_model.dart';
 import '../../../../data/repository/schedule_repository_impl.dart';
 import '../../../../domain/use_case/schedule_use_case.dart';
@@ -70,6 +71,6 @@ class UserAvailableTimeBloc
     });
   }
 
-  late ScheduleUseCase scheduleUseCase;
-  late ScheduleRepositoryImpl scheduleRepository;
+  final ScheduleUseCase scheduleUseCase;
+  final ScheduleRepository scheduleRepository;
 }

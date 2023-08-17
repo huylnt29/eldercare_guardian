@@ -12,6 +12,7 @@ import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/action_dialog_widget.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/cached_network_image_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/list_view_shimmer.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/rounded_container_widget.dart';
 
@@ -26,7 +27,7 @@ import '../data/model/task_model.dart';
 import '../data/model/work_shift_model.dart';
 import '../data/model/work_shift_session_enum.dart';
 import '../data/repository/schedule_repository_impl.dart';
-import '../domain/use_case/schedule_use_case.dart';
+
 import 'tabs/planned_work/bloc/planned_work_bloc.dart';
 import 'tabs/user_available_time/bloc/user_available_time_bloc.dart';
 
@@ -97,9 +98,9 @@ class _ScheduleScreenState extends State<ScheduleScreen>
           child: TabBarView(
             physics: const NeverScrollableScrollPhysics(),
             controller: tabController,
-            children: [
+            children: const [
               PlannedWorkTab(),
-              const UserAvailableTimeTab(),
+              UserAvailableTimeTab(),
             ],
           ),
         ),

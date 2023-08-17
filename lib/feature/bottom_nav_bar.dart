@@ -1,5 +1,6 @@
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:eldercare_guardian/feature/profile/presentation/bloc/profile_bloc.dart';
+import 'package:eldercare_guardian/feature/report_management/presentation/screens/view_aips_and_report/related_report_info_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,13 +29,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
   ];
 
   late List<Widget> bottomBarScreens = [
-    const Text('Report'),
+    const RelatedReportInfoScreen(),
     const ScheduleScreen(),
-    BlocProvider.value(
-      value: BlocProvider.of<ProfileBloc>(context)
-        ..add(FetchDataForScreenEvent()),
-      child: const ViewProfileScreen(),
-    ),
+    const ViewProfileScreen(),
   ];
 
   final List<BottomNavigationBarItem> bottomNavigationItems = [
@@ -73,7 +70,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         foregroundColor: AppColors.textColor,
         actions: [
           Container(
-            margin: EdgeInsets.only(right: 18.sf),
+            margin: EdgeInsets.only(right: 15.sf),
             child: Assets.icons.notification.svg(),
           ),
         ],

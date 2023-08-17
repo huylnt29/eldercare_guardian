@@ -9,12 +9,10 @@ class UserAvailableTimeTab extends StatefulWidget {
 
 class _UserAvailableTimeTabState extends State<UserAvailableTimeTab>
     with TickerProviderStateMixin {
-  final userAvailableTimeBloc = UserAvailableTimeBloc(
-    ScheduleRepositoryImpl(
-      ScheduleRemoteDataSource(getIt()),
-    ),
-    ScheduleUseCase(),
-  )..add(FetchDayWorkShift(DateTime.now().firstDayOfNextWeek));
+  final userAvailableTimeBloc = getIt<UserAvailableTimeBloc>()
+    ..add(
+      FetchDayWorkShift(DateTime.now().firstDayOfNextWeek),
+    );
 
   late final tabController = TabController(length: 7, vsync: this);
 
@@ -141,7 +139,7 @@ class _UserAvailableTimeTabState extends State<UserAvailableTimeTab>
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 12.sf),
+              padding: EdgeInsets.only(left: 12.sf),
               decoration: BoxDecoration(
                 color: AppColors.textColor.withOpacity(0.9),
                 borderRadius: BorderRadius.circular(12.sf),

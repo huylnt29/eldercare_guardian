@@ -1,17 +1,12 @@
 part of '../../schedule_screen.dart';
 
 class PlannedWorkTab extends StatelessWidget {
-  PlannedWorkTab({super.key});
-  final plannedWorkBloc = PlannedWorkBloc(
-    ScheduleRepositoryImpl(
-      ScheduleRemoteDataSource(getIt()),
-    ),
-  )..add(InitScreenEvent());
+  const PlannedWorkTab({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => plannedWorkBloc,
+      create: (_) => getIt<PlannedWorkBloc>()..add(InitScreenEvent()),
       child: SingleChildScrollView(
         child: Column(
           children: [

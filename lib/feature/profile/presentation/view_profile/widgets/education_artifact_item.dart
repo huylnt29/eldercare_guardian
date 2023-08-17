@@ -53,10 +53,10 @@ class EducationArtifactItem extends StatelessWidget {
         ),
         12.hSpace,
         ClipRRect(
-          borderRadius: BorderRadius.circular(100.sf),
+          borderRadius: BorderRadius.circular(50),
           child: CachedNetWorkImageWidget(
-            width: 81.sf,
-            height: 81.sf,
+            width: 72.sf,
+            height: 72.sf,
             imageUrl: imageEvidence ?? FakedData.emptyImagePath,
           ),
         ),

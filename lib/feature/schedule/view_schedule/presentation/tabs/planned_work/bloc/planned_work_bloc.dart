@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
 
 import '../../../../../../../core/model/aip_model.dart';
+
 import '../../../../data/model/task_model.dart';
 import '../../../../data/repository/schedule_repository_impl.dart';
 
@@ -85,5 +86,5 @@ class PlannedWorkBloc extends Bloc<PlannedWorkEvent, PlannedWorkState> {
     });
   }
 
-  late ScheduleRepositoryImpl scheduleRepository;
+  final ScheduleRepository scheduleRepository;
 }

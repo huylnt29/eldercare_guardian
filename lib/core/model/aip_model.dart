@@ -7,8 +7,8 @@ class Aip {
     required this.id,
     required this.firstName,
     required this.lastName,
-    required this.identity,
-    required this.phoneNumber,
+    this.identity,
+    this.phoneNumber,
     required this.dateOfBirth,
     required this.address,
   });
@@ -19,8 +19,8 @@ class Aip {
   String firstName;
   String lastName;
   @JsonKey(name: 'CCCD')
-  String identity;
-  String phoneNumber;
+  String? identity;
+  String? phoneNumber;
   String dateOfBirth;
   String address;
 }

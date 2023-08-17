@@ -25,10 +25,13 @@ class ViewProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final profileBloc = context.read<ProfileBloc>()
+      ..add(FetchDataForScreenEvent());
+
     return BlocConsumer<ProfileBloc, ProfileState>(
       listener: (context, state) {
         if (state.profileUpdatedSuccessfully == true) {
-          context.read<ProfileBloc>().add(FetchDataForScreenEvent());
+          profileBloc.add(FetchDataForScreenEvent());
         }
       },
       builder: (context, state) {

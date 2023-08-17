@@ -26,6 +26,14 @@ class Routes {
       RoutePath.editWorkShiftScreen,
       handler: editWorkShiftScreenHandler,
     );
+    setRouter(
+      RoutePath.reportManangementScreen,
+      handler: reportManagementScreenHandler,
+    );
+    setRouter(
+      RoutePath.reportDetailsScreen,
+      handler: reportDetailsScreenHandler,
+    );
   }
 
   static void setRouter(

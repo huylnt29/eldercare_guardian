@@ -51,9 +51,9 @@ class _TaskListAreaState extends State<TaskListArea> {
         Expanded(
           child: Container(
             padding: EdgeInsets.symmetric(
-              vertical: 12.sf,
-              horizontal: 8.sf,
-            ).copyWith(left: 10.sf),
+              vertical: 5.sf,
+              horizontal: 1.sf,
+            ).copyWith(left: 10.sf, top: 12.sf),
             decoration: BoxDecoration(
               border: Border.all(
                 width: 2.sf,
@@ -69,9 +69,9 @@ class _TaskListAreaState extends State<TaskListArea> {
                   children: [
                     Text(
                       task.title,
-                      style: AppTextStyles.heading2(AppColors.textColor),
+                      style: AppTextStyles.heading3(AppColors.textColor),
                     ),
-                    12.hSpace,
+                    8.hSpace,
                     Container(
                       padding: EdgeInsets.symmetric(
                         vertical: 5.sf,
@@ -111,10 +111,8 @@ class _TaskListAreaState extends State<TaskListArea> {
                 // TODO: Remove when done testing
                 onTap: () => onNavigatingTakePictureScreen(task.id),
                 child: ClipOval(
-                  child: Image.network(
-                    task.taskEvidence!.imageEvidencePath,
-                    width: 50.sf,
-                    height: 50.sf,
+                  child: CachedNetWorkImageWidget(
+                    imageUrl: task.taskEvidence!.imageEvidencePath,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -128,7 +126,6 @@ class _TaskListAreaState extends State<TaskListArea> {
                 child: IconButton(
                   onPressed: () => onNavigatingTakePictureScreen(task.id),
                   icon: Assets.icons.camera.svg(),
-                  iconSize: 30.sf,
                 ),
               ),
       ],

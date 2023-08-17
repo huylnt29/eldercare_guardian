@@ -6,4 +6,6 @@ class RoutePath {
   static const String takePictureScreen = '/take-picture';
   static const String editProfileScreen = 'edit-profile';
   static const String editWorkShiftScreen = 'edit-work-shift';
+  static const String reportDetailsScreen = 'report-details';
+  static const String reportManangementScreen = 'manage-report';
 }

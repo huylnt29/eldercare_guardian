@@ -1,19 +1,50 @@
 import 'package:eldercare_guardian/core/faked/faked_data.dart';
 import 'package:eldercare_guardian/feature/profile/data/local_data_source/profile_local_data_source.dart';
 import 'package:eldercare_guardian/feature/profile/data/remote_data_source/profile_remote_data_source.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/model/profile_model.dart';
 import '../model/education_artifact_model.dart';
 import '../model/experience_model.dart';
 
-class ProfileRepositoryImpl {
-  ProfileLocalDataSource profileLocalDataSource;
-  ProfileRemoteDataSource profileRemoteDataSource;
-  ProfileRepositoryImpl(
+abstract class ProfileRepository {
+  ProfileRepository(
     this.profileLocalDataSource,
     this.profileRemoteDataSource,
   );
+  ProfileLocalDataSource profileLocalDataSource;
+  ProfileRemoteDataSource profileRemoteDataSource;
+  Future<Profile> getProfileById();
+  Future<Profile> putProfileById(Profile profile);
+  Future<int> putProfileRemoteToLocal(Profile remoteProfile);
+  Future<EducationArtifact> postEducationArtifact(
+    EducationArtifact educationArtifact,
+  );
+  Future<bool> postEducationArtifactEvidence(
+    EducationArtifact educationArtifact,
+    String filePath,
+  );
+  Future<EducationArtifact> putEducationArtifactById(
+    EducationArtifact educationArtifact,
+  );
+  Future<dynamic> deleteEducationArtifact(
+    EducationArtifact educationArtifact,
+  );
+  Future<dynamic> postExperience(Experience experience);
+  Future<Experience> putExperiencById(Experience experience);
+  Future<dynamic> deleteExperience(
+    Experience experience,
+  );
+  Future<bool> deleteProfile();
+}
 
+@Injectable(as: ProfileRepository)
+class ProfileRepositoryImpl extends ProfileRepository {
+  ProfileRepositoryImpl(
+    super.profileLocalDataSource,
+    super.profileRemoteDataSource,
+  );
+  @override
   Future<Profile> getProfileById() async {
     final localProfile = await profileLocalDataSource.getProfileById(
       FakedData.guardianId,
@@ -27,6 +58,7 @@ class ProfileRepositoryImpl {
     return remoteProfile;
   }
 
+  @override
   Future<Profile> putProfileById(Profile profile) async {
     final response = await profileRemoteDataSource.putProfileById(
       FakedData.guardianId,
@@ -35,6 +67,7 @@ class ProfileRepositoryImpl {
     return response;
   }
 
+  @override
   Future<int> putProfileRemoteToLocal(Profile remoteProfile) async {
     final response = await profileLocalDataSource.putProfile(
       remoteProfile,
@@ -42,6 +75,7 @@ class ProfileRepositoryImpl {
     return response;
   }
 
+  @override
   Future<EducationArtifact> postEducationArtifact(
       EducationArtifact educationArtifact) async {
     final response = await profileRemoteDataSource.postEducationArtifact(
@@ -51,6 +85,7 @@ class ProfileRepositoryImpl {
     return response;
   }
 
+  @override
   Future<bool> postEducationArtifactEvidence(
     EducationArtifact educationArtifact,
     String filePath,
@@ -63,6 +98,7 @@ class ProfileRepositoryImpl {
     return response;
   }
 
+  @override
   Future<EducationArtifact> putEducationArtifactById(
       EducationArtifact educationArtifact) async {
     final response = await profileRemoteDataSource.putEducationArtifactById(
@@ -71,6 +107,7 @@ class ProfileRepositoryImpl {
     return response;
   }
 
+  @override
   Future<dynamic> deleteEducationArtifact(
     EducationArtifact educationArtifact,
   ) async {
@@ -81,6 +118,7 @@ class ProfileRepositoryImpl {
     return response;
   }
 
+  @override
   Future<dynamic> postExperience(Experience experience) async {
     final response = await profileRemoteDataSource.postExperience(
       FakedData.guardianId,
@@ -89,6 +127,7 @@ class ProfileRepositoryImpl {
     return response;
   }
 
+  @override
   Future<Experience> putExperiencById(Experience experience) async {
     final response = await profileRemoteDataSource.putExperienceById(
       experience,
@@ -96,6 +135,7 @@ class ProfileRepositoryImpl {
     return response;
   }
 
+  @override
   Future<dynamic> deleteExperience(
     Experience experience,
   ) async {
@@ -106,6 +146,7 @@ class ProfileRepositoryImpl {
     return response;
   }
 
+  @override
   Future<bool> deleteProfile() async {
     final response = await profileLocalDataSource.deleteProfile(
       FakedData.guardianId,

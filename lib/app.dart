@@ -1,7 +1,6 @@
-import 'package:eldercare_guardian/feature/profile/data/local_data_source/profile_local_data_source.dart';
-import 'package:eldercare_guardian/feature/profile/data/remote_data_source/profile_remote_data_source.dart';
-import 'package:eldercare_guardian/feature/profile/data/repository/profile_repository_impl.dart';
 import 'package:eldercare_guardian/feature/profile/presentation/bloc/profile_bloc.dart';
+import 'package:eldercare_guardian/feature/schedule/view_schedule/presentation/tabs/planned_work/bloc/planned_work_bloc.dart';
+import 'package:eldercare_guardian/feature/schedule/view_schedule/presentation/tabs/user_available_time/bloc/user_available_time_bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,15 +36,10 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => AuthenticationBloc(),
+          create: (_) => getIt<AuthenticationBloc>(),
         ),
         BlocProvider(
-          create: (_) => ProfileBloc(
-            ProfileRepositoryImpl(
-              ProfileLocalDataSource(),
-              ProfileRemoteDataSource(getIt()),
-            ),
-          ),
+          create: (_) => getIt<ProfileBloc>(),
         ),
       ],
       child: child,
