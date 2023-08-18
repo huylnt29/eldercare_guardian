@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="eldercare_guardian"
+        android:label="Eldercare"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/eldercare_icon_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"
