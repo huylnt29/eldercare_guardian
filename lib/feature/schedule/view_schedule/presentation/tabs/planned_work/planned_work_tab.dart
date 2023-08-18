@@ -8,11 +8,11 @@ class PlannedWorkTab extends StatefulWidget {
 }
 
 class _PlannedWorkTabState extends State<PlannedWorkTab> {
-  final plannedWorkBloc = getIt<PlannedWorkBloc>()..add(InitScreenEvent());
+  final plannedWorkBloc = getIt<PlannedWorkBloc>();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => plannedWorkBloc,
+    return BlocProvider.value(
+      value: plannedWorkBloc..add(InitScreenEvent()),
       child: SingleChildScrollView(
         child: Column(
           children: [

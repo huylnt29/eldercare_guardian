@@ -18,11 +18,11 @@ class LoadingDialog {
           builder: (context) => ColoredBox(
             color: Colors.black.withOpacity(.3),
             child: const Center(
-              child: FPTLoading(
+              child: Loading(
                 color: [
                   AppColors.primaryColor,
-                  AppColors.secondaryColor,
                   AppColors.accentColor,
+                  AppColors.secondaryColor,
                 ],
               ),
             ),
@@ -38,23 +38,6 @@ class LoadingDialog {
       _overlay?.remove();
       _overlay = null;
     });
-  }
-}
-
-class LoadingContent extends StatelessWidget {
-  const LoadingContent({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: FPTLoading(
-        color: [
-          Colors.blue,
-          Colors.orange,
-          Colors.purple,
-        ],
-      ),
-    );
   }
 }
 
@@ -202,19 +185,18 @@ class GradientCircularProgressPainter extends CustomPainter {
 //#endregion ================== end old loading ========================= //
 
 //#region =================== new Loading ============================ //
-class FPTLoading extends StatefulWidget {
-  const FPTLoading({
+class Loading extends StatefulWidget {
+  const Loading({
     required this.color,
     Key? key,
   }) : super(key: key);
   final List<Color> color;
 
   @override
-  State<FPTLoading> createState() => _FPTLoadingState();
+  State<Loading> createState() => _LoadingState();
 }
 
-class _FPTLoadingState extends State<FPTLoading>
-    with SingleTickerProviderStateMixin {
+class _LoadingState extends State<Loading> with SingleTickerProviderStateMixin {
   late AnimationController _offsetController;
 
   @override

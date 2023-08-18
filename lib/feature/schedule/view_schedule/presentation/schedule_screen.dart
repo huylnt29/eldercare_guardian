@@ -62,7 +62,7 @@ class _ScheduleScreenState extends State<ScheduleScreen>
 
   @override
   void dispose() {
-    tabController.dispose();
+    // tabController.dispose();
     super.dispose();
   }
 

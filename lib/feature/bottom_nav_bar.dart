@@ -1,9 +1,7 @@
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
-import 'package:eldercare_guardian/feature/profile/presentation/bloc/profile_bloc.dart';
 import 'package:eldercare_guardian/feature/report_management/presentation/screens/view_aips_and_report/related_report_info_screen.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/action_dialog_widget.dart';
@@ -63,8 +61,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
         isPositiveGradient: true,
         dialogContext: context,
         iconTitle: Icon(
-          Icons.policy,
-          size: 48.sf,
+          Icons.warning_amber,
+          size: 32.sf,
         ),
         title: 'Our apologize',
         message: 'This feature will be available soon.',
@@ -94,25 +92,29 @@ class _BottomNavBarState extends State<BottomNavBar> {
           Container(
             margin: EdgeInsets.only(right: 15.sf),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () => showNotAvailableFeature(),
               icon: Assets.icons.notification.svg(),
             ),
           ),
         ],
       ),
       extendBody: false,
-      body: PageView(
-        controller: _screenController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: List.generate(
-          bottomBarScreens.length,
-          (index) => Padding(
-            padding: EdgeInsets.only(
-              top: 18.sf,
-              left: 12.sf,
-              right: 12.sf,
+      body: ValueListenableBuilder(
+        valueListenable: bottomNavBarIndex,
+        builder: (context, value, child) => IndexedStack(
+          // controller: _screenController,
+          // physics: const NeverScrollableScrollPhysics(),
+          index: value,
+          children: List.generate(
+            bottomBarScreens.length,
+            (index) => Padding(
+              padding: EdgeInsets.only(
+                top: 18.sf,
+                left: 12.sf,
+                right: 12.sf,
+              ),
+              child: bottomBarScreens[index],
             ),
-            child: bottomBarScreens[index],
           ),
         ),
       ),
@@ -156,11 +158,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
               currentIndex: bottomNavBarIndex.value,
               onTap: (index) {
                 bottomNavBarIndex.value = index;
-                _screenController.animateToPage(
-                  index,
-                  duration: const Duration(milliseconds: 100),
-                  curve: Curves.easeIn,
-                );
+                // _screenController.animateToPage(
+                //   index,
+                //   duration: const Duration(milliseconds: 100),
+                //   curve: Curves.easeIn,
+                // );
               },
             ),
           ),
