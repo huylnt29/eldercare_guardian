@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/rounded_container_widget.dart';
 
 import '../../app.dart';
 
@@ -211,16 +212,12 @@ class _LoadingState extends State<Loading> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+    return SizedBox(
+      width: 180.sf,
+      child: RoundedContainerWidget(
         child: SizedBox(
-          width: 56.sf,
-          height: 24.sf,
+          width: 72.sf,
+          height: 36.sf,
           child: AnimatedBuilder(
             animation: _offsetController,
             builder: (_, __) => Row(
