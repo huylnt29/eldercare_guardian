@@ -65,11 +65,8 @@ class _SignInScreenState extends State<SignInScreen> {
               image: AssetImage(Assets.images.signInScreenBackground.path),
             ),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              signInForm(),
-            ],
+          child: Center(
+            child: SingleChildScrollView(child: signInForm()),
           ),
         ).frame(
           height: double.infinity,
@@ -87,13 +84,14 @@ class _SignInScreenState extends State<SignInScreen> {
         }
       },
       child: Container(
+        height: 375.sf,
         padding: EdgeInsets.symmetric(
           vertical: 12.sf,
           horizontal: 5.sf,
         ),
         margin: EdgeInsets.symmetric(
           horizontal: 50.sf,
-        ),
+        ).copyWith(top: 75.sf),
         decoration: BoxDecoration(
             color: AppColors.primaryColor,
             borderRadius: BorderRadius.circular(18.sf),
