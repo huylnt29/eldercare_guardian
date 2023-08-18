@@ -213,18 +213,18 @@ class _LoadingState extends State<Loading> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 180.sf,
+      width: 150.sf,
+      height: 90.sf,
       child: RoundedContainerWidget(
-        child: SizedBox(
-          width: 36.sf,
-          height: 36.sf,
-          child: AnimatedBuilder(
-            animation: _offsetController,
-            builder: (_, __) => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(
-                widget.color.length,
-                (index) => DotContainer(
+        child: AnimatedBuilder(
+          animation: _offsetController,
+          builder: (_, __) => Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              widget.color.length,
+              (index) => Container(
+                margin: EdgeInsets.symmetric(horizontal: 12.sf),
+                child: DotContainer(
                   controller: _offsetController,
                   offsetInterval: Interval(
                       0.18 + ((.18 * index) - .01), 0.28 + (.18 * index) - .01),
