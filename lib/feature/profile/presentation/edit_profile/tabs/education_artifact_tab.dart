@@ -164,13 +164,21 @@ class _EducationArtifactTabState extends State<EducationArtifactTab> {
                       ),
                     )
                   : (educationArtifact.imageEvidence != null
-                      ? Image.file(
-                          File(educationArtifact.imageEvidence!),
-                          width: 90.sf,
+                      ? ClipOval(
+                          child: Image.file(
+                            File(educationArtifact.imageEvidence!),
+                            fit: BoxFit.fill,
+                            width: 112.sf,
+                            height: 112.sf,
+                          ),
                         )
-                      : Image.asset(
-                          Assets.images.emptyImage.path,
-                          width: 90.sf,
+                      : ClipOval(
+                          child: Image.asset(
+                            Assets.images.emptyImage.path,
+                            fit: BoxFit.fill,
+                            width: 112.sf,
+                            height: 112.sf,
+                          ),
                         )),
             ),
           ],

@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:isar/isar.dart';
 
 part 'report_model.g.dart';
 
@@ -14,6 +13,7 @@ class Report {
     this.aipHealthStatus,
     this.note,
     this.supportRequest,
+    this.aipName,
   });
 
   factory Report.fromJson(Map<String, Object?> json) => _$ReportFromJson(json);
@@ -37,4 +37,7 @@ class Report {
 
   String? supportRequest;
   String? note;
+
+  @JsonKey(name: 'name', includeToJson: false)
+  String? aipName;
 }

@@ -37,6 +37,8 @@ class ScheduleRemoteDataSource {
   }
 
   Future<bool> postTaskEvidence(String taskId, File file) async {
+    Logger.v('[Data layer] Posting task evidence');
+
     String fileName = file.path.split('/').last;
     FormData formData = FormData.fromMap({
       'file': await MultipartFile.fromFile(
@@ -50,7 +52,8 @@ class ScheduleRemoteDataSource {
         data: formData,
       );
       return true;
-    } catch (e) {
+    } catch (error) {
+      Logger.e(error);
       return false;
     }
   }

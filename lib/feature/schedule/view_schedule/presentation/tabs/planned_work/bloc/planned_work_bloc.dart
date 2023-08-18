@@ -83,6 +83,7 @@ class PlannedWorkBloc extends Bloc<PlannedWorkEvent, PlannedWorkState> {
       } on Exception {
         emit(state.copyWith(loadState: LoadState.error));
       }
+      add(InitScreenEvent());
     });
   }
 

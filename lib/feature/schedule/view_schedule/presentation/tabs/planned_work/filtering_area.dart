@@ -11,8 +11,13 @@ class _FilteringAreaState extends State<FilteringArea> {
   late PlannedWorkBloc plannedWorkBloc;
   @override
   void initState() {
-    plannedWorkBloc = context.read<PlannedWorkBloc>();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    plannedWorkBloc = context.read<PlannedWorkBloc>();
   }
 
   @override

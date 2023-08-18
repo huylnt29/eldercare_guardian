@@ -34,7 +34,6 @@ class ViewFinishedReportsTab extends StatelessWidget {
   }
 
   Widget buildFinishedReportItem(BuildContext context, Report report) {
-    final reportBloc = context.read<ReportBloc>();
     return RoundedContainerWidget(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,7 +43,7 @@ class ViewFinishedReportsTab extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  report.aipId ?? ErrorMessage.isNotDetermined,
+                  report.aipName ?? ErrorMessage.isNotDetermined,
                   style: AppTextStyles.heading3(AppColors.textColor),
                 ),
                 12.vertical,
@@ -64,9 +63,12 @@ class ViewFinishedReportsTab extends StatelessWidget {
                 arguments: {'report': report},
               ),
             ),
-            icon: Assets.icons.arrowLeft.svg(
-              width: 48.sf,
-              color: AppColors.accentColor,
+            icon: Transform.flip(
+              flipX: true,
+              child: Assets.icons.arrowLeft.svg(
+                width: 48.sf,
+                color: AppColors.accentColor,
+              ),
             ),
           )
         ],

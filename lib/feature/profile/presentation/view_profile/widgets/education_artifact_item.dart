@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:eldercare_guardian/core/extensions/file_path_extension.dart';
 import 'package:eldercare_guardian/core/faked/faked_data.dart';
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -54,13 +57,29 @@ class EducationArtifactItem extends StatelessWidget {
         12.hSpace,
         ClipRRect(
           borderRadius: BorderRadius.circular(50),
-          child: CachedNetWorkImageWidget(
-            width: 72.sf,
-            height: 72.sf,
-            imageUrl: imageEvidence ?? FakedData.emptyImagePath,
-          ),
+          child: buildImage(imageEvidence),
         ),
       ],
+    );
+  }
+
+  Widget buildImage(String? imageEvidence) {
+    if (imageEvidence == null) {
+      return CachedNetWorkImageWidget(
+        width: 72.sf,
+        height: 72.sf,
+        imageUrl: FakedData.emptyImagePath,
+      );
+    } else if (imageEvidence.isLocalFilePath) {
+      return Image.file(
+        File(imageEvidence),
+        fit: BoxFit.fill,
+      );
+    }
+    return CachedNetWorkImageWidget(
+      width: 72.sf,
+      height: 72.sf,
+      imageUrl: imageEvidence,
     );
   }
 }

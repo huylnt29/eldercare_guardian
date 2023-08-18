@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:permission_handler/permission_handler.dart';
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 
 import 'package:flutter/material.dart';
@@ -44,6 +44,12 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
     super.dispose();
   }
 
+  Future<void> requireLocationPermission() async {
+    const ph = Permission.location;
+    final requested = await ph.request();
+    final granted = requested.isGranted;
+  }
+
   void startCamera() async {
     cameras = await availableCameras();
     cameraController = CameraController(
@@ -59,6 +65,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
     }).catchError((e) {
       Logger.e(e);
     });
+    await requireLocationPermission();
   }
 
   @override

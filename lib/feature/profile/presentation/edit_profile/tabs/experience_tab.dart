@@ -89,129 +89,139 @@ class _ExperienceTabState extends State<ExperienceTab> {
           ),
         );
       },
-      child: RoundedContainerWidget(
-        child: Row(
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 8.sf,
-                    vertical: 6.sf,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.circular(24.sf),
-                  ),
-                  child: InkWell(
-                    onTap: () => selectDate(
-                      experience,
-                      startDateController,
-                      ExperienceDatePickerPurpose.startDate,
+      child: SizedBox(
+        height: 275.sf,
+        child: RoundedContainerWidget(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8.sf,
+                      vertical: 6.sf,
                     ),
-                    child: ValueListenableBuilder(
-                      valueListenable: startDateController,
-                      builder: (context, value, child) => Text(value),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(24.sf),
                     ),
-                  ),
-                ),
-                12.vSpace,
-                Assets.images.timelineProgress.image(height: 48.sf),
-                12.vSpace,
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 8.sf,
-                    vertical: 6.sf,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.circular(24.sf),
-                  ),
-                  child: InkWell(
-                    onTap: () => selectDate(
-                      experience,
-                      endDateController,
-                      ExperienceDatePickerPurpose.endDate,
-                    ),
-                    child: ValueListenableBuilder(
-                      valueListenable: endDateController,
-                      builder: (context, value, child) => Text(value),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            12.hSpace,
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 8.sf,
-                  vertical: 5.sf,
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.primaryColor,
-                  borderRadius: BorderRadius.circular(18.sf),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Flexible(
-                      child: TextFormFieldWidget(
-                        onEditingComplete: () {
-                          keyboardInvisible.value = true;
-                          FocusScope.of(context).unfocus();
-                        },
-                        onTap: () => keyboardInvisible.value = false,
-                        onTapOutside: (_) {
-                          keyboardInvisible.value = true;
-                          FocusScope.of(context).unfocus();
-                        },
-                        onChanged: (_) {
-                          experience.position = positionController.text;
-                          if (experience.editionType ==
-                              ExperienceEditionType.original) {
-                            experience.editionType =
-                                ExperienceEditionType.originalModified;
-                          }
-                        },
-                        controller: positionController,
-                        textInputType: TextInputType.name,
-                        colorTheme: AppColors.textColor,
-                        labelText: 'Position',
+                    child: InkWell(
+                      onTap: () => selectDate(
+                        experience,
+                        startDateController,
+                        ExperienceDatePickerPurpose.startDate,
+                      ),
+                      child: ValueListenableBuilder(
+                        valueListenable: startDateController,
+                        builder: (context, value, child) => Text(value),
                       ),
                     ),
-                    12.vSpace,
-                    Flexible(
-                      child: TextFormFieldWidget(
-                        onEditingComplete: () {
-                          keyboardInvisible.value = true;
-                          FocusScope.of(context).unfocus();
-                        },
-                        onTap: () => keyboardInvisible.value = false,
-                        onTapOutside: (_) {
-                          keyboardInvisible.value = true;
-                          FocusScope.of(context).unfocus();
-                        },
-                        onChanged: (_) {
-                          experience.description = descriptionController.text;
-                          if (experience.editionType ==
-                              ExperienceEditionType.original) {
-                            experience.editionType =
-                                ExperienceEditionType.originalModified;
-                          }
-                        },
-                        controller: descriptionController,
-                        textInputType: TextInputType.name,
-                        colorTheme: AppColors.textColor,
-                        labelText: 'Description',
+                  ),
+                  8.horizontal,
+                  Expanded(
+                    child: Transform.rotate(
+                      angle: 1.57,
+                      child: Assets.images.timelineProgress.image(),
+                    ),
+                  ),
+                  8.horizontal,
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8.sf,
+                      vertical: 6.sf,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(24.sf),
+                    ),
+                    child: InkWell(
+                      onTap: () => selectDate(
+                        experience,
+                        endDateController,
+                        ExperienceDatePickerPurpose.endDate,
+                      ),
+                      child: ValueListenableBuilder(
+                        valueListenable: endDateController,
+                        builder: (context, value, child) => Text(value),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            )
-          ],
+              18.vSpace,
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 8.sf,
+                    vertical: 5.sf,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor,
+                    borderRadius: BorderRadius.circular(18.sf),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: TextFormFieldWidget(
+                          onEditingComplete: () {
+                            keyboardInvisible.value = true;
+                            FocusScope.of(context).unfocus();
+                          },
+                          onTap: () => keyboardInvisible.value = false,
+                          onTapOutside: (_) {
+                            keyboardInvisible.value = true;
+                            FocusScope.of(context).unfocus();
+                          },
+                          onChanged: (_) {
+                            experience.position = positionController.text;
+                            if (experience.editionType ==
+                                ExperienceEditionType.original) {
+                              experience.editionType =
+                                  ExperienceEditionType.originalModified;
+                            }
+                          },
+                          controller: positionController,
+                          textInputType: TextInputType.name,
+                          colorTheme: AppColors.textColor,
+                          labelText: 'Position',
+                        ),
+                      ),
+                      12.vSpace,
+                      Flexible(
+                        child: TextFormFieldWidget(
+                          onEditingComplete: () {
+                            keyboardInvisible.value = true;
+                            FocusScope.of(context).unfocus();
+                          },
+                          onTap: () => keyboardInvisible.value = false,
+                          onTapOutside: (_) {
+                            keyboardInvisible.value = true;
+                            FocusScope.of(context).unfocus();
+                          },
+                          onChanged: (_) {
+                            experience.description = descriptionController.text;
+                            if (experience.editionType ==
+                                ExperienceEditionType.original) {
+                              experience.editionType =
+                                  ExperienceEditionType.originalModified;
+                            }
+                          },
+                          controller: descriptionController,
+                          textInputType: TextInputType.name,
+                          colorTheme: AppColors.textColor,
+                          labelText: 'Description',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

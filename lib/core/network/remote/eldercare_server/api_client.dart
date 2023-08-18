@@ -28,7 +28,7 @@ abstract class ApiClient {
   // __________________________________________________
 
   /// AIP
-  @GET('/aip/guardian/{id}')
+  @GET('/aip/unreported/guardian/{id}')
   Future<List<Aip>> getAipByDate(
     @Path('id') String guardianId,
     @Query('date') String date, // format : YYYY-MM-DD
@@ -108,7 +108,11 @@ abstract class ApiClient {
 
   /// REPORT
 
-  // TODO: Get finished reports by date
+  @GET('/report/guardian/{id}')
+  Future<List<Report>> getReportsByDate(
+    @Path('id') String guardianId,
+    @Query('date') String date,
+  );
 
   @GET('/report/{id}')
   Future<Report> getReport(

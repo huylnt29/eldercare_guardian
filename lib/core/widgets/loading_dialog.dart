@@ -349,5 +349,3 @@ class DotContainer extends StatelessWidget {
     );
   }
 }
-
-//#endregion =================== end new Loading ============================ //

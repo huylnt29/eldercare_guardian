@@ -1,5 +1,7 @@
+import 'package:eldercare_guardian/feature/profile/presentation/view_profile/widgets/profile_basic_info_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:huylnt_flutter_component/reusable_core/constants/error_message.dart';
 import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
@@ -160,6 +162,35 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
   }
 
   Widget buildReportDetailsSection() {
-    return const Text('Report details');
+    return Column(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          child: RoundedContainerWidget(
+            child: Text(
+              widget.report!.aipName ?? ErrorMessage.isNotDetermined,
+              style: AppTextStyles.heading3(AppColors.textColor),
+            ),
+          ),
+        ),
+        24.vertical,
+        ProfileBasicInfoItem(
+          'Summary',
+          widget.report!.summary ?? ErrorMessage.isNotDetermined,
+        ),
+        ProfileBasicInfoItem(
+          'Health status of AIP',
+          widget.report!.aipHealthStatus ?? ErrorMessage.isNotDetermined,
+        ),
+        ProfileBasicInfoItem(
+          'Support request',
+          widget.report!.supportRequest ?? ErrorMessage.isNotDetermined,
+        ),
+        ProfileBasicInfoItem(
+          'Notes',
+          widget.report!.note ?? ErrorMessage.isNotDetermined,
+        ),
+      ],
+    );
   }
 }

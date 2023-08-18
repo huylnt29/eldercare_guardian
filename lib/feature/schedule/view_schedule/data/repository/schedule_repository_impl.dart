@@ -7,6 +7,7 @@ import 'package:eldercare_guardian/core/model/aip_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:huylnt_flutter_component/reusable_core/extensions/date_time.dart';
+import 'package:huylnt_flutter_component/reusable_core/extensions/logger.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/network/remote/eldercare_server/api_client.dart';

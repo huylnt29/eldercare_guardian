@@ -5,8 +5,11 @@ import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
 
 class ProfileBasicInfoItem extends StatelessWidget {
-  const ProfileBasicInfoItem(this.title, this.value, {Key? key})
-      : super(key: key);
+  const ProfileBasicInfoItem(
+    this.title,
+    this.value, {
+    Key? key,
+  }) : super(key: key);
   final String title;
   final dynamic value;
 

@@ -75,12 +75,15 @@ class _RelatedReportInfoScreenState extends State<RelatedReportInfoScreen>
               bold: false,
             ),
             indicator: UnderlineTabIndicator(
-              borderSide: BorderSide(width: 2.sf, color: AppColors.accentColor),
+              borderSide: BorderSide(
+                width: 3.sf,
+                color: AppColors.secondaryColor,
+              ),
               insets: EdgeInsets.symmetric(horizontal: 18.sf),
             ),
           ),
         ),
-        8.vSpace,
+        18.vSpace,
         Expanded(
           child: BlocProvider(
             create: (context) => reportBloc,

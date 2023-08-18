@@ -10,6 +10,7 @@ import 'package:huylnt_flutter_component/reusable_core/extensions/date_time.dart
 import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
 
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
+import 'package:huylnt_flutter_component/reusable_core/extensions/logger.dart';
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/action_dialog_widget.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/cached_network_image_widget.dart';
@@ -88,12 +89,15 @@ class _ScheduleScreenState extends State<ScheduleScreen>
               bold: false,
             ),
             indicator: UnderlineTabIndicator(
-              borderSide: BorderSide(width: 2.sf, color: AppColors.accentColor),
+              borderSide: BorderSide(
+                width: 3.sf,
+                color: AppColors.secondaryColor,
+              ),
               insets: EdgeInsets.symmetric(horizontal: 18.sf),
             ),
           ),
         ),
-        8.vSpace,
+        12.vSpace,
         Expanded(
           child: TabBarView(
             physics: const NeverScrollableScrollPhysics(),

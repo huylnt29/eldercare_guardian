@@ -8,13 +8,13 @@ class ReportRemoteDataSource {
     String guardianId,
     DateTime dateTime,
   ) async {
-    // final response = await apiClient.getAipByDate(
-    //   guardianId,
-    //   dateTime.yearMonthDay,
-    // );
+    final response = await apiClient.getReportsByDate(
+      guardianId,
+      dateTime.yearMonthDay,
+    );
 
-    // return response;
-    return [];
+    return response;
+    // return [];
   }
 
   Future<Report> getReport(String reportId) async {

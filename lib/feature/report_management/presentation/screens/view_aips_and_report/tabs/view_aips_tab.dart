@@ -67,6 +67,7 @@ class ViewAipsTab extends StatelessWidget {
               );
               if (result == true) {
                 reportBloc.add(GetAipsEvent());
+                reportBloc.add(GetFinishedReportsEvent());
               }
             },
             icon: Assets.icons.writeReport.svg(

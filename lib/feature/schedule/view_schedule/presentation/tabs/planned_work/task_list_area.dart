@@ -11,8 +11,13 @@ class _TaskListAreaState extends State<TaskListArea> {
   late PlannedWorkBloc plannedWorkBloc;
   @override
   void initState() {
-    plannedWorkBloc = context.read<PlannedWorkBloc>();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    plannedWorkBloc = context.read<PlannedWorkBloc>();
   }
 
   @override
@@ -27,11 +32,15 @@ class _TaskListAreaState extends State<TaskListArea> {
     }, builder: (context, state) {
       if (state.loadState == LoadState.loaded) {
         if (state.tasks.isNotEmpty) {
-          return ListView.separated(
-            shrinkWrap: true,
-            itemBuilder: (context, index) => taskListItem(state.tasks[index]!),
-            separatorBuilder: (context, index) => 15.vSpace,
-            itemCount: state.tasks.length,
+          return Container(
+            margin: EdgeInsets.only(bottom: 24.sf),
+            child: ListView.separated(
+              shrinkWrap: true,
+              itemBuilder: (context, index) =>
+                  taskListItem(state.tasks[index]!),
+              separatorBuilder: (context, index) => 15.vSpace,
+              itemCount: state.tasks.length,
+            ),
           );
         } else {
           return const NoDataWidget();
@@ -52,8 +61,9 @@ class _TaskListAreaState extends State<TaskListArea> {
           child: Container(
             padding: EdgeInsets.symmetric(
               vertical: 5.sf,
-              horizontal: 1.sf,
-            ).copyWith(left: 10.sf, top: 12.sf),
+              horizontal: 8.sf,
+            ).copyWith(left: 8.sf, top: 12.sf),
+            margin: EdgeInsets.only(bottom: 3.sf),
             decoration: BoxDecoration(
               border: Border.all(
                 width: 2.sf,
@@ -67,9 +77,14 @@ class _TaskListAreaState extends State<TaskListArea> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      task.title,
-                      style: AppTextStyles.heading3(AppColors.textColor),
+                    Expanded(
+                      child: Text(
+                        task.title,
+                        style: AppTextStyles.heading3(AppColors.textColor),
+                        softWrap: false,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     8.hSpace,
                     Container(
@@ -114,6 +129,8 @@ class _TaskListAreaState extends State<TaskListArea> {
                   child: CachedNetWorkImageWidget(
                     imageUrl: task.taskEvidence!.imageEvidencePath,
                     fit: BoxFit.cover,
+                    width: 61.sf,
+                    height: 61.sf,
                   ),
                 ),
               )
@@ -143,6 +160,10 @@ class _TaskListAreaState extends State<TaskListArea> {
         },
       ),
     );
+
+    Logger.v('Received xFile which is task evidence: ');
+    Logger.d(xFile);
+
     if (xFile != null) {
       plannedWorkBloc.add(PostTaskEvidenceEvent(taskId, xFile));
     }

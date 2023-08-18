@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
+import 'package:huylnt_flutter_component/reusable_core/widgets/action_dialog_widget.dart';
 
 import '../core/automatic_generator/assets.gen.dart';
 import 'profile/presentation/view_profile/view_profile_screen.dart';
@@ -55,6 +56,27 @@ class _BottomNavBarState extends State<BottomNavBar> {
     super.initState();
   }
 
+  Future<void> showNotAvailableFeature() async {
+    await showDialog<void>(
+      context: context,
+      builder: (ctx) => ActionDialogWidget(
+        isPositiveGradient: true,
+        dialogContext: context,
+        iconTitle: Icon(
+          Icons.policy,
+          size: 48.sf,
+        ),
+        title: 'Our apologize',
+        message: 'This feature will be available soon.',
+        titleColor: AppColors.textColor,
+        positiveActionTitle: 'Never mind',
+        onPositiveActionCallback: () {
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +93,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
         actions: [
           Container(
             margin: EdgeInsets.only(right: 15.sf),
-            child: Assets.icons.notification.svg(),
+            child: IconButton(
+              onPressed: () {},
+              icon: Assets.icons.notification.svg(),
+            ),
           ),
         ],
       ),
