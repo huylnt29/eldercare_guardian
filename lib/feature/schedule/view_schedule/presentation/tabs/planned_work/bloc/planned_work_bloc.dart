@@ -24,12 +24,13 @@ class PlannedWorkBloc extends Bloc<PlannedWorkEvent, PlannedWorkState> {
         ) {
     on<InitScreenEvent>((event, emit) async {
       add(ChangeDateTimeEvent(state.currentSelectedDate));
-      add(GetAipsEvent());
     });
 
     on<GetAipsEvent>((event, emit) async {
       try {
-        final response = await scheduleRepository.getAips(DateTime.now());
+        final response = await scheduleRepository.getAips(
+          state.currentSelectedDate,
+        );
         emit(state.copyWith(
           aips: response,
         ));
@@ -52,7 +53,7 @@ class PlannedWorkBloc extends Bloc<PlannedWorkEvent, PlannedWorkState> {
       emit(state.copyWith(
         tasks: tasks,
       ));
-
+      add(GetAipsEvent());
       add(ChangeAipEvent(null));
     });
 

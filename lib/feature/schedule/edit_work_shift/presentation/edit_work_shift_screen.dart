@@ -121,7 +121,11 @@ class _EditWorkShiftScreenState extends State<EditWorkShiftScreen> {
               ),
             ),
             TextFormFieldWidget(
-              onChanged: (_) => workShift.startTime = startTimeController.text
+              onTapOutside: (p0) => workShift.startTime = startTimeController
+                  .text
+                  .dateTimeFromHourMinute(widget.dateTime),
+              onEditingComplete: () => workShift.startTime = startTimeController
+                  .text
                   .dateTimeFromHourMinute(widget.dateTime),
               controller: startTimeController,
               textInputType: TextInputType.text,
@@ -129,7 +133,10 @@ class _EditWorkShiftScreenState extends State<EditWorkShiftScreen> {
               labelText: 'Start time',
             ),
             TextFormFieldWidget(
-              onChanged: (_) => workShift.endTime = endTimeController.text
+              onTapOutside: (p0) => workShift.endTime = endTimeController.text
+                  .dateTimeFromHourMinute(widget.dateTime),
+              onEditingComplete: () => workShift.endTime = endTimeController
+                  .text
                   .dateTimeFromHourMinute(widget.dateTime),
               controller: endTimeController,
               textInputType: TextInputType.text,
