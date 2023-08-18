@@ -11,24 +11,28 @@ class ScheduleRemoteDataSource {
     final response = await apiClient.getTasks(
       guardianId,
       dateTime.yearMonthDay,
+      null,
     );
     return response;
-    // return [];
   }
 
-  Future<List<Task>> getTasksByAipId(String aipId, DateTime dateTime) async {
-    return [
-      Task.fromJson({
-        'id': 't124',
-        'title': 'Clean the floor',
-        'fromDateTime': DateTime.now().toIso8601String(),
-        'toDateTime': DateTime.now().toIso8601String(),
-        'status': 0,
-      }),
-    ];
+  Future<List<Task>> getTasksByAipId(
+    String guardianId,
+    String aipId,
+    DateTime dateTime,
+  ) async {
+    final response = await apiClient.getTasks(
+      guardianId,
+      dateTime.yearMonthDay,
+      aipId,
+    );
+    return response;
   }
 
-  Future<List<Aip>> getAipsByDate(String guardianId, DateTime dateTime) async {
+  Future<List<Aip>> getAipsByDate(
+    String guardianId,
+    DateTime dateTime,
+  ) async {
     final response = await apiClient.getAipByDate(
       guardianId,
       dateTime.yearMonthDay,

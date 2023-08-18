@@ -73,9 +73,7 @@ _i1.GetIt $initGetIt(
       () => _i12.PlannedWorkBloc(gh<_i9.ScheduleRepository>()));
   gh.factory<_i13.ProfileBloc>(
       () => _i13.ProfileBloc(gh<_i7.ProfileRepository>()));
-  gh.factory<_i14.ReportBloc>(() => _i14.ReportBloc(
-        gh<_i8.ReportRepository>(),
-        gh<_i9.ScheduleRepository>(),
-      ));
+  gh.factory<_i14.ReportBloc>(
+      () => _i14.ReportBloc(gh<_i8.ReportRepository>()));
   return getIt;
 }

@@ -109,12 +109,9 @@ class _TaskListAreaState extends State<TaskListArea> {
                   ],
                 ),
                 8.vSpace,
-                Visibility(
-                  visible: task.aipName != null,
-                  child: Text(
-                    task.aipName ?? ErrorMessage.isNotDetermined,
-                    style: AppTextStyles.heading3(AppColors.textColor),
-                  ),
+                Text(
+                  task.aip.lastName,
+                  style: AppTextStyles.heading3(AppColors.textColor),
                 ),
               ],
             ),

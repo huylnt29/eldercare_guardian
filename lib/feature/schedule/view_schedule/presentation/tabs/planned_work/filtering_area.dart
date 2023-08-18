@@ -20,6 +20,27 @@ class _FilteringAreaState extends State<FilteringArea> {
     plannedWorkBloc = context.read<PlannedWorkBloc>();
   }
 
+  Future<void> showNotAvailableFeature() async {
+    await showDialog<void>(
+      context: context,
+      builder: (ctx) => ActionDialogWidget(
+        isPositiveGradient: true,
+        dialogContext: context,
+        iconTitle: Icon(
+          Icons.warning_amber,
+          size: 32.sf,
+        ),
+        title: 'Our apologize',
+        message: 'This feature will be available soon.',
+        titleColor: AppColors.textColor,
+        positiveActionTitle: 'Never mind',
+        onPositiveActionCallback: () {
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return RoundedContainerWidget(
@@ -147,18 +168,21 @@ class _FilteringAreaState extends State<FilteringArea> {
                         10.hSpace,
                         Visibility(
                           visible: (state.aipId != null),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 5.sf,
-                              horizontal: 12.sf,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.accentColor,
-                              borderRadius: BorderRadius.circular(12.sf),
-                            ),
-                            child: Text(
-                              'View profile',
-                              style: AppTextStyles.heading3(Colors.white),
+                          child: InkWell(
+                            onTap: () => showNotAvailableFeature(),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 5.sf,
+                                horizontal: 12.sf,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColors.accentColor,
+                                borderRadius: BorderRadius.circular(12.sf),
+                              ),
+                              child: Text(
+                                'View profile',
+                                style: AppTextStyles.heading3(Colors.white),
+                              ),
                             ),
                           ),
                         )

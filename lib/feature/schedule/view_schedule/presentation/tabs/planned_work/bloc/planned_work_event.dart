@@ -6,6 +6,10 @@ class InitScreenEvent extends PlannedWorkEvent {
   InitScreenEvent();
 }
 
+class GetAipsEvent extends PlannedWorkEvent {
+  GetAipsEvent();
+}
+
 class ChangeDateTimeEvent extends PlannedWorkEvent {
   ChangeDateTimeEvent(this.nextDate);
   DateTime nextDate;
@@ -14,14 +18,6 @@ class ChangeDateTimeEvent extends PlannedWorkEvent {
 class ChangeAipEvent extends PlannedWorkEvent {
   ChangeAipEvent(this.aipId);
   String? aipId;
-}
-
-class ResetStateEvent extends PlannedWorkEvent {
-  ResetStateEvent();
-}
-
-class StateLoadedEvent extends PlannedWorkEvent {
-  StateLoadedEvent();
 }
 
 class PostTaskEvidenceEvent extends PlannedWorkEvent {

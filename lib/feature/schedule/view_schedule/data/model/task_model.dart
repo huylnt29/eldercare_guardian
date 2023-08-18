@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
 
 import '../../../../../core/enums/task_status.dart';
+import '../../../../../core/model/aip_model.dart';
 
 part 'task_model.g.dart';
 
@@ -12,7 +13,7 @@ class Task {
     required this.title,
     @Default(false) required this.isDone,
     @Default(0) this.status,
-    this.aipName,
+    required this.aip,
     this.taskEvidence,
   });
 
@@ -23,7 +24,7 @@ class Task {
   bool isDone;
   @enumerated
   TaskStatus? status;
-  String? aipName;
+  Aip aip;
   @JsonKey(name: 'image')
   TaskEvidence? taskEvidence;
 }

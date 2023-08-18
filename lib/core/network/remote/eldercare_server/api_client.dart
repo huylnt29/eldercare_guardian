@@ -24,12 +24,19 @@ abstract class ApiClient {
   Future<List<Task>> getTasks(
     @Path('guardianId') String guardianId,
     @Query('date') String date, // format : YYYY-MM-DD
+    @Query('aip-id') String? aipId,
   );
   // __________________________________________________
 
   /// AIP
-  @GET('/aip/unreported/guardian/{id}')
+  @GET('/aip/guardian/{id}')
   Future<List<Aip>> getAipByDate(
+    @Path('id') String guardianId,
+    @Query('date') String date, // format : YYYY-MM-DD
+  );
+
+  @GET('/aip/unreported/guardian/{id}')
+  Future<List<Aip>> getUnReportedAipByDate(
     @Path('id') String guardianId,
     @Query('date') String date, // format : YYYY-MM-DD
   );

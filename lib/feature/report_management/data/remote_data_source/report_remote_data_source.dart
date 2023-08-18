@@ -4,6 +4,17 @@ class ReportRemoteDataSource {
   ReportRemoteDataSource(this.apiClient);
   final ApiClient apiClient;
 
+  Future<List<Aip>> getUnReportedAipByDate(
+    String guardianId,
+    DateTime dateTime,
+  ) async {
+    final response = await apiClient.getUnReportedAipByDate(
+      guardianId,
+      dateTime.yearMonthDay,
+    );
+    return response;
+  }
+
   Future<List<Report>> getReportsByDate(
     String guardianId,
     DateTime dateTime,
@@ -14,7 +25,6 @@ class ReportRemoteDataSource {
     );
 
     return response;
-    // return [];
   }
 
   Future<Report> getReport(String reportId) async {

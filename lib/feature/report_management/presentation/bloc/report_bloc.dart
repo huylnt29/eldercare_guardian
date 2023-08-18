@@ -15,7 +15,7 @@ part 'report_state.dart';
 part 'report_bloc.freezed.dart';
 
 class ReportBloc extends Bloc<ReportEvent, ReportState> {
-  ReportBloc(this.reportRepository, this.scheduleRepository)
+  ReportBloc(this.reportRepository)
       : super(const ReportState(
           aips: [],
           aipsLoadState: LoadState.initial,
@@ -26,8 +26,13 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     on<GetAipsEvent>((event, emit) async {
       emit(state.copyWith(aipsLoadState: LoadState.loading));
       try {
-        final response = await scheduleRepository.getAips(DateTime.now());
-        emit(state.copyWith(aips: response, aipsLoadState: LoadState.loaded));
+        final response = await reportRepository.getUnReportedAipByDate(
+          DateTime.now(),
+        );
+        emit(state.copyWith(
+          aips: response,
+          aipsLoadState: LoadState.loaded,
+        ));
       } on Exception catch (error) {
         Logger.e(error);
         emit(state.copyWith(aipsLoadState: LoadState.error));
@@ -80,5 +85,4 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     });
   }
   final ReportRepository reportRepository;
-  final ScheduleRepository scheduleRepository;
 }

@@ -3,6 +3,7 @@ import 'package:camera/camera.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
+import 'package:huylnt_flutter_component/reusable_core/extensions/logger.dart';
 
 import '../../../../../../../core/model/aip_model.dart';
 
@@ -23,6 +24,18 @@ class PlannedWorkBloc extends Bloc<PlannedWorkEvent, PlannedWorkState> {
         ) {
     on<InitScreenEvent>((event, emit) async {
       add(ChangeDateTimeEvent(state.currentSelectedDate));
+      add(GetAipsEvent());
+    });
+
+    on<GetAipsEvent>((event, emit) async {
+      try {
+        final response = await scheduleRepository.getAips(DateTime.now());
+        emit(state.copyWith(
+          aips: response,
+        ));
+      } on Exception catch (error) {
+        Logger.e(error);
+      }
     });
 
     on<ChangeDateTimeEvent>((event, emit) async {
@@ -62,14 +75,6 @@ class PlannedWorkBloc extends Bloc<PlannedWorkEvent, PlannedWorkState> {
       ));
     });
 
-    on<ResetStateEvent>((event, emit) {
-      emit(state.copyWith(loadState: LoadState.initial));
-    });
-
-    on<StateLoadedEvent>((event, emit) {
-      emit(state.copyWith(loadState: LoadState.loaded));
-    });
-
     on<PostTaskEvidenceEvent>((event, emit) async {
       emit(state.copyWith(loadState: LoadState.loading));
       try {
@@ -83,6 +88,7 @@ class PlannedWorkBloc extends Bloc<PlannedWorkEvent, PlannedWorkState> {
       } on Exception {
         emit(state.copyWith(loadState: LoadState.error));
       }
+
       add(InitScreenEvent());
     });
   }
