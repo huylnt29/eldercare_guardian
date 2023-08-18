@@ -110,7 +110,7 @@ class _SignInScreenState extends State<SignInScreen> {
             TextFormFieldWidget(
               controller: emailController,
               labelText: 'Email',
-              textInputType: TextInputType.phone,
+              textInputType: TextInputType.emailAddress,
               colorTheme: AppColors.textColor,
             ),
             TextFormFieldWidget(

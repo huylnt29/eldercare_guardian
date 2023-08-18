@@ -1,4 +1,4 @@
-package com.example.eldercare_guardian
+package com.eldercare.guardian
 
 import io.flutter.embedding.android.FlutterActivity
 

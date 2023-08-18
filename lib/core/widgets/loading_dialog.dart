@@ -216,7 +216,7 @@ class _LoadingState extends State<Loading> with SingleTickerProviderStateMixin {
       width: 180.sf,
       child: RoundedContainerWidget(
         child: SizedBox(
-          width: 72.sf,
+          width: 36.sf,
           height: 36.sf,
           child: AnimatedBuilder(
             animation: _offsetController,
