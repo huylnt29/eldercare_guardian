@@ -2,6 +2,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
+import 'package:eldercare_guardian/core/extensions/string_extension.dart';
 import 'package:eldercare_guardian/core/model/profile_model.dart';
 import 'package:eldercare_guardian/feature/profile/data/model/education_artifact_model.dart';
 import 'package:eldercare_guardian/feature/profile/data/model/experience_model.dart';
@@ -52,24 +53,31 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
 
       emit(state.copyWith(loadState: LoadState.loading));
+
       try {
         // Education artifact
         for (var element in state.tempProfile!.educationArtifacts) {
           if (element!.editionType ==
               EducationArtifactEditionType.originalModified) {
-            Logger.v('Hello1');
+            Logger.v('Original education artifact has been modified');
             final educationArtifact =
-                await profileRepository.putEducationArtifactById(element);
-            await profileRepository.postEducationArtifactEvidence(
-              educationArtifact,
-              element.imageEvidence!,
+                await profileRepository.putEducationArtifactById(
+              element,
             );
+            if (element.imageEvidence!.isLocalFilePath) {
+              await profileRepository.postEducationArtifactEvidence(
+                educationArtifact,
+                element.imageEvidence!,
+              );
+            }
           } else if (element.editionType ==
                   EducationArtifactEditionType.draft &&
               element.canBePosted) {
-            Logger.v('Hello2');
+            Logger.v('Education artifact is draft');
             final educationArtifact =
-                await profileRepository.postEducationArtifact(element);
+                await profileRepository.postEducationArtifact(
+              element,
+            );
             await profileRepository.postEducationArtifactEvidence(
               educationArtifact,
               element.imageEvidence!,

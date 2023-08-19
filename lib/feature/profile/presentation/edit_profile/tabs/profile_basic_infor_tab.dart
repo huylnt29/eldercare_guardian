@@ -25,8 +25,9 @@ class _ProfileBasicInfoTabState extends State<ProfileBasicInfoTab> {
         ErrorMessage.isNotDetermined;
     lastNameController.text =
         profileBloc.state.tempProfile!.lastName ?? ErrorMessage.isNotDetermined;
-    dateOfBirthController.text = profileBloc.state.tempProfile!.dateOfBirth ??
-        ErrorMessage.isNotDetermined;
+    dateOfBirthController.text =
+        profileBloc.state.tempProfile!.dateOfBirth?.toDateTime.beautifulDate ??
+            ErrorMessage.isNotDetermined;
     identityController.text =
         profileBloc.state.tempProfile!.identity ?? ErrorMessage.isNotDetermined;
     emailController.text =

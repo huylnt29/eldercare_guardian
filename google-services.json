@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "707133812",
+    "project_id": "eldercare-ddcf6",
+    "storage_bucket": "eldercare-ddcf6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707133812:android:cb79225098762771482c21",
+        "android_client_info": {
+          "package_name": "com.eldercare.guardian"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "707133812-8724sn8u65ur4453vuktpcn3sj8hilvg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmyu-NklxfulagCk2gItH5kNTgkLGcjNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "707133812-8724sn8u65ur4453vuktpcn3sj8hilvg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -35,6 +35,7 @@ class _TaskListAreaState extends State<TaskListArea> {
           return Container(
             margin: EdgeInsets.only(bottom: 24.sf),
             child: ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) =>
                   taskListItem(state.tasks[index]!),

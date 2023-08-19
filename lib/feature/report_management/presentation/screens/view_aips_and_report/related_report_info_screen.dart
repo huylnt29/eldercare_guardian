@@ -85,8 +85,8 @@ class _RelatedReportInfoScreenState extends State<RelatedReportInfoScreen>
         ),
         18.vSpace,
         Expanded(
-          child: BlocProvider(
-            create: (context) => reportBloc,
+          child: BlocProvider.value(
+            value: reportBloc,
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               controller: tabController,

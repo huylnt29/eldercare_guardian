@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:eldercare_guardian/core/extensions/file_path_extension.dart';
+import 'package:eldercare_guardian/core/extensions/string_extension.dart';
 import 'package:eldercare_guardian/core/faked/faked_data.dart';
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';

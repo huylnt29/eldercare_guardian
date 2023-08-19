@@ -1,3 +1,4 @@
+import 'package:eldercare_guardian/core/extensions/string_extension.dart';
 import 'package:eldercare_guardian/core/faked/faked_data.dart';
 import 'package:eldercare_guardian/core/model/profile_model.dart';
 import 'package:eldercare_guardian/core/router/route_config.dart';
@@ -8,7 +9,9 @@ import 'package:eldercare_guardian/core/widgets/no_data_widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:huylnt_flutter_component/reusable_core/constants/error_message.dart';
 import 'package:huylnt_flutter_component/reusable_core/enums/load_state.dart';
+import 'package:huylnt_flutter_component/reusable_core/extensions/date_time.dart';
 import 'package:huylnt_flutter_component/reusable_core/extensions/font_size.dart';
 import 'package:huylnt_flutter_component/reusable_core/theme/app_text_styles.dart';
 import 'package:huylnt_flutter_component/reusable_core/widgets/button_widget.dart';
@@ -82,7 +85,8 @@ class ViewProfileScreen extends StatelessWidget {
                     ),
                     ProfileBasicInfoItem(
                       'Date of birth',
-                      state.profile!.dateOfBirth,
+                      state.profile!.dateOfBirth?.toDateTime.beautifulDate ??
+                          ErrorMessage.isNotDetermined,
                     ),
                     ProfileBasicInfoItem(
                       'Identity number',
@@ -140,6 +144,7 @@ class ViewProfileScreen extends StatelessWidget {
           ),
           (state.profile!.experiences.isNotEmpty)
               ? ListView(
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   children: [
                     for (var experience in state.profile!.experiences)
@@ -173,6 +178,7 @@ class ViewProfileScreen extends StatelessWidget {
           ),
           (state.profile!.educationArtifacts.isNotEmpty)
               ? ListView(
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   children: [
                     for (var educationArtifact

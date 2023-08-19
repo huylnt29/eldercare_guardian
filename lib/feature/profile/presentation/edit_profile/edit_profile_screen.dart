@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:eldercare_guardian/core/automatic_generator/assets.gen.dart';
+import 'package:eldercare_guardian/core/extensions/string_extension.dart';
 import 'package:eldercare_guardian/core/faked/faked_data.dart';
 import 'package:eldercare_guardian/core/theme/app_colors.dart';
 import 'package:eldercare_guardian/core/widgets/error_widget.dart';

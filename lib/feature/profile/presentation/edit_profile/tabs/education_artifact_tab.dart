@@ -152,34 +152,7 @@ class _EducationArtifactTabState extends State<EducationArtifactTab> {
             12.hSpace,
             InkWell(
               onTap: () => onNavigatingTakePictureScreen(educationArtifact.id!),
-              child: (educationArtifact.editionType ==
-                      EducationArtifactEditionType.original)
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(100.sf),
-                      child: CachedNetWorkImageWidget(
-                        width: 112.sf,
-                        height: 112.sf,
-                        imageUrl: educationArtifact.imageEvidence ??
-                            FakedData.emptyImagePath,
-                      ),
-                    )
-                  : (educationArtifact.imageEvidence != null
-                      ? ClipOval(
-                          child: Image.file(
-                            File(educationArtifact.imageEvidence!),
-                            fit: BoxFit.fill,
-                            width: 112.sf,
-                            height: 112.sf,
-                          ),
-                        )
-                      : ClipOval(
-                          child: Image.asset(
-                            Assets.images.emptyImage.path,
-                            fit: BoxFit.fill,
-                            width: 112.sf,
-                            height: 112.sf,
-                          ),
-                        )),
+              child: buildEducationArtifactEvidence(educationArtifact),
             ),
           ],
         ),
@@ -204,6 +177,37 @@ class _EducationArtifactTabState extends State<EducationArtifactTab> {
         educationArtifactId,
         xFile,
       ));
+    }
+  }
+
+  Widget buildEducationArtifactEvidence(EducationArtifact educationArtifact) {
+    if (educationArtifact.imageEvidence == null) {
+      return ClipOval(
+        child: Image.asset(
+          Assets.images.emptyImage.path,
+          fit: BoxFit.fill,
+          width: 112.sf,
+          height: 112.sf,
+        ),
+      );
+    } else if (educationArtifact.imageEvidence!.isLocalFilePath) {
+      return ClipOval(
+        child: Image.file(
+          File(educationArtifact.imageEvidence!),
+          fit: BoxFit.fill,
+          width: 112.sf,
+          height: 112.sf,
+        ),
+      );
+    } else {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(100.sf),
+        child: CachedNetWorkImageWidget(
+          width: 112.sf,
+          height: 112.sf,
+          imageUrl: educationArtifact.imageEvidence!,
+        ),
+      );
     }
   }
 }

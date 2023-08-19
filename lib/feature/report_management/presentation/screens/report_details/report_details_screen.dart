@@ -39,8 +39,8 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => reportBloc,
+    return BlocProvider.value(
+      value: reportBloc,
       child: CompleteScaffoldWidget(
         appBarTextWidget: Text(
           (widget.aip != null) ? 'Write daily report' : 'View report details',

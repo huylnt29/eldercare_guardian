@@ -61,8 +61,8 @@ class _UserAvailableTimeTabState extends State<UserAvailableTimeTab>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => userAvailableTimeBloc,
+    return BlocProvider.value(
+      value: userAvailableTimeBloc,
       child: buildContent(),
     );
   }
