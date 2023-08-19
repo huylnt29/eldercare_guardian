@@ -12,7 +12,7 @@ class _ProfileBasicInfoTabState extends State<ProfileBasicInfoTab> {
   final lastNameController = TextEditingController(text: '');
   final dateOfBirthController = TextEditingController(text: '');
   final identityController = TextEditingController(text: '');
-  final emailController = TextEditingController(text: '');
+
   final phoneNumberController = TextEditingController(text: '');
   final addressController = TextEditingController(text: '');
 
@@ -30,8 +30,7 @@ class _ProfileBasicInfoTabState extends State<ProfileBasicInfoTab> {
             ErrorMessage.isNotDetermined;
     identityController.text =
         profileBloc.state.tempProfile!.identity ?? ErrorMessage.isNotDetermined;
-    emailController.text =
-        profileBloc.state.tempProfile!.email ?? ErrorMessage.isNotDetermined;
+
     phoneNumberController.text = profileBloc.state.tempProfile!.phoneNumber ??
         ErrorMessage.isNotDetermined;
     addressController.text =
@@ -100,15 +99,6 @@ class _ProfileBasicInfoTabState extends State<ProfileBasicInfoTab> {
             textInputType: TextInputType.number,
             colorTheme: AppColors.textColor,
             labelText: 'Identity',
-          ),
-          8.vSpace,
-          TextFormFieldWidget(
-            onChanged: (_) =>
-                profileBloc.state.tempProfile!.email = emailController.text,
-            controller: emailController,
-            textInputType: TextInputType.emailAddress,
-            colorTheme: AppColors.textColor,
-            labelText: 'Email',
           ),
           8.vSpace,
           TextFormFieldWidget(
