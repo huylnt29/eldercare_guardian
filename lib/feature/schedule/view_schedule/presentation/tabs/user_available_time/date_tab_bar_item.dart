@@ -13,7 +13,7 @@ class DateTabBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 120.sf,
+      width: 150.sf,
       margin: EdgeInsets.only(right: 18.sf),
       child: RoundedContainerWidget(
         child: Column(
