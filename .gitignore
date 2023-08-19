@@ -48,3 +48,4 @@ pubspec.lock
 *.gen.dart
 *.g.dart 
 *.freezed.dart
+android/app/google-services.json
