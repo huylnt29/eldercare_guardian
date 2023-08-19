@@ -16,7 +16,6 @@ class Profile {
     this.lastName,
     this.dateOfBirth,
     this.identity,
-    this.email,
     this.phoneNumber,
     this.address,
     this.level = Level.none,
@@ -38,7 +37,7 @@ class Profile {
   @JsonKey(name: 'CCCD')
   @Index(unique: true)
   String? identity;
-  Email? email;
+
   PhoneNumber? phoneNumber;
   String? address;
   @JsonKey(name: 'certificates', includeToJson: false)
@@ -75,7 +74,6 @@ class Profile {
       lastName: lastName ?? this.lastName,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       identity: identity ?? this.identity,
-      email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       address: address ?? this.address,
       educationArtifacts: educationArtifacts ?? this.educationArtifacts,

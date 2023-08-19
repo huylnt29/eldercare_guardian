@@ -93,10 +93,6 @@ class ViewProfileScreen extends StatelessWidget {
                       state.profile!.identity,
                     ),
                     ProfileBasicInfoItem(
-                      'Email',
-                      state.profile!.email,
-                    ),
-                    ProfileBasicInfoItem(
                       'Phone number',
                       state.profile!.phoneNumber,
                     ),
